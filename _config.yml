@@ -1,7 +1,2 @@
 title: Five Eeee
-baseurl: ""
-sass:
-  sass_dir: _sass
-  style: compressed
-
-theme: jekyll-theme-cayman
+remote_theme: jeremyboggs/5e
