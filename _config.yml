@@ -8,3 +8,4 @@ url: "https://easyroleplay.com"
 sass:
     sass_dir: _sass
     
+theme: jekyll-theme-midnight
