@@ -1,11 +1,29 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+---
+my_number: 5
+description: "here is a description"
+---
 
-<body>
-<main role="main" id="main" class="phb">
-    Cheese
-    <a href="{{ 'about.md' | absolute_url }}">Characters and About</a>
+<html>
+<link rel="stylesheet" href="{{ site.baseurl }}/style.css">
+<head>
+    <meta charset="utf-8">
+    <title>{{ title }}</title>
+</head>
+<body class="phb">
+<figure class="class">
+    <h1>Character Classes</h1>
+</figure>
+{% for classPair in site.data.classes %}
+{% assign class = classPair[1] %}
+    {% include_relative _includes/class/desc.html class=class %}
+    {% include_relative _includes/class/ability-scores.html class=class %}
+    {% include_relative _includes/class/extra.html class=class %}
+    {% include_relative _includes/class/passives.html class=class %}
+    {% include_relative _includes/class/actions.html class=class %}
+    <hr>
+{%  endfor %}
 
-</main>
+
+
 </body>
 </html>

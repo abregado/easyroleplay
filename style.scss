@@ -1,44 +1,95 @@
 ---
 ---
-@import 'reset.scss';
-@import 'phb.fonts.scss';
-@import 'phb.assets.scss';
-@import 'phb.depricated.scss';
-@import 'phb.style.scss';
 
+$heading-red: #6a1c0f;
+$heading-underline: #c9ad6a;
+$noteGreen: #e0e5c1;
+$horizontalRule: #9c2b1b;
 
-.phb {
-    overflow: scroll !important;
-    height: auto !important;
-    width: auto !important;
-    font-size: 1em !important;
-    padding: 1em 3em;
-    min-height: 100vh;
+* {
+    p {
+        font-family: "Titillium Web";
+        color: #222222;
+        margin-top: 0em;
+    }
+    li {
+        font-family: "Titillium Web";
+        color: #222222;
+        margin-top: 0em;
+    }
     h1 {
-        font-size: 300%;
+        font-family: "Cormorant SC SemiBold";
+        color: $heading-red;
+        font-weight: bold;
+        font-size: 1.5em;
     }
-
     h2 {
-        font-size: 175%;
+        font-family: "Cormorant SC SemiBold";
+        color: $heading-red;
+        font-size: 1.2em;
+        font-weight: bold;
+        text-decoration-line: underline;
+        text-decoration-color: $heading-underline;
     }
-    p + h2,
-    ul + h2,
-    ol + h2 {
-        margin-top: 1em;
-    }
-
     h3 {
-        font-size: 150%;
+        font-family: "Cormorant SC";
+        color: $heading-red;
+        font-weight: bold;
+        letter-spacing : -0.02em;
+        font-size: 1em;
+        margin-bottom: 0em;
     }
-
-    h4,h5 {
-        font-size: 125%;
+    ul {
+        margin-top: 0;
+    }
+}
+.action {
+    font-family: "Titillium Web";
+    .title {
+        font-style: italic;
+    }
+    .type {
+        font-weight: bold;
+    }
+}
+.passive {
+    font-family: "Titillium Web";
+    .title {
+        font-style: italic;
     }
 }
 
-#banner {
-    background: black;
-    color:white;
-    padding: 1em 3em;
-}
+table.ability {
+    width: 100%;
+    margin-bottom: 1em;
+    font-size: 10pt;
+    font-family: "Titillium Web";
 
+    thead {
+        display: table-row-group;
+        font-weight: 400;
+
+        th {
+            vertical-align: bottom;
+            padding-bottom: 0.3em;
+            padding-right: 0.1em;
+            padding-left: 0.1em;
+        }
+    }
+
+    tbody {
+        tr {
+            td {
+                text-align: center;
+                vertical-align: bottom;
+                padding-bottom: 0.3em;
+                padding-right: 0.1em;
+                padding-left: 0.1em;
+            }
+
+            &:nth-child(odd) {
+                background-color: $noteGreen;
+            }
+        }
+    }
+}

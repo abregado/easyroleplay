@@ -1,11 +1,11 @@
 #Settings
 title: Easy Roleplay
 email: contact@benbuckton.com
-description: "Straight forward set of prinatables so you can start roleplaying in the next 15 minutes" 
+description: "Straight forward set of prinatables so you can start roleplaying in the next 15 minutes"
 remote_theme: jeremyboggs/5e
 url: "https://easyroleplay.com"
 
 sass:
-    sass_dir: _sass
-    
-theme: jekyll-theme-midnight
+  sass_dir: _sass
+partials:
+  - "_includes"

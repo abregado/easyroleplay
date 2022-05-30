@@ -1,0 +1,33 @@
+<figure>
+    <h3>Ability Scores</h3>
+    <table class="ability">
+        <thead>
+            <th>Str</th>
+            <th>Dex</th>
+            <th>Con</th>
+            <th>Int</th>
+            <th>Wis</th>
+            <th>Cha</th>
+        </thead>
+        <tr>
+            <td>{{ include.class.stats[0] }}</td>
+            <td>{{ include.class.stats[1] }}</td>
+            <td>{{ include.class.stats[2] }}</td>
+            <td>{{ include.class.stats[3] }}</td>
+            <td>{{ include.class.stats[4] }}</td>
+            <td>{{ include.class.stats[5] }}</td>
+        </tr>
+    </table>
+    <table class="ability">
+        <thead>
+            <th>Armor Class</th>
+            <th>Health</th>
+            <th>Rest Dice</th>
+        </thead>
+        <tr>
+            <td>{{ include.class.ac }}</td>
+            <td>{{ include.class.health }}</td>
+            <td>{{ include.class.rest }}</td>
+        </tr>
+    </table>
+</figure>

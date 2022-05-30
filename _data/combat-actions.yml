@@ -1,0 +1,23 @@
+surge-activity:
+  title: "Surge of Activity"
+  desc: "You may take a second Action immediately this turn."
+  type: "Free Action"
+  cost: "1 Surge token"
+
+surge-vitality:
+  title: "Surge of Vitality"
+  desc: "Immediately heal yourself d10+3 hitpoints."
+  type: "Free Action"
+  cost: "1 Surge token"
+
+evasive-footwork:
+  title: "Evasive Footwork"
+  desc: "Roll a d8 and add the value to your Armor class until the start of your next turn."
+  type: "Free Action, when you move at least 5ft"
+  cost: "1 Supremacy token"
+
+riposte:
+  title: "Riposte"
+  desc: "Make a melee attack against the target with one of your weapons, and add an extra d8 damage if you hit."
+  type: "Reaction, when a creature attacks you and misses"
+  cost: "1 Supremacy token"

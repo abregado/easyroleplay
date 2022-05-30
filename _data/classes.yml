@@ -1,0 +1,35 @@
+jeff:
+  name: "Duelist"
+  desc: "A fighter who is quick on their feet, able to turn aside blows using their shield and take deadly advantage of mistakes that their opponents make."
+  stats: ["-3","+2","+1","+0","+2","-1"]
+  ac: 16
+  health: 25
+  rest: "3d10"
+  skill-allowances: ["Acrobatics","Animal Handling","Athletics","History","Insight","Intimidation","Perception","Survival"]
+  skill-count: 2
+  proficiencies: ["Simple weapons","Martial weapons"]
+  resources:
+    -
+      name: "Surge"
+      amount: 2
+    -
+      name: "Supremacy"
+      amount: 3
+  inventory:
+    -
+      type: "choice"
+      choices: [longsword, warhammer]
+    -
+      type: "set"
+      contents: [dagger, shield, health-potion, rope]
+  passives:
+    - duelist
+  actions:
+  - surge-vitality
+  - surge-activity
+  - evasive-footwork
+  - riposte
+bob:
+  name: "Bob"
+  actions:
+    - surge-vitality

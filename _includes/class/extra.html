@@ -1,0 +1,34 @@
+<figure class="class">
+    <h3>Major skills</h3>
+    <p>When skills are handed out you may select {{ include.class.skill-count }} from {{  include.class.skill-allowances |  join: ", " }}.
+    </p>
+    <h3>Resource tokens</h3>
+    <p>
+        {% for token in include.class.resources %}
+            {{ token.name }} x{{ token.amount }}{% unless token == include.class.resources.last %},{% endunless %}
+        {% endfor %}
+    </p>
+    <h3>Equipment and Inventory</h3>
+    <ul>
+        {% for entry in include.class.inventory %}
+            {% if entry.type == "choice" %}
+                <li>
+                {% for choice in entry.choices %}
+                    {% assign item = site.data.equipment[choice] %}
+                    {{ item.title }}
+                    {% unless choice == entry.choices.last %}or{% endunless %}
+                {% endfor %}
+                </li>
+            {% else %}
+                <li>
+                    {% for content in entry.contents %}
+                        {% assign item = site.data.equipment[content] %}
+                        {% if content == entry.contents.last %} and {% endif %}
+                        {{ item.title }}
+                        {% unless content == entry.contents.last %},{% endunless %}
+                    {% endfor %}
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</figure>

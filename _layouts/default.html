@@ -1,4 +1,7 @@
-﻿<html lang="en">
+﻿---
+---
+
+<html lang="en">
     {% include head.html %}
     <body>
     {% include header.html %}
@@ -7,6 +10,11 @@
             {{ content }}
         </div>
     </div>
+    <ul>
+    {% for person in site.data.people %}
+        <li>{{ person.name }}</li>
+    {% endfor %}}
+    </ul>
     {% include footer.html %}
     </body>
 </html>

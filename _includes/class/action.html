@@ -1,0 +1,7 @@
+<p class="action">
+    <span class="title">{{ include.action.title }}. </span> <span class="type">{{ include.action.type }}: </span>
+    {% if include.action.cost %}
+        Spend {{ include.action.cost }}.
+    {% endif %}
+    {{ include.action.desc }}
+</p>

@@ -1,0 +1,21 @@
+longsword:
+  title: "Longsword"
+  proficiency: "martial"
+  desc: "melee attack roll, d8 slashing, Versatile (d10)"
+dagger:
+  title: "Dagger"
+  proficiency: "simple"
+  desc: "melee attack roll, d4 piercing, Finesse, Thrown (30/60)"
+shield:
+  title: "Shield"
+  proficiency: "shield"
+  desc: "+2 AC when equipped"
+health-potion:
+  title: "Health Potion"
+  desc: "Heals 1d4+1 health when used."
+warhammer:
+  title: "Warhammer"
+  proficiency: "martial"
+  desc: "melee attack roll, d8 bludgeoning"
+rope:
+  title: "Rope (15m)"
