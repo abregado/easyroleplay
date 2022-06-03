@@ -4,17 +4,14 @@
 <html lang="en">
     {% include head.html %}
     <body>
-    {% include header.html %}
-    <div class ="page content">
+
+    <div class ="container">
+        {% include header.html %}
         <div class="wrap">
             {{ content }}
         </div>
+        {% include footer.html %}
     </div>
-    <ul>
-    {% for person in site.data.people %}
-        <li>{{ person.name }}</li>
-    {% endfor %}}
-    </ul>
-    {% include footer.html %}
+
     </body>
 </html>

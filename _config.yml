@@ -9,3 +9,5 @@ sass:
   sass_dir: _sass
 partials:
   - "_includes"
+  - "_pages"
+permalink: /:categories/:title/

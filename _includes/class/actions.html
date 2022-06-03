@@ -2,6 +2,6 @@
 <h2>Combat Actions</h2>
     {% for actionName in include.class.actions %}
         {% assign action = site.data.combat-actions[actionName] %}
-        {% include_relative _includes/class/action.html action=action %}
+        {% include class/action.html action=action %}
     {% endfor %}
 </figure>

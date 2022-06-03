@@ -1,13 +1,12 @@
-jeff:
+duelist:
   name: "Duelist"
   desc: "A fighter who is quick on their feet, able to turn aside blows using their shield and take deadly advantage of mistakes that their opponents make."
-  stats: ["-3","+2","+1","+0","+2","-1"]
+  stats: ["+3","+2","+1","+0","+2","-1"]
   ac: 16
   health: 25
   rest: "3d10"
   skill-allowances: ["Acrobatics","Animal Handling","Athletics","History","Insight","Intimidation","Perception","Survival"]
   skill-count: 2
-  proficiencies: ["Simple weapons","Martial weapons"]
   resources:
     -
       name: "Surge"
@@ -24,12 +23,205 @@ jeff:
       contents: [dagger, shield, health-potion, rope]
   passives:
     - duelist
+    - martial
+    - shield
   actions:
   - surge-vitality
   - surge-activity
   - evasive-footwork
   - riposte
-bob:
-  name: "Bob"
-  actions:
-    - surge-vitality
+gladiator:
+  name: "Gladiator"
+  desc: "A powerful damage dealer that focuses on accurate and brutal strikes using two handed weapons."
+  stats: [ "+3","+2","+2","+0","+1","-1" ]
+  ac: 16
+  health: 28
+  rest: "3d10"
+berserker:
+  name: "Berserker"
+  desc: "Channeling their fury, this melee fighter attacks their enemies relentlessly."
+  stats: [ "+3","+2","+2","+0","+1","-1" ]
+  ac: 14
+  health: 32
+  rest: "3d12"
+totem-warrior:
+  name: "Totem Warrior"
+  desc: "Able to channel animal spirits to assist their allies and themselves in melee combat."
+  stats: [ "+3","+2","+2","+0","+1","-1" ]
+  ac: 14
+  health: 32
+  rest: "3d12"
+vocalist:
+  name: "Vocalist"
+  desc: "A magic user who utilizes their voice to harm their enemies with psychic damage and heal their allies with soothing songs."
+  stats: [ "+0","+2","+1","+2","-1","+3" ]
+  ac: 13
+  health: 21
+  rest: "3d8"
+court-musician:
+  name: "Court Musician"
+  desc: "Wielding a string instrument called an Oud, this hero can create powerful, and loud, magical effects."
+  stats: [ "+0","+2","+1","+2","-1","+3" ]
+  ac: 13
+  health: 21
+  rest: "3d8"
+sun-priest:
+  name: "Sun priest"
+  desc: "These heroes use power granted by their god to protect and heal their allies."
+  stats: [ "+2","+2","+1","-1","+3","+0" ]
+  ac: 16
+  health: 21
+  rest: "3d8"
+holy-commander:
+  name: "Holy Commander"
+  desc: "On the frontline, the commanders use their divine magic to enhance their allies' fighting prowess."
+  stats: [ "+2","+2","+1","-1","+3","+0" ]
+  ac: 16
+  health: 21
+  rest: "3d8"
+shaman:
+  name: "Shaman"
+  desc: "This shapeshifter can change into a Hawk to scout the way for their allies. In combat, they can harness the power of the forest."
+  stats: [ "+2","+1","+2","+0","+3","-1" ]
+  ac: 12
+  health: 24
+  rest: "3d8"
+fang-stalker:
+  name: "Fang Stalker"
+  desc: "This shapeshifter specializes in stealth and ambush, being able to transform into a Panther."
+  stats: [ "+2","+1","+2","+0","+3","-1" ]
+  ac: 12
+  health: 24
+  rest: "3d8"
+featherweight:
+  name: "Featherweight"
+  desc: "A martial artist who has perfected inner balance. They are able to channel their Ki into a variety of effects."
+  stats: [ "+0","+3","+2","-1","+2","+1" ]
+  ac: 15
+  health: 24
+  rest: "3d8"
+twilight-walker:
+  name: "Twilight Walker"
+  desc: "A martial artist who uses their Ki to bend light, and befriend the shadows."
+  stats: [ "+0","+3","+2","-1","+2","+1" ]
+  ac: 15
+  health: 24
+  rest: "3d8"
+holy-protector:
+  name: "Holy Protector"
+  desc: "A knight sworn to protect the weak, and focuses their magic on protection."
+  stats: [ "+3","+0","+2","+1","-1","+2" ]
+  ac: 17
+  health: 28
+  rest: "3d10"
+red-knight:
+  name: "Red Knight"
+  desc: "A knight who has trained their magic to smite their evil enemies."
+  stats: [ "+3","+0","+2","+1","-1","+2" ]
+  ac: 17
+  health: 28
+  rest: "3d10"
+hunter:
+  name: "Hunter"
+  desc: "A ranged fighter who specializes in tracking and empowering their strikes with magic."
+  stats: [ "-1","+3","+2","+0","+2","+1" ]
+  ac: 16
+  health: 28
+  rest: "3d10"
+warden:
+  name: "Warden"
+  desc: "A dual wielding fighter with an animal companion who hunts monsters which threaten the wilds."
+  stats: [ "-1","+3","+2","+0","+2","+1" ]
+  ac: 16
+  health: 28
+  rest: "3d10"
+pactbound:
+  name: "Pactbound"
+  desc: "The powers granted by their devilish patrons allow these heroes to both take and spare life. They also have a devil familiar."
+  stats: [ "+1","+2","+0","+2","-1","+3" ]
+  ac: 13
+  health: 18
+  rest: "3d8"
+demonologist:
+  name: "Demonologist"
+  desc: "Experts in the way of demons, these academics focus their powers into magical weapons."
+  stats: [ "+1","+2","+0","+2","-1","+3" ]
+  ac: 13
+  health: 18
+  rest: "3d8"
+necromancer:
+  name: "Necromancer"
+  desc: "Control over the soul and the ability to summon ethereal weapons are not powers to be taken lightly."
+  stats: [ "-1","+2","+2","+3","-0","-1" ]
+  ac: 12
+  health: 20
+  rest: "3d6"
+loremaster:
+  name: "Loremaster"
+  desc: "Versed in Evocation and Abjuration magics, these magic users are powerful opponents. Their academic expertise also helps when not on the battlefield."
+  stats: [ "-1","+2","+2","+3","-0","-1" ]
+  ac: 12
+  health: 20
+  rest: "3d6"
+blood-witch:
+  name: "Blood Witch"
+  desc: "A monster hunter that uses forbidden magics to curse their enemies and enhance their own powers."
+  stats: [ "+1","+2","+2","+3","+0","-1" ]
+  ac: 15
+  health: 28
+  rest: "3d10"
+lycan-sentinel:
+  name: "Lycan Sentinel"
+  desc: "A hunter who can transform into a werewolf, using its power to hunt other monsters."
+  stats: [ "+1","+2","+2","+3","+0","-1" ]
+  ac: 15
+  health: 28
+  rest: "3d10"
+alchemist:
+  name: "Alchemist"
+  desc: "Masters of combining chemistry and magic, these heroes have an ability for almost any situation."
+  stats: [ "+2","+2","-1","+3","+1","+0" ]
+  ac: 16
+  health: 15
+  rest: "3d8"
+engineer:
+  name: "Engineer"
+  desc: "Tinkers who create magical apparatus to do their bidding. They can reconfigure their machines during combat when needed."
+  stats: [ "+2","+2","-1","+3","+1","+0" ]
+  ac: 16
+  health: 15
+  rest: "3d8"
+scoundrel:
+  name: "Scoundrel"
+  desc: "A jack of all trades with fast hands. Talented and experienced in dungeon delving and remaining unseen."
+  stats: [ "-1","+3","+0","+1","+2","+2" ]
+  ac: 14
+  health: 18
+  rest: "3d8"
+assassin:
+  name: "Assassin"
+  desc: "These heroes use the arts of surprise and stealth to introduce their opponents to the point of a poisoned blade."
+  stats: [ "-1","+3","+0","+1","+2","+2" ]
+  ac: 14
+  health: 18
+  rest: "3d8"
+dragon-soul:
+  name: "Dragon Soul"
+  desc: "Born with the blood of a dragon, these magic users can draw upon their heritage to aid then in battle."
+  stats: [ "+0","+2","+1","-1","+2","+3" ]
+  ac: 15
+  health: 20
+  rest: "3d6"
+elementalist:
+  name: "Elementalist"
+  desc: "These heroes can draw on the power of the natural elements to perform great feats."
+  stats: [ "+0","+2","+1","-1","+2","+3" ]
+  ac: 14
+  health: 20
+  rest: "3d6"
+awakened:
+  name: "Awakened"
+  desc: "After gaining psionic powers, these heroes set out to do some good in the world."
+astral-sensei:
+  name: "Astral Sensei"
+  desc: "These martial artists train to release their true celestial forms."

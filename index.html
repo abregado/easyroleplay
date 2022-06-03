@@ -1,6 +1,7 @@
 ---
 my_number: 5
 description: "here is a description"
+permalink: /
 ---
 
 <html>
@@ -9,17 +10,16 @@ description: "here is a description"
     <meta charset="utf-8">
     <title>{{ title }}</title>
 </head>
+
 <body class="phb">
+<a href="character/duelist">CLICK HERE</a>
+
 <figure class="class">
     <h1>Character Classes</h1>
 </figure>
 {% for classPair in site.data.classes %}
 {% assign class = classPair[1] %}
-    {% include_relative _includes/class/desc.html class=class %}
-    {% include_relative _includes/class/ability-scores.html class=class %}
-    {% include_relative _includes/class/extra.html class=class %}
-    {% include_relative _includes/class/passives.html class=class %}
-    {% include_relative _includes/class/actions.html class=class %}
+    {% include_relative _includes/class/class-full.html class=class %}
     <hr>
 {%  endfor %}
 

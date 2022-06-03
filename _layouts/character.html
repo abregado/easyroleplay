@@ -1,9 +1,6 @@
-﻿<div class="character">
-    <header class="character-header">
-        <h1>{{ character.name }}</h1>
-    </header>
-    
-    <article class="character-content">
-        {{ content }}
-    </article>
-</div>
+﻿---
+layout: "default"
+---
+<a class="back" href="/characters"><- Character List</a>
+{% assign classData = site.data.classes[page.className] %}
+{% include class/class-full.html class=classData %}

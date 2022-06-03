@@ -7,9 +7,9 @@ $noteGreen: #e0e5c1;
 $horizontalRule: #9c2b1b;
 
 * {
+    font-family: "Titillium Web";
+    color: #222222;
     p {
-        font-family: "Titillium Web";
-        color: #222222;
         margin-top: 0em;
     }
     li {
@@ -43,6 +43,30 @@ $horizontalRule: #9c2b1b;
         margin-top: 0;
     }
 }
+div.container {
+    width: 600px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+ul.character-classes {
+    list-style-type: none;
+    li {
+        a {
+            text-decoration: none;
+            padding: 5px 20px;
+            display: block;
+        }
+        a:hover {
+            background: #f1e7c8;
+        }
+    }
+}
+
+a.back {
+    font-weight: bold;
+}
+
 .action {
     font-family: "Titillium Web";
     .title {

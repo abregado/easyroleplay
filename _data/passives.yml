@@ -1,3 +1,9 @@
 duelist:
   title: "Duelist"
   desc: When rolling damage for melee strikes using a one handed weapon, increase one of the damage types caused by 2.
+martial:
+  title: "Martial weapons proficiency"
+  desc: When rolling melee attack rolls using martial weapons, add 2 to the roll.
+shield:
+  title: "Shield proficiency"
+  desc: When wielding a shield, add 2 to your armor class.
