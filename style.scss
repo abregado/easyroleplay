@@ -42,6 +42,12 @@ $horizontalRule: #9c2b1b;
     ul {
         margin-top: 0;
     }
+    strong.levelable {
+        color: #6a1c0f;
+    }
+    strong.randomelement {
+        color: darkslateblue;
+    }
 }
 div.container {
     width: 600px;
@@ -116,4 +122,6 @@ table.ability {
             }
         }
     }
+
+
 }
