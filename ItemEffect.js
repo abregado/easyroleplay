@@ -14,7 +14,14 @@ import {
     PartySkillBonus,
     RandomCreatureType,
     FeetIncrement,
-    RandomCondition, DamageDice, DiceMinimum
+    RandomCondition,
+    DamageDice,
+    DiceMinimum,
+    RandomEnvironment,
+    RandomDamageType,
+    CantripOption,
+    RandomCantrip,
+    NumberIncrement, RandomClassResource, RandomLanguage
 } from "./ItemComponent.js";
 
 const componentClasses = {
@@ -35,6 +42,14 @@ const componentClasses = {
     "RandomCondition": RandomCondition,
     "DamageDice": DamageDice,
     "DiceMinimum": DiceMinimum,
+    "RandomEnvironment": RandomEnvironment,
+    "RandomDamageType": RandomDamageType,
+    "CantripOption": CantripOption,
+    "RandomCantrip": RandomCantrip,
+    "NumberIncrement": NumberIncrement,
+    "RandomClassResource": RandomClassResource,
+    "RandomLanguage": RandomLanguage,
+
 }
 
 class ItemEffect {
@@ -61,10 +76,10 @@ class ItemEffect {
         this.components.forEach(component=>{
             properties[component.propertyName] = component.GenerateText();
             if (strongLevelables){
-                if (component.CanLevelUp()){
-                    properties[component.propertyName] = '<strong class="levelable">['+properties[component.propertyName]+']</strong>'
+                if (component.isProperty){
+                    properties[component.propertyName] = '<strong class="randomelement">['+properties[component.propertyName]+']</strong>';
                 } else {
-                    properties[component.propertyName] = '<strong class="randomelement">['+properties[component.propertyName]+']</strong>'
+                    properties[component.propertyName] = '<strong class="levelable">['+properties[component.propertyName]+']</strong>';
                 }
             }
         })

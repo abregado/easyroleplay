@@ -1,14 +1,5 @@
 const itemEffects = [
     {
-        text: "${this.ActionSpeed}: Spend ${this.ChargeCost}. Change the damage type of ${this.SpellCountOfLevel} from one of the following to another (${this.DamageTypes}) until your next rest ends.",
-        components: [
-            {name: "ChargeCost", formula: "TextUnits", startValue: [2, "charge"]},
-            {name: "SpellCountOfLevel", formula: "SpellCountOfLevel", startValue: [1, 0]},
-            {name: "DamageTypes", formula: "DamageTypes", startValue: 1},
-            {name: "ActionSpeed", formula: "ActionSpeedIncrease", startValue: 0}
-        ]
-    },
-    {
         text: "Passive: +${this.AttackBonus} to melee attack rolls using this weapon.",
         components: [
             {name: "AttackBonus", formula: "AttackBonus", startValue: 1},
@@ -108,13 +99,10 @@ const itemEffects = [
         ]
     },
     {
-        text: "Reaction when you cast a spell with duration: Once per day, Double the duration.",
-    },
-    {
-        text: "Reaction when you cast a spell with duration: Twice per day, Increase the duration by one minute.",
-    },
-    {
-        text: "Reaction when you cast a spell with duration: Increase the duration by one round.",
+        text: "Reaction when you cast a spell with duration: ${this.UsesPerDay}, Double the duration of that spell.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 2},
+        ]
     },
     {
         text: "Reaction: ${this.UsesPerDay}, You ${this.SkillBonus} your next ${this.RandomAbility} saving throw.",
@@ -137,7 +125,6 @@ const itemEffects = [
         components: [
             {name: "RandomAbility", formula: "RandomAbilityScoreType", startValue: 0},
             {name: "SkillBonus", formula: "SkillBonus", startValue: 0},
-            {name: "RandomAbility", formula: "RandomAbilityScoreType", startValue: 0},
         ]
     },
     {
@@ -168,7 +155,10 @@ const itemEffects = [
         ]
     },
     {
-        text: "Reaction when wounded by an attack: Spend a charge. Gain temporary hit points equal to your level, after the attack is resolved.",
+        text: "Reaction when wounded by an attack: ${this.UsesPerDay}, Gain temporary hit points equal to your level, after the attack is resolved.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
+        ]
     },
     {
         text: "Your party is immune to being surprised by a group including at least one ${this.RandomCreatureType} type, once per long rest.",
@@ -222,10 +212,16 @@ const itemEffects = [
         ]
     },
     {
-        text: "Action: Once per day, Roll any number of hit die. Heal the amount rolled.",
+        text: "${this.ActionSpeed}: Once per day, Roll any number of hit die. Heal the amount rolled.",
+        components: [
+            {name:"ActionSpeed", formula: "ActionSpeedIncrease",startValue: 1}
+        ]
     },
     {
-        text: "Free action: Twice per day, the next hit die spent rolls maximum.",
+        text: "Free action: ${this.UsesPerDay}, the next hit die spent rolls maximum.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
+        ]
     },
     {
         text: "Passive: You may reroll ${this.DiceMinimum} when you roll a hit die.",
@@ -258,16 +254,28 @@ const itemEffects = [
         ]
     },
     {
-        text: "Passive: Immunity to travel penalties from one environment type.",
+        text: "Passive: Immunity to travel penalties from terrain and weather while in ${this.RandomEnvironment} environments.",
+        components: [
+            {name:"RandomEnvironment",formula: "RandomEnvironment", startValue: 0}
+        ]
     },
     {
-        text: "Passive: Resistance to one elemental environmental damage.",
+        text: "Passive: Resistance to ${this.RandomDamageType} damage from environmental hazards.",
+        components: [
+            {name:"RandomDamageType",formula: "RandomDamageType", startValue: 0}
+        ]
     },
     {
-        text: "Action: Double the range of the next spell cast.",
+        text: "${this.ActionSpeed}: Double the range of the next spell cast.",
+        components: [
+            {name:"ActionSpeed", formula: "ActionSpeedIncrease",startValue: 1}
+        ]
     },
     {
-        text: "Bonus Action: Increase the next ranged spell cast by 15ft.",
+        text: "Bonus Action: Increase the next ranged spell cast by ${this.FeetIncrement}.",
+        components: [
+            {name: "FeetIncrement", formula: "FeetIncrement", startValue: [0,10]},
+        ]
     },
     {
         text: "Reaction: Increase the next ranged spell attack cast by ${this.FeetIncrement}.",
@@ -276,13 +284,18 @@ const itemEffects = [
         ]
     },
     {
-        text: "Ritual: Spend 4 charges. Change the damage type of one spell to another damage type of the same level until your next rest.",
+        text: "${this.ActionSpeed}: Once per day, change the damage type of ${this.SpellCountOfLevel} from one of the following to another (${this.DamageTypes}) until your next rest ends.",
+        components: [
+            {name: "SpellCountOfLevel", formula: "SpellCountOfLevel", startValue: [1, 0]},
+            {name: "DamageTypes", formula: "DamageTypes", startValue: 1},
+            {name: "ActionSpeed", formula: "ActionSpeedIncrease", startValue: 0}
+        ]
     },
     {
-        text: "Action: Spend 2 charges. Change the damage type of one level 1 spell to another damage type of the same level.",
-    },
-    {
-        text: "Reaction: Change the damage type of one cantrip to another damage type of the same level.",
+        text: "Reaction: Change the damage type of one cantrip from one of the following to another (${this.DamageTypes}) for the next attack.",
+        components: [
+            {name: "DamageTypes", formula: "DamageTypes", startValue: 0},
+        ]
     },
     {
         text: "Ritual: Twice per day, gain Darkvision (${this.FeetIncrement}) for 1 hour.",
@@ -303,106 +316,227 @@ const itemEffects = [
         ]
     },
     {
-        text: "Action: Spend 4 charges. Grant an ally within 5ft level 3 bonus on the next saving throw they make.",
+        text: "Action: ${this.UsesPerDay}, An ally within 5ft may ${this.SkillBonus} on the next saving throw they make.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
+            {name: "SkillBonus", formula: "SkillBonus", startValue: 2},
+        ]
     },
     {
-        text: "Reaction: Spend a charge. Grant an ally within 5ft level 2 bonus on a saving throw.",
+        text: "Reaction: ${this.UsesPerDay}, An ally within 5ft may ${this.SkillBonus} on the next saving throw they make.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
+            {name: "SkillBonus", formula: "SkillBonus", startValue: 1},
+        ]
     },
     {
-        text: "Reaction: Grant an ally within 5ft level 1 bonus on a saving throw.",
+        text: "Reaction: An ally within 5ft may ${this.SkillBonus} on the next saving throw they make.",
+        components: [
+            {name: "SkillBonus", formula: "SkillBonus", startValue: 0},
+        ]
     },
     {
-        text: "Stores three cantrips. Spend 2 charges to cast any of them.",
+        text: "${this.UsesPerDay} cast one of the follow cantrips: ${this.CantripOption}.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
+            {name: "CantripOption", formula: "CantripOption", startValue: 3},
+        ]
     },
     {
-        text: "Stores 2 cantrips. Spend 1 charge to cast any of them.",
+        text: "${this.UsesPerDay} cast one of the follow cantrips: ${this.CantripOption}.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 0},
+            {name: "CantripOption", formula: "CantripOption", startValue: 2},
+        ]
     },
     {
-        text: "Stores 1 cantrip. Costs nothing to cast.",
+        text: "You may cast the follow cantrips: ${this.CantripOption}.",
+        components: [
+            {name: "CantripOption", formula: "CantripOption", startValue: 1},
+        ]
     },
     {
-        text: "Stores one level two spell. Drains as soon as you cast a spell. Only Attuned can store and cast.",
+        text: "Stores ${this.SpellCountOfLevel}. Drains as soon as you cast any spell. Only and attuned user can store and cast these spells.",
+        components: [
+            {name: "SpellCountOfLevel", formula: "SpellCountOfLevel", startValue: [1, 2]},
+        ]
     },
     {
-        text: "Stores one level 1 spell. Drains at the start of any long rest. Anyone can store. Attuned can cast as if they were the storer.",
+        text: "Stores ${this.SpellCountOfLevel}. Drains at the start of any rest. Anyone can store. Attuned can cast as if they were the storer.",
+        components: [
+            {name: "SpellCountOfLevel", formula: "SpellCountOfLevel", startValue: [1, 1]},
+        ]
     },
     {
-        text: "Stores up to 4 cantrip uses. Drains at the start of any long rest. Anyone can store. Attuned can cast as if they were the storer.",
+        text: "Reaction when hit by an attack: ${this.UsesPerDay}, cast any spell that uses an action. You gain the ${this.RandomCondition} condition until the end of your next turn.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
+            {name: "RandomCondition", formula: "RandomCondition", startValue: 1}
+        ]
     },
     {
-        text: "Reaction when hit by an attack: Spend 4 charges. Cast any spell that uses an action. You gain a level 2 condition until the end of your next turn.",
-    },
-    {
-        text: "Reaction when hit by an attack: Spend 2 charges. Cast an instantaneous level 1 spell that uses a Bonus action, and does not require concentration.",
+        text: "Reaction when hit by an attack: ${this.UsesPerDay}, cast an instantaneous level 1 spell that uses a Bonus action, and does not require concentration.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 2},
+        ]
     },
     {
         text: "Reaction when hit by an attack: Cast a cantrip that can target your attacker. Cantrip chosen when attuning.",
     },
     {
-        text: "Reaction, when you roll a Stealth check: Spend 4 charges. Maximise the result. Gain a level 2 condition",
+        text: "Reaction, when you roll a Stealth check: ${this.UsesPerDay}, maximise the result. Gain the ${this.RandomCondition} condition until the end of your next turn.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 2},
+            {name: "RandomCondition", formula: "RandomCondition", startValue: 1}
+        ]
     },
     {
-        text: "Reaction, when you roll a Stealth check: Spend 2 charges. Reroll the result. Gain a level 1 condition.",
+        text: "Reaction, when you roll a Stealth check: ${this.UsesPerDay}, reroll the result. Gain the ${this.RandomCondition} condition until the end of your next turn.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 2},
+            {name: "RandomCondition", formula: "RandomCondition", startValue: 0}
+        ]
     },
     {
-        text: "Reaction, when you roll a Stealth check: Gain a level 2 condition and reroll the result.",
+        text: "Ritual: ${this.UsesPerDay} Create 3${this.DamageDice} dice pieces of ammunition for a weapon you have by touching a non-magical weapon. The touched weapon disintegrates.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
+            {name: "DamageDice", formula: "DamageDice", startValue: 1},
+        ]
     },
     {
-        text: "Ritual: Create 3x level 2 dice pieces of ammunition for a weapon you have by touching a non-magical weapon. The touched weapon disintegrates.",
+        text: "Action: ${this.UsesPerDay} Create ${this.DamageDice} dice pieces of ammunition for a weapon you have by touching a non-magical weapon. The touched weapon disintegrates.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 2},
+            {name: "DamageDice", formula: "DamageDice", startValue: 1},
+        ]
     },
     {
-        text: "Action: Create level 2 dice of ammunition for a weapon you have by touching a non-magical weapon. The touched weapon disintegrates.",
+        text: "Passive: +${this.AttackBonus} to ammunition recovery rolls.",
+        components: [
+            {name: "AttackBonus", formula: "AttackBonus",startValue: 1},
+        ]
     },
     {
-        text: "Passive: +2 to ammunition recovery rolls.",
+        text: "Ritual: Spend a point of ${this.RandomClassResource} to gain a level ${this.SpellLevel} spell slot.",
+        components: [
+            {name: "RandomClassResource", formula: "RandomClassResource",startValue: 0},
+            {name: "SpellLevel", formula: "TextNumber", startValue: 3},
+        ]
     },
     {
-        text: "Ritual: Spend your [class resource/Channel Divinity] to gain a level 3 spell slot.",
+        text: "Action: Spend a point of ${this.RandomClassResource} to gain a level ${this.SpellLevel} spell slot.",
+        components: [
+            {name: "RandomClassResource", formula: "RandomClassResource",startValue: 0},
+            {name: "SpellLevel", formula: "TextNumber", startValue: 2},
+        ]
     },
     {
-        text: "Action: Spend your [class resource/Channel Divinity] to gain a level 2 spell slot.",
+        text: "Reaction: Spend a point of ${this.RandomClassResource} to gain a level ${this.SpellLevel} spell slot.",
+        components: [
+            {name: "RandomClassResource", formula: "RandomClassResource",startValue: 0},
+            {name: "SpellLevel", formula: "TextNumber", startValue: 1},
+        ]
     },
     {
-        text: "Free action: Spend your [class resource/Channel Divinity] to gain a level 1 spell slot.",
+        text: "Free action: ${this.UsesPerDay}, You ${this.SkillBonus} on Concentration checks for the duration of the next spell you cast.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 2},
+            {name: "SkillBonus", formula: "SkillBonus", startValue: 0},
+        ]
     },
     {
-        text: "Free action: Spend 4 charges. Gain level 3 bonus on Concentration checks for the duration of the next spell you cast.",
+        text: "Free action: ${this.UsesPerDay}, You ${this.SkillBonus} on Concentration checks for the duration of the next spell you cast.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
+            {name: "SkillBonus", formula: "SkillBonus", startValue: 1},
+        ]
     },
     {
-        text: "Reaction: Spend two charges. Reroll a failed Concentration check.",
+        text: "Reaction: ${this.UsesPerDay}, Reroll a failed Concentration check.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
+        ]
     },
     {
-        text: "Reaction: Spend a charge. Level 2 bonus on a Concentration check you are about to make. ",
+        text: "Free action: ${this.UsesPerDay}, the next spell you cast does not require both its Somatic and Verbal components.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
+        ]
     },
     {
-        text: "Free action: Spend 4 charges. The next spell you cast does not require both its Somatic and Verbal components. It is also completely undetectable.",
+        text: "Reaction: ${this.UsesPerDay}, the next spell you cast does not require both its Somatic and Verbal components.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 2},
+        ]
     },
     {
-        text: "Reaction: Spend a charge. The next spell you cast does not require one of its Somatic or Verbal components.",
+        text: "Ritual: ${this.UsesPerDay}, for 1 hour you understand, speak, read and write one language that you have in front of you during the ritual.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
+        ]
     },
     {
-        text: "Free action: Spend two charges. The next spell you cast does not require one of its Somatic or Verbal components.",
+        text: "Free action: ${this.UsesPerDay}, for ${this.NumberIncrement} minutes you can understand, speak, read and write ${this.RandomLanguage}.",
+        components: [
+            {name: "RandomLanguage", formula: "RandomLanguage", startValue: 1},
+            {name: "NumberIncrement", formula: "NumberIncrement", startValue: [0,10]},
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
+        ]
     },
     {
-        text: "Ritual: Spend 4 charges. For 1 hour you understand, speak, read and write one language that you have in front of you during the ritual.",
+        text: "Passive: You can understand and read ${this.RandomLanguage}.",
+        components: [
+            {name: "RandomLanguage", formula: "RandomLanguage", startValue: 1}
+        ]
     },
     {
-        text: "Free action: Spend a charge. For 10 minutes you can understand, speak, read and write one language you did not know before. ",
+        text: "Passive: You can understand, read, write and speak ${this.RandomLanguage}.",
+        components: [
+            {name: "RandomLanguage", formula: "RandomLanguage", startValue: 0}
+        ]
     },
     {
-        text: "Passive: You can understand and read one language you did not know before.",
+        text: "Passive: You can understand and speak ${this.RandomLanguage}.",
+        components: [
+            {name: "RandomLanguage", formula: "RandomLanguage", startValue: 1}
+        ]
     },
     {
-        text: "Free action, when you heal a target: Spend 4 charges. You heal the same amount as the target.",
+        text: "Free action, when you heal a target: ${this.UsesPerDay}, You heal the same amount as the target.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
+        ]
     },
     {
-        text: "Passive: Level 2 damage healed when casting a spell that heals a target.",
+        text: "Passive: Heal ${this.DamageDice} hit points when casting a spell that heals a target.",
+        components: [
+            {name: "DamageDice", formula: "DamageDice",startValue: 1}
+        ]
     },
     {
-        text: "Passive: Level 1 damage healed when casting a spell on a friendly target..",
+        text: "Passive: Heal ${this.DamageDice} hit points when casting a spell on a friendly target.",
+        components: [
+            {name: "DamageDice", formula: "DamageDice",startValue: 0}
+        ]
     },
     {
-        text: "Free action, when you heal a target: Spend 4 charges. You gain double the temporary hit points that the target healed. These last until your next rest.",
+        text: "Passive: Targets you heal may reroll ${this.DiceMinimum} on dice for healing.",
+        components: [
+            {name: "DiceMinimum", formula: "DiceMinimum",startValue: 0}
+        ]
+    },
+    {
+        text: "Passive: You may reroll ${this.DiceMinimum} on dice for healing, when you are the target.",
+        components: [
+            {name: "DiceMinimum", formula: "DiceMinimum",startValue: 0}
+        ]
+    },
+    {
+        text: "Free action, when you heal a target: ${this.UsesPerDay}, you gain double the temporary hit points that the target healed. These last until your next rest.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
+        ]
     },
     {
         text: "Passive: Level 3 damage temporary hit points when casting a spell that heals a target. These last until your next rest.",
@@ -411,7 +545,10 @@ const itemEffects = [
         text: "Passive: Level 2 damage temporary hit points gained when casting a spell on a friendly target. These last until your next rest.",
     },
     {
-        text: "Free action, when you take the Attack action: Spend 2 charges. All attack rolls gain a +2 bonus.",
+        text: "Free action, when you take the Attack action: ${this.UsesPerDay}, all attack rolls for this action gain a +2 bonus.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
+        ]
     },
     {
         text: "Passive: +1 to [spell,melee,ranged] attack rolls when held.",
