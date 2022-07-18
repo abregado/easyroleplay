@@ -67,6 +67,14 @@ const languageOptions =[
     ["Dwarvish","Elvish","Giant","Gnomish","Goblin","Halfling","Orc","Undercommon"],
     ["Abyssal","Celestial","Draconic","Deep Speech","Infernal","Primordial","Sylvan"]
 ]
+const attackRollType = [
+    'ranged spell',
+    'melee spell',
+    'ranged weapon',
+    'melee weapon'
+]
+
+
 function RandomFromList (list) {
     return list[Math.floor(Math.random() * list.length)];
 }
@@ -81,7 +89,7 @@ function RandomListFromList (list, entries) {
 
     for (let i=0;i<entries;i++){
         const randomIndex = Math.floor(Math.random() * listCopy.length);
-        result.push(listCopy.splice(randomIndex,1))
+        result.push(listCopy.splice(randomIndex,1));
     }
 
     return result;
@@ -488,7 +496,7 @@ export class DiceMinimum extends ItemComponent {
     constructor(propertyName,startingValues) {
         super(propertyName,startingValues);
         this.componentLevel = startingValues;
-        this.maxLevel = 4;
+        this.maxLevel = 3;
     }
 
     GenerateText() {
@@ -557,5 +565,54 @@ export class RandomLanguage extends ItemComponent {
 
     GenerateText() {
         return this.languageName.toString();
+    }
+}
+
+export class RandomAttackRollType extends ItemComponent {
+    attackRollType;
+
+    constructor(propertyName,startingValues) {
+        super(propertyName,startingValues);
+        this.attackRollType = RandomFromList(attackRollType);
+        this.componentLevel = 0;
+        this.maxLevel = 0;
+        this.isProperty = true;
+    }
+
+    GenerateText() {
+        return this.attackRollType.toString();
+    }
+}
+
+export class SkillPenalty extends ItemComponent {
+    levels= [
+        "must reroll 20's on",
+        "subtract 1d4 to the total of",
+        "suffer disadvantage on",
+    ]
+
+    constructor(propertyName,startingValues) {
+        super(propertyName,startingValues);
+        this.componentLevel = startingValues;
+        this.maxLevel = 2;
+    }
+
+    GenerateText() {
+        return this.levels[this.componentLevel].toString();
+    }
+}
+
+export class NumberPlus extends ItemComponent {
+    extraNumber = 0;
+
+    constructor(propertyName,startingValues) {
+        super(propertyName,startingValues);
+        this.componentLevel = startingValues[0];
+        this.extraNumber = startingValues[1];
+        this.maxLevel = 10;
+    }
+
+    GenerateText() {
+        return (this.componentLevel+this.extraNumber).toString();
     }
 }

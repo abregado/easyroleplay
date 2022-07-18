@@ -21,7 +21,7 @@ import {
     RandomDamageType,
     CantripOption,
     RandomCantrip,
-    NumberIncrement, RandomClassResource, RandomLanguage
+    NumberIncrement, RandomClassResource, RandomLanguage, RandomAttackRollType, SkillPenalty, NumberPlus
 } from "./ItemComponent.js";
 
 const componentClasses = {
@@ -49,6 +49,9 @@ const componentClasses = {
     "NumberIncrement": NumberIncrement,
     "RandomClassResource": RandomClassResource,
     "RandomLanguage": RandomLanguage,
+    "RandomAttackRollType": RandomAttackRollType,
+    "SkillPenalty": SkillPenalty,
+    "NumberPlus": NumberPlus,
 
 }
 
@@ -59,6 +62,7 @@ class ItemEffect {
 
     constructor(itemData) {
         this.text = itemData.text
+        console.log(this.text);
         if (itemData.components != null){
             itemData.components.forEach(componentData=>{
                 const componentClass = componentClasses[componentData.formula];
@@ -84,8 +88,30 @@ class ItemEffect {
             }
         })
 
-        console.log(properties)
         return new Function("return `" + this.text +"`;").call(properties);
+    }
+
+    LevelUp(){
+        const levelables = this.components.filter(component=>component.CanLevelUp());
+        if (levelables.length > 0) {
+            const randomIndex = Math.floor(Math.random() * levelables.length);
+            levelables[randomIndex].LevelUp();
+            this.effectLevel++;
+        } else {
+            console.log("No levelable effects!")
+        }
+    }
+
+    CanLevelUp(){
+        let result = true;
+
+        this.components.forEach(component=>{
+            if (component.CanLevelUp() == false) {
+                result = false;
+            }
+        })
+
+        return result;
     }
 }
 

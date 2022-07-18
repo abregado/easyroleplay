@@ -1,4 +1,5 @@
 import {ItemEffect} from "./ItemEffect.js";
+import {Artifact} from "./Artifact.js";
 
 function buildOneOfEachItemEffect(itemEffects){
     let allEffectObjects = [];
@@ -34,9 +35,13 @@ function insertHTML(id, html) {
 }
 
 function run() {
-    var allItems = buildOneOfEachItemEffect(itemEffects)
-    const html = createList(allItems,true);
-    insertHTML('iteminfo',html);
+    const item1 = new Artifact(itemEffects,0);
+    const item2 = new Artifact(itemEffects,0);
+    insertHTML('item1',createList(item1.effects))
+    insertHTML('item2',createList(item2.effects))
+    // var allItems = buildOneOfEachItemEffect(itemEffects)
+    // const html = createList(allItems,true);
+    // insertHTML('allEffects',html);
 }
 
 window.onload = run;

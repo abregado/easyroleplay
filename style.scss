@@ -122,6 +122,10 @@ table.ability {
             }
         }
     }
+}
 
 
+figure.twincard {
+    display: grid;
+    grid-template-columns: 50% 50%;
 }

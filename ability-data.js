@@ -1,10 +1,4 @@
-const itemEffects = [
-    {
-        text: "Passive: +${this.AttackBonus} to melee attack rolls using this weapon.",
-        components: [
-            {name: "AttackBonus", formula: "AttackBonus", startValue: 1},
-        ]
-    },
+let itemEffects = [
     {
         text: "Passive: You ${this.SkillBonus} your ${this.RandomSkillCheckType} checks.",
         components: [
@@ -13,17 +7,19 @@ const itemEffects = [
         ]
     },
     {
-        text: "Free action: Twice per day, You ${this.SkillBonus} your next ${this.RandomSkillCheckType} check.",
+        text: "Free action: ${this.UsesPerDay}, You ${this.SkillBonus} your next ${this.RandomSkillCheckType} check.",
         components: [
             {name: "SkillBonus", formula: "SkillBonus", startValue: 1},
             {name: "RandomSkillCheckType", formula: "RandomSkillCheckType", startValue: 0},
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
         ],
     },
     {
-        text: "Free action: Once per day, You ${this.SkillBonus} your next ${this.RandomSkillCheckType} check.",
+        text: "Free action: ${this.UsesPerDay}, You ${this.SkillBonus} your next ${this.RandomSkillCheckType} check.",
         components: [
             {name: "SkillBonus", formula: "SkillBonus", startValue: 2},
             {name: "RandomSkillCheckType", formula: "RandomSkillCheckType", startValue: 0},
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 0},
         ]
     },
     {
@@ -40,9 +36,10 @@ const itemEffects = [
         ]
     },
     {
-        text: "${this.ActionSpeed}: Spend 4 charges, Spend any number of hit dice to recharge the same number of level one spell slots.",
+        text: "${this.ActionSpeed}: ${this.UsesPerDay}, Spend any number of hit dice to recharge the same number of level one spell slots.",
         components: [
-            {name: "ActionSpeed", formula: "ActionSpeedIncrease", startValue: 0}
+            {name: "ActionSpeed", formula: "ActionSpeedIncrease", startValue: 0},
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 0}
         ]
     },
     {
@@ -60,7 +57,10 @@ const itemEffects = [
         ]
     },
     {
-        text: "Reaction when you cast any spell: Roll a number of hit dice equal to the spell level and suffer the damage. The spell is considered one level higher.",
+        text: "Reaction when you cast any spell: Roll ${this.HitDice} hit dice and suffer the damage. The spell is considered ${this.HitDice} levels higher.",
+        components: [
+            {name: "HitDice", formula: "TextNumber", startValue: 2},
+        ]
     },
     {
         text: "Reaction when you cast a spell: ${this.UsesPerDay}, Spend a spell slot three levels lower.",
@@ -81,19 +81,19 @@ const itemEffects = [
         ]
     },
     {
-        text: "Action: ${this.UsesPerDay}, Upgrade your lowest spell slot by three levels. ",
+        text: "Action: ${this.UsesPerDay}, upgrade your lowest spell slot by three levels. ",
         components: [
             {name: "UsesPerDay", formula: "UsesPerDay", startValue: 0},
         ]
     },
     {
-        text: "Action: ${this.UsesPerDay}, Upgrade your lowest spell slot by two levels. ",
+        text: "Action: ${this.UsesPerDay}, upgrade your lowest spell slot by two levels. ",
         components: [
             {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
         ]
     },
     {
-        text: "Action: ${this.UsesPerDay}, Upgrade a spell slot one level.",
+        text: "Action: ${this.UsesPerDay}, upgrade a spell slot one level.",
         components: [
             {name: "UsesPerDay", formula: "UsesPerDay", startValue: 2},
         ]
@@ -135,10 +135,11 @@ const itemEffects = [
         ]
     },
     {
-        text: "Reaction: Twice per day, You ${this.SkillBonus} a single saving throw made against effects caused by a ${this.RandomCreatureType} type creature",
+        text: "Reaction: ${this.UsesPerDay}, You ${this.SkillBonus} a single saving throw made against effects caused by a ${this.RandomCreatureType} type creature",
         components: [
             {name: "SkillBonus", formula: "SkillBonus", startValue: 2},
             {name: "RandomCreatureType", formula: "RandomCreatureType", startValue: 0},
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 0},
         ]
     },
     {
@@ -187,22 +188,25 @@ const itemEffects = [
         ]
     },
     {
-        text: "Reaction: Once per day, immediately remove the ${this.RandomCondition} condition from yourself.",
+        text: "Reaction: ${this.UsesPerDay}, immediately remove the ${this.RandomCondition} condition from yourself.",
         components: [
-            {name: "RandomCondition",formula: "RandomCondition",startValue: 0}
+            {name: "RandomCondition",formula: "RandomCondition",startValue: 0},
+            {name: "UsesPerDay",formula: "UsesPerDay",startValue: 0}
         ]
     },
     {
-        text: "Action: Once per day, immediately remove the ${this.RandomCondition} condition from a willing target within ${this.FeetIncrement}.",
+        text: "Action: ${this.UsesPerDay}, immediately remove the ${this.RandomCondition} condition from a willing target within ${this.FeetIncrement}.",
         components: [
             {name: "RandomCondition",formula: "RandomCondition",startValue: 0},
             {name: "FeetIncrement", formula: "FeetIncrement", startValue: [2,5]},
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 0},
         ]
     },
     {
-        text: "Free action, at the end of your turn: Twice per day. You ${this.SkillBonus} a check to remove any condition.",
+        text: "Free action, at the end of your turn: ${this.UsesPerDay}, You ${this.SkillBonus} a check to remove any condition.",
         components: [
-            {name: "SkillBonus", formula: "SkillBonus", startValue: 2}
+            {name: "SkillBonus", formula: "SkillBonus", startValue: 2},
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1}
         ]
     },
     {
@@ -212,9 +216,10 @@ const itemEffects = [
         ]
     },
     {
-        text: "${this.ActionSpeed}: Once per day, Roll any number of hit die. Heal the amount rolled.",
+        text: "${this.ActionSpeed}: ${this.UsesPerDay}, Roll any number of hit die. Heal the amount rolled.",
         components: [
-            {name:"ActionSpeed", formula: "ActionSpeedIncrease",startValue: 1}
+            {name:"ActionSpeed", formula: "ActionSpeedIncrease",startValue: 1},
+            {name:"UsesPerDay", formula: "UsesPerDay",startValue: 0}
         ]
     },
     {
@@ -284,11 +289,12 @@ const itemEffects = [
         ]
     },
     {
-        text: "${this.ActionSpeed}: Once per day, change the damage type of ${this.SpellCountOfLevel} from one of the following to another (${this.DamageTypes}) until your next rest ends.",
+        text: "${this.ActionSpeed}: ${this.UsesPerDay}, change the damage type of ${this.SpellCountOfLevel} from one of the following to another (${this.DamageTypes}) until your next rest ends.",
         components: [
             {name: "SpellCountOfLevel", formula: "SpellCountOfLevel", startValue: [1, 0]},
             {name: "DamageTypes", formula: "DamageTypes", startValue: 1},
-            {name: "ActionSpeed", formula: "ActionSpeedIncrease", startValue: 0}
+            {name: "ActionSpeed", formula: "ActionSpeedIncrease", startValue: 0},
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 0}
         ]
     },
     {
@@ -298,15 +304,17 @@ const itemEffects = [
         ]
     },
     {
-        text: "Ritual: Twice per day, gain Darkvision (${this.FeetIncrement}) for 1 hour.",
+        text: "Ritual: ${this.UsesPerDay}, gain Darkvision (${this.FeetIncrement}) for 1 hour.",
         components: [
             {name: "FeetIncrement", formula: "FeetIncrement", startValue: [2,20]},
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
         ]
     },
     {
-        text: "Bonus Action: Four times per day. Gain Darkvision (${this.FeetIncrement}) for 10 minutes.",
+        text: "Bonus Action: ${this.UsesPerDay}, Gain Darkvision (${this.FeetIncrement}) for 10 minutes.",
         components: [
             {name: "FeetIncrement", formula: "FeetIncrement", startValue: [2,10]},
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 3},
         ]
     },
     {
@@ -316,21 +324,21 @@ const itemEffects = [
         ]
     },
     {
-        text: "Action: ${this.UsesPerDay}, An ally within 5ft may ${this.SkillBonus} on the next saving throw they make.",
+        text: "Action: ${this.UsesPerDay}, An ally within 5ft may ${this.SkillBonus} the next saving throw they make.",
         components: [
             {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
             {name: "SkillBonus", formula: "SkillBonus", startValue: 2},
         ]
     },
     {
-        text: "Reaction: ${this.UsesPerDay}, An ally within 5ft may ${this.SkillBonus} on the next saving throw they make.",
+        text: "Reaction: ${this.UsesPerDay}, An ally within 5ft may ${this.SkillBonus} the next saving throw they make.",
         components: [
             {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
             {name: "SkillBonus", formula: "SkillBonus", startValue: 1},
         ]
     },
     {
-        text: "Reaction: An ally within 5ft may ${this.SkillBonus} on the next saving throw they make.",
+        text: "Reaction: An ally within 5ft may ${this.SkillBonus} the next saving throw they make.",
         components: [
             {name: "SkillBonus", formula: "SkillBonus", startValue: 0},
         ]
@@ -379,9 +387,6 @@ const itemEffects = [
         components: [
             {name: "UsesPerDay", formula: "UsesPerDay", startValue: 2},
         ]
-    },
-    {
-        text: "Reaction when hit by an attack: Cast a cantrip that can target your attacker. Cantrip chosen when attuning.",
     },
     {
         text: "Reaction, when you roll a Stealth check: ${this.UsesPerDay}, maximise the result. Gain the ${this.RandomCondition} condition until the end of your next turn.",
@@ -539,10 +544,10 @@ const itemEffects = [
         ]
     },
     {
-        text: "Passive: Level 3 damage temporary hit points when casting a spell that heals a target. These last until your next rest.",
-    },
-    {
-        text: "Passive: Level 2 damage temporary hit points gained when casting a spell on a friendly target. These last until your next rest.",
+        text: "Passive: Gain ${this.DamageDice} temporary hit points when casting a spell that heals a target. These last until your next rest.",
+        components: [
+            {name: "DamageDice", formula: "DamageDice",startValue: 1}
+        ]
     },
     {
         text: "Free action, when you take the Attack action: ${this.UsesPerDay}, all attack rolls for this action gain a +2 bonus.",
@@ -551,79 +556,129 @@ const itemEffects = [
         ]
     },
     {
-        text: "Passive: +1 to [spell,melee,ranged] attack rolls when held.",
+        text: "Passive, while held: +${this.AttackBonus} to ${this.RandomAttackRollType} attack rolls.",
+        components: [
+            {name: "RandomAttackRollType", formula: "RandomAttackRollType", startValue: 1},
+            {name: "AttackBonus", formula: "AttackBonus", startValue: 1}
+        ]
     },
     {
-        text: "Passive: Level 1 bonus to [spell,melee,ranged] attack rolls when held.",
+        text: "Passive, while held: You ${this.SkillBonus} to ${this.RandomAttackRollType} attack rolls.",
+        components: [
+            {name: "RandomAttackRollType", formula: "RandomAttackRollType", startValue: 1},
+            {name: "SkillBonus", formula: "SkillBonus", startValue: 0}
+        ]
     },
     {
-        text: "Passive: creatures under the effect of one of your spells trigger AoO when moving into melee range of you.",
+        text: "Passive: Creatures under the effect of one of your spells trigger AoO when moving into melee range of you.",
     },
     {
-        text: "Passive: Level 3 save bonus on saving throws against creatures under the effect of one of your spells.",
+        text: "Passive: You ${this.SkillBonus} on saving throws against creatures under the effect of one of your spells.",
+        components: [
+            {name: "SkillBonus", formula: "SkillBonus", startValue: 0}
+        ]
     },
     {
-        text: "Passive: +2 AC against attacks from creatures under the effect of one of your spells.",
+        text: "Passive: +${this.AttackBonus} AC against attacks from creatures under the effect of one of your spells.",
+        components: [
+            {name: "AttackBonus", formula: "AttackBonus", startValue: 2}
+        ]
     },
     {
-        text: "Reaction when you cast a spell: Spend 4 charges. Teleport 20ft to a point you have seen recently.",
+        text: "Reaction when you cast a spell: ${this.UsesPerDay}, teleport ${this.FeetIncrement} to a point you have seen recently.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 0},
+            {name: "FeetIncrement", formula: "FeetIncrement", startValue: [1,10]}
+        ]
     },
     {
-        text: "Reaction when you cast a spell: Spend 2 charges. Teleport 10ft to a point you can see.",
+        text: "Reaction when you cast a spell: ${this.UsesPerDay}, teleport ${this.FeetIncrement} to a point you have seen recently.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
+            {name: "FeetIncrement", formula: "FeetIncrement", startValue: [1,5]}
+        ]
     },
     {
-        text: "Passive: You can teleport 5ft every time you expend a spell slot.",
+        text: "Passive: You can teleport ${this.FeetIncrement} every time you expend a spell slot.",
+        components: [
+            {name: "FeetIncrement", formula: "FeetIncrement", startValue: [0,5]}
+        ]
     },
     {
-        text: "Passive: Creatures already under the effect of one of your spells cannot move out of your threat range without using the disengage action.",
+        text: "Passive: Creatures already under the effect of one of your spells ${this.SkillPenalty} their Saving throws from spells you cast.",
+        components: [
+            {name: "SkillPenalty", formula: "SkillPenalty", startValue: 0}
+        ]
     },
     {
-        text: "Passive: Creatures already under the effect of one of your spells suffer a level 2 penalty to their Saving throws from spells you cast.",
+        text: "Passive: Creatures already under the effect of one of your spells suffer -${this.AttackBonus} AC against spell attack rolls you make against them.",
+        components: [
+            {name: "AttackBonus", formula: "AttackBonus", startValue: 0}
+        ]
     },
     {
-        text: "Passive: Creatures already under the effect of one of your spells suffer a level 2 penalty to their AC when you attack them.",
+        text: "Passive: Regain ${this.TextNumber} hit die at the start of each short rest while attuned to this item.",
+        components: [
+            {name: "TextNumber", formula: "TextNumber", startValue: 1}
+        ]
     },
     {
-        text: "Passive: Regain one charge or one hit die during a short rest while attuned to this item.",
+        text: "Passive: Reroll any spent hit dice once. You must accept the second result.",
     },
     {
-        text: "Passive: Reroll any spent hit dice once.",
+        text: "Free action, before rolling Initiative: ${this.UsesPerDay}, your initiative score is ${this.NumberPlus} for this encounter.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
+            {name: "NumberPlus", formula: "NumberPlus", startValue: [1,18]}
+        ]
     },
     {
-        text: "Free action, before rolling Initiative: Spend 2 charges. Your initiative score is 18 + item level.",
+        text: "Free action, after Initiative order has been calculated: ${this.UsesPerDay}, swap initiative count with one other willing player.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
+        ]
     },
     {
-        text: "Free action, after Initiative order has been calculated: Swap initiative count with one other willing player.",
+        text: "Passive: +${this.AttackBonus} to your initiative rolls",
+        components: [
+            {name: "AttackBonus", formula: "AttackBonus", startValue: 0}
+        ]
     },
     {
-        text: "Passive: +1 to initiative rolls",
+        text: "Free action, when you make an Insight check: ${this.UsesPerDay}, you automatically pass the Insight check, but the target knows that you know.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 0},
+        ]
     },
     {
-        text: "Ritual: Transfer as many charges from this item to other items, 1-to-1.",
+        text: "Free action, when you make an Insight check: ${this.UsesPerDay}, Learn the primary emotion the target is feeling right now. ",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
+        ]
     },
     {
-        text: "Action: Spend two charges. Another item you can touch recharges 1 charge.",
+        text: "Free action, when you make an Insight check: ${this.UsesPerDay}, Learn the target’s name. Fiends must make a DC 10 Charisma saving throw. On a failure you learn their true name. If you learn a true name, the item disintegrates.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 2},
+        ]
     },
     {
-        text: "Passive: While attuned to this item, your other items have their max charge increased by 1.",
+        text: "Free action when you take the Disengage action: ${this.UsesPerDay}, all your movement this round is considered teleportation.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 0},
+        ]
     },
     {
-        text: "Free action, when you make an Insight check: Spend 2 charges. You automatically pass the Insight check, but the target knows that you know.",
+        text: "Bonus action, when you take the Disengage action: ${this.UsesPerDay}, Also take the Dash or Dodge action.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 0},
+        ]
     },
     {
-        text: "Free action, when you make an Insight check: Spend 2 charges. Learn the primary emotion the target is feeling right now. ",
-    },
-    {
-        text: "Free action, when you make an Insight check: Spend 1 charge. Learn the target’s name. Fiends must make a DC 10 Charisma saving throw. On a failure you learn their true name. If you learn a true name, the item disintegrates.",
-    },
-    {
-        text: "Free action when you take the Disengage action: Spend 4 charges. All your movement this round is considered teleportation.",
-    },
-    {
-        text: "Bonus action, when you take the Disengage action: Spend a charge. Also take the Dash or Dodge action.",
-    },
-    {
-        text: "Passive: when you take the Disengage action: You may move through spaces containing creatures.",
+        text: "Free action when you take the Disengage action: ${this.UsesPerDay}, You may move through spaces containing creatures.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
+        ]
     },
 
 ]
