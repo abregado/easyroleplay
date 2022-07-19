@@ -8,7 +8,6 @@ import {
     SpellLevel,
     TextNumber,
     TextUnits,
-    ItemComponent,
     RandomAbilityScoreType,
     UsesPerDay,
     PartySkillBonus,
@@ -63,13 +62,13 @@ class ItemEffect {
     constructor(itemData) {
         this.text = itemData.text
         console.log(this.text);
-        if (itemData.components != null){
-            itemData.components.forEach(componentData=>{
+        if (itemData.components != null) {
+            itemData.components.forEach(componentData => {
                 const componentClass = componentClasses[componentData.formula];
-                if (componentClass == null){
+                if (componentClass == null) {
                     console.error("No ComponentClass found with name: " + componentData.formula);
                 }
-                this.components.push(new componentClass(componentData.name,componentData.startValue))
+                this.components.push(new componentClass(componentData.name, componentData.startValue))
             })
         }
     }
@@ -77,22 +76,22 @@ class ItemEffect {
     GenerateText(strongLevelables = false) {
         const properties = {}
 
-        this.components.forEach(component=>{
+        this.components.forEach(component => {
             properties[component.propertyName] = component.GenerateText();
-            if (strongLevelables){
-                if (component.isProperty){
-                    properties[component.propertyName] = '<strong class="randomelement">['+properties[component.propertyName]+']</strong>';
+            if (strongLevelables) {
+                if (component.isProperty) {
+                    properties[component.propertyName] = '<strong class="randomelement">[' + properties[component.propertyName] + ']</strong>';
                 } else {
-                    properties[component.propertyName] = '<strong class="levelable">['+properties[component.propertyName]+']</strong>';
+                    properties[component.propertyName] = '<strong class="levelable">[' + properties[component.propertyName] + ']</strong>';
                 }
             }
         })
 
-        return new Function("return `" + this.text +"`;").call(properties);
+        return new Function("return `" + this.text + "`;").call(properties);
     }
 
-    LevelUp(){
-        const levelables = this.components.filter(component=>component.CanLevelUp());
+    LevelUp() {
+        const levelables = this.components.filter(component => component.CanLevelUp());
         if (levelables.length > 0) {
             const randomIndex = Math.floor(Math.random() * levelables.length);
             levelables[randomIndex].LevelUp();
@@ -102,11 +101,11 @@ class ItemEffect {
         }
     }
 
-    CanLevelUp(){
+    CanLevelUp() {
         let result = true;
 
-        this.components.forEach(component=>{
-            if (component.CanLevelUp() == false) {
+        this.components.forEach(component => {
+            if (component.CanLevelUp() === false) {
                 result = false;
             }
         })

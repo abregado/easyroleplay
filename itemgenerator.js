@@ -39,9 +39,9 @@ function run() {
     const item2 = new Artifact(itemEffects,0);
     insertHTML('item1',createList(item1.effects))
     insertHTML('item2',createList(item2.effects))
-    // var allItems = buildOneOfEachItemEffect(itemEffects)
-    // const html = createList(allItems,true);
-    // insertHTML('allEffects',html);
+    var allItems = buildOneOfEachItemEffect(itemEffects)
+    const html = createList(allItems,true);
+    insertHTML('allEffects',html);
 }
 
 window.onload = run;

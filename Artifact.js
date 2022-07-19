@@ -9,42 +9,42 @@ class Artifact {
 
         this.AddEffect()
 
-        for(let i = 1;i<level;i++){
+        for (let i = 1; i < level; i++) {
             this.AddLevel()
         }
 
         console.log(`item length is ${this.effects.length}`);
     }
 
-    AddEffect(){
+    AddEffect() {
         const randomIndex = Math.floor(Math.random() * this.unselectedEffectData.length);
         this.effects.push(new ItemEffect(this.unselectedEffectData[randomIndex]));
-        this.unselectedEffectData.splice(randomIndex,1);
+        this.unselectedEffectData.splice(randomIndex, 1);
     }
 
-    AddLevel(){
+    AddLevel() {
         const randRoll = Math.random() * 2;
-        if (randRoll> this.effects.length){
+        if (randRoll > this.effects.length) {
             this.AddEffect()
         } else {
             this.LevelUpAllEffects()
         }
     }
 
-    LevelUpAllEffects(){
+    LevelUpAllEffects() {
         let extraLevels = 0
 
-        this.effects.forEach(effect=>{
-            if (effect.CanLevelUp()){
+        this.effects.forEach(effect => {
+            if (effect.CanLevelUp()) {
                 effect.LevelUp()
             } else {
-                extraLevels ++;
+                extraLevels++;
             }
         })
 
-        for (let i = 0; i<extraLevels;i++){
-            const levellables = this.effects.filter(effect=>effect.CanLevelUp())
-            if (levellables.length>0) {
+        for (let i = 0; i < extraLevels; i++) {
+            const levellables = this.effects.filter(effect => effect.CanLevelUp())
+            if (levellables.length > 0) {
                 levellables[Math.floor(Math.random() * levellables.length)].LevelUp();
             }
         }

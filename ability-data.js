@@ -152,7 +152,7 @@ let itemEffects = [
     {
         text: "${this.ActionSpeed}: Spend any number of hit dice to gain temporary hit points equal to twice the total rolled, until your next rest.",
         components: [
-            {name:"ActionSpeed", formula: "ActionSpeedIncrease",startValue: 0}
+            {name: "ActionSpeed", formula: "ActionSpeedIncrease", startValue: 0}
         ]
     },
     {
@@ -183,22 +183,22 @@ let itemEffects = [
     {
         text: "Bonus action: Transfer up to ${this.TextUnits} of AC to a friendly target within ${this.FeetIncrement} until the start of your next turn.",
         components: [
-            {name: "TextUnits", formula: "TextUnits", startValue: [2,"point"]},
-            {name: "FeetIncrement", formula: "FeetIncrement", startValue: [2,5]},
+            {name: "TextUnits", formula: "TextUnits", startValue: [2, "point"]},
+            {name: "FeetIncrement", formula: "FeetIncrement", startValue: [2, 5]},
         ]
     },
     {
         text: "Reaction: ${this.UsesPerDay}, immediately remove the ${this.RandomCondition} condition from yourself.",
         components: [
-            {name: "RandomCondition",formula: "RandomCondition",startValue: 0},
-            {name: "UsesPerDay",formula: "UsesPerDay",startValue: 0}
+            {name: "RandomCondition", formula: "RandomCondition", startValue: 0},
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 0}
         ]
     },
     {
         text: "Action: ${this.UsesPerDay}, immediately remove the ${this.RandomCondition} condition from a willing target within ${this.FeetIncrement}.",
         components: [
-            {name: "RandomCondition",formula: "RandomCondition",startValue: 0},
-            {name: "FeetIncrement", formula: "FeetIncrement", startValue: [2,5]},
+            {name: "RandomCondition", formula: "RandomCondition", startValue: 0},
+            {name: "FeetIncrement", formula: "FeetIncrement", startValue: [2, 5]},
             {name: "UsesPerDay", formula: "UsesPerDay", startValue: 0},
         ]
     },
@@ -212,14 +212,14 @@ let itemEffects = [
     {
         text: "Reaction, at the start of your turn: Remove the ${this.RandomCondition} condition. Your speed is zero until the end of your next turn.",
         components: [
-            {name: "RandomCondition",formula: "RandomCondition",startValue: 1}
+            {name: "RandomCondition", formula: "RandomCondition", startValue: 1}
         ]
     },
     {
         text: "${this.ActionSpeed}: ${this.UsesPerDay}, Roll any number of hit die. Heal the amount rolled.",
         components: [
-            {name:"ActionSpeed", formula: "ActionSpeedIncrease",startValue: 1},
-            {name:"UsesPerDay", formula: "UsesPerDay",startValue: 0}
+            {name: "ActionSpeed", formula: "ActionSpeedIncrease", startValue: 1},
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 0}
         ]
     },
     {
@@ -231,61 +231,61 @@ let itemEffects = [
     {
         text: "Passive: You may reroll ${this.DiceMinimum} when you roll a hit die.",
         components: [
-            {name:"DiceMinimum", formula: "DiceMinimum",startValue: 0}
+            {name: "DiceMinimum", formula: "DiceMinimum", startValue: 0}
         ]
     },
     {
         text: "Action: Gain ${this.AttackBonus} bonus on your next spell attack roll.",
         components: [
-            {name:"AttackBonus", formula: "AttackBonus",startValue: 3}
+            {name: "AttackBonus", formula: "AttackBonus", startValue: 3}
         ]
     },
     {
         text: "Action: Gain ${this.DamageDice} bonus damage on your next spell attack roll. If you miss, this action is wasted.",
         components: [
-            {name:"DamageDice", formula: "DamageDice",startValue: 3}
+            {name: "DamageDice", formula: "DamageDice", startValue: 3}
         ]
     },
     {
         text: "Bonus action: Gain ${this.AttackBonus} bonus on your next spell attack roll.",
         components: [
-            {name:"AttackBonus", formula: "AttackBonus",startValue: 2}
+            {name: "AttackBonus", formula: "AttackBonus", startValue: 2}
         ]
     },
     {
         text: "Passive: Choose a spell you know when you attune to the item. Gain a +${this.AttackBonus} bonus when casting that spell.",
         components: [
-            {name:"AttackBonus", formula: "AttackBonus",startValue: 1}
+            {name: "AttackBonus", formula: "AttackBonus", startValue: 1}
         ]
     },
     {
         text: "Passive: Immunity to travel penalties from terrain and weather while in ${this.RandomEnvironment} environments.",
         components: [
-            {name:"RandomEnvironment",formula: "RandomEnvironment", startValue: 0}
+            {name: "RandomEnvironment", formula: "RandomEnvironment", startValue: 0}
         ]
     },
     {
         text: "Passive: Resistance to ${this.RandomDamageType} damage from environmental hazards.",
         components: [
-            {name:"RandomDamageType",formula: "RandomDamageType", startValue: 0}
+            {name: "RandomDamageType", formula: "RandomDamageType", startValue: 0}
         ]
     },
     {
         text: "${this.ActionSpeed}: Double the range of the next spell cast.",
         components: [
-            {name:"ActionSpeed", formula: "ActionSpeedIncrease",startValue: 1}
+            {name: "ActionSpeed", formula: "ActionSpeedIncrease", startValue: 1}
         ]
     },
     {
         text: "Bonus Action: Increase the next ranged spell cast by ${this.FeetIncrement}.",
         components: [
-            {name: "FeetIncrement", formula: "FeetIncrement", startValue: [0,10]},
+            {name: "FeetIncrement", formula: "FeetIncrement", startValue: [0, 10]},
         ]
     },
     {
         text: "Reaction: Increase the next ranged spell attack cast by ${this.FeetIncrement}.",
         components: [
-            {name: "FeetIncrement", formula: "FeetIncrement", startValue: [0,5]},
+            {name: "FeetIncrement", formula: "FeetIncrement", startValue: [0, 5]},
         ]
     },
     {
@@ -306,21 +306,21 @@ let itemEffects = [
     {
         text: "Ritual: ${this.UsesPerDay}, gain Darkvision (${this.FeetIncrement}) for 1 hour.",
         components: [
-            {name: "FeetIncrement", formula: "FeetIncrement", startValue: [2,20]},
+            {name: "FeetIncrement", formula: "FeetIncrement", startValue: [2, 20]},
             {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
         ]
     },
     {
         text: "Bonus Action: ${this.UsesPerDay}, Gain Darkvision (${this.FeetIncrement}) for 10 minutes.",
         components: [
-            {name: "FeetIncrement", formula: "FeetIncrement", startValue: [2,10]},
+            {name: "FeetIncrement", formula: "FeetIncrement", startValue: [2, 10]},
             {name: "UsesPerDay", formula: "UsesPerDay", startValue: 3},
         ]
     },
     {
         text: "Passive: Gain Darkvision (${this.FeetIncrement})",
         components: [
-            {name: "FeetIncrement", formula: "FeetIncrement", startValue: [2,5]},
+            {name: "FeetIncrement", formula: "FeetIncrement", startValue: [2, 5]},
         ]
     },
     {
@@ -419,27 +419,27 @@ let itemEffects = [
     {
         text: "Passive: +${this.AttackBonus} to ammunition recovery rolls.",
         components: [
-            {name: "AttackBonus", formula: "AttackBonus",startValue: 1},
+            {name: "AttackBonus", formula: "AttackBonus", startValue: 1},
         ]
     },
     {
         text: "Ritual: Spend a point of ${this.RandomClassResource} to gain a level ${this.SpellLevel} spell slot.",
         components: [
-            {name: "RandomClassResource", formula: "RandomClassResource",startValue: 0},
+            {name: "RandomClassResource", formula: "RandomClassResource", startValue: 0},
             {name: "SpellLevel", formula: "TextNumber", startValue: 3},
         ]
     },
     {
         text: "Action: Spend a point of ${this.RandomClassResource} to gain a level ${this.SpellLevel} spell slot.",
         components: [
-            {name: "RandomClassResource", formula: "RandomClassResource",startValue: 0},
+            {name: "RandomClassResource", formula: "RandomClassResource", startValue: 0},
             {name: "SpellLevel", formula: "TextNumber", startValue: 2},
         ]
     },
     {
         text: "Reaction: Spend a point of ${this.RandomClassResource} to gain a level ${this.SpellLevel} spell slot.",
         components: [
-            {name: "RandomClassResource", formula: "RandomClassResource",startValue: 0},
+            {name: "RandomClassResource", formula: "RandomClassResource", startValue: 0},
             {name: "SpellLevel", formula: "TextNumber", startValue: 1},
         ]
     },
@@ -485,7 +485,7 @@ let itemEffects = [
         text: "Free action: ${this.UsesPerDay}, for ${this.NumberIncrement} minutes you can understand, speak, read and write ${this.RandomLanguage}.",
         components: [
             {name: "RandomLanguage", formula: "RandomLanguage", startValue: 1},
-            {name: "NumberIncrement", formula: "NumberIncrement", startValue: [0,10]},
+            {name: "NumberIncrement", formula: "NumberIncrement", startValue: [0, 10]},
             {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
         ]
     },
@@ -516,25 +516,25 @@ let itemEffects = [
     {
         text: "Passive: Heal ${this.DamageDice} hit points when casting a spell that heals a target.",
         components: [
-            {name: "DamageDice", formula: "DamageDice",startValue: 1}
+            {name: "DamageDice", formula: "DamageDice", startValue: 1}
         ]
     },
     {
         text: "Passive: Heal ${this.DamageDice} hit points when casting a spell on a friendly target.",
         components: [
-            {name: "DamageDice", formula: "DamageDice",startValue: 0}
+            {name: "DamageDice", formula: "DamageDice", startValue: 0}
         ]
     },
     {
         text: "Passive: Targets you heal may reroll ${this.DiceMinimum} on dice for healing.",
         components: [
-            {name: "DiceMinimum", formula: "DiceMinimum",startValue: 0}
+            {name: "DiceMinimum", formula: "DiceMinimum", startValue: 0}
         ]
     },
     {
         text: "Passive: You may reroll ${this.DiceMinimum} on dice for healing, when you are the target.",
         components: [
-            {name: "DiceMinimum", formula: "DiceMinimum",startValue: 0}
+            {name: "DiceMinimum", formula: "DiceMinimum", startValue: 0}
         ]
     },
     {
@@ -546,7 +546,7 @@ let itemEffects = [
     {
         text: "Passive: Gain ${this.DamageDice} temporary hit points when casting a spell that heals a target. These last until your next rest.",
         components: [
-            {name: "DamageDice", formula: "DamageDice",startValue: 1}
+            {name: "DamageDice", formula: "DamageDice", startValue: 1}
         ]
     },
     {
@@ -588,20 +588,20 @@ let itemEffects = [
         text: "Reaction when you cast a spell: ${this.UsesPerDay}, teleport ${this.FeetIncrement} to a point you have seen recently.",
         components: [
             {name: "UsesPerDay", formula: "UsesPerDay", startValue: 0},
-            {name: "FeetIncrement", formula: "FeetIncrement", startValue: [1,10]}
+            {name: "FeetIncrement", formula: "FeetIncrement", startValue: [1, 10]}
         ]
     },
     {
         text: "Reaction when you cast a spell: ${this.UsesPerDay}, teleport ${this.FeetIncrement} to a point you have seen recently.",
         components: [
             {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
-            {name: "FeetIncrement", formula: "FeetIncrement", startValue: [1,5]}
+            {name: "FeetIncrement", formula: "FeetIncrement", startValue: [1, 5]}
         ]
     },
     {
         text: "Passive: You can teleport ${this.FeetIncrement} every time you expend a spell slot.",
         components: [
-            {name: "FeetIncrement", formula: "FeetIncrement", startValue: [0,5]}
+            {name: "FeetIncrement", formula: "FeetIncrement", startValue: [0, 5]}
         ]
     },
     {
@@ -629,7 +629,7 @@ let itemEffects = [
         text: "Free action, before rolling Initiative: ${this.UsesPerDay}, your initiative score is ${this.NumberPlus} for this encounter.",
         components: [
             {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
-            {name: "NumberPlus", formula: "NumberPlus", startValue: [1,18]}
+            {name: "NumberPlus", formula: "NumberPlus", startValue: [1, 18]}
         ]
     },
     {
