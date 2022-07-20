@@ -29,10 +29,11 @@ let itemEffects = [
         ]
     },
     {
-        text: "${this.ActionSpeed}: Spend a hit die to recharge a level ${this.SpellLevel} spell slot.",
+        text: "${this.ActionSpeed}: ${this.UsesPerDay}, Spend a hit die to recharge a level ${this.SpellLevel} spell slot.",
         components: [
             {name: "SpellLevel", formula: "TextNumber", startValue: 1},
-            {name: "ActionSpeed", formula: "ActionSpeedIncrease", startValue: 1}
+            {name: "ActionSpeed", formula: "ActionSpeedIncrease", startValue: 1},
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1}
         ]
     },
     {
@@ -235,19 +236,13 @@ let itemEffects = [
         ]
     },
     {
-        text: "Action: Gain ${this.AttackBonus} bonus on your next spell attack roll.",
+        text: "Action: Gain +${this.AttackBonus} bonus on your next spell attack roll.",
         components: [
             {name: "AttackBonus", formula: "AttackBonus", startValue: 3}
         ]
     },
     {
-        text: "Action: Gain ${this.DamageDice} bonus damage on your next spell attack roll. If you miss, this action is wasted.",
-        components: [
-            {name: "DamageDice", formula: "DamageDice", startValue: 3}
-        ]
-    },
-    {
-        text: "Bonus action: Gain ${this.AttackBonus} bonus on your next spell attack roll.",
+        text: "Bonus action: Gain +${this.AttackBonus} bonus on your next spell attack roll.",
         components: [
             {name: "AttackBonus", formula: "AttackBonus", startValue: 2}
         ]
@@ -403,14 +398,14 @@ let itemEffects = [
         ]
     },
     {
-        text: "Ritual: ${this.UsesPerDay} Create 3${this.DamageDice} dice pieces of ammunition for a weapon you have by touching a non-magical weapon. The touched weapon disintegrates.",
+        text: "Ritual: ${this.UsesPerDay}, create 3${this.DamageDice} pieces of ammunition for a weapon you have by touching a non-magical weapon. The touched weapon disintegrates.",
         components: [
             {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
             {name: "DamageDice", formula: "DamageDice", startValue: 1},
         ]
     },
     {
-        text: "Action: ${this.UsesPerDay} Create ${this.DamageDice} dice pieces of ammunition for a weapon you have by touching a non-magical weapon. The touched weapon disintegrates.",
+        text: "Action: ${this.UsesPerDay}, create ${this.DamageDice} pieces of ammunition for a weapon you have by touching a non-magical weapon. The touched weapon disintegrates.",
         components: [
             {name: "UsesPerDay", formula: "UsesPerDay", startValue: 2},
             {name: "DamageDice", formula: "DamageDice", startValue: 1},
@@ -556,14 +551,14 @@ let itemEffects = [
         ]
     },
     {
-        text: "Passive, while held: +${this.AttackBonus} to ${this.RandomAttackRollType} attack rolls.",
+        text: "Passive: +${this.AttackBonus} to ${this.RandomAttackRollType} attack rolls.",
         components: [
             {name: "RandomAttackRollType", formula: "RandomAttackRollType", startValue: 1},
             {name: "AttackBonus", formula: "AttackBonus", startValue: 1}
         ]
     },
     {
-        text: "Passive, while held: You ${this.SkillBonus} to ${this.RandomAttackRollType} attack rolls.",
+        text: "Passive: You ${this.SkillBonus} to ${this.RandomAttackRollType} attack rolls.",
         components: [
             {name: "RandomAttackRollType", formula: "RandomAttackRollType", startValue: 1},
             {name: "SkillBonus", formula: "SkillBonus", startValue: 0}

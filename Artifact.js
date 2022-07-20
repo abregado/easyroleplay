@@ -1,11 +1,42 @@
 import {ItemEffect} from "./ItemEffect.js";
 
+const itemTypes = [
+    {size: "Tiny", price: [100,250], options: ["Ring", "Earring", "Brooch", "Amulet", "Bracelet", "Clasp", "Necklace", "Chain", "Pendant",  "Choker", "Torc", "Armlet", "Anklet", "Pin", "Locket", "Emblem", "Medallion"] },
+    {size: "Tiny", price: [80,200], options: ["Quill", "Die", "Chalice", "Parchment", "Mechanical Object", "Horn", "Shell", "Lode", "Orb", "Crystal", "Form", "Band"] },
+    {size: "Small", price: [50,150], options: ["Gloves", "Cap", "Bracer", "Helm", "Gauntlet", "Greaves", "Boots", "Belt", "Pauldron", "Cape", "Cloak", "Sash"] }
+]
+
+const levelPrice = [
+    {rarity:"Uncommon",cost:200},
+    {rarity:"Rare",cost:1000},
+    {rarity:"Rare",cost:2000},
+    {rarity:"Rare",cost:3000},
+    {rarity:"Very Rare",cost:10000},
+    {rarity:"Very Rare",cost:20000},
+]
+
+
+function RandomFromList(list) {
+    return list[Math.floor(Math.random() * list.length)];
+}
+
 class Artifact {
-    effects = []
-    unselectedEffectData = []
+    effects = [];
+    unselectedEffectData = [];
+    description = "";
+    size = "";
+    rarity = "";
+    price = 0;
 
     constructor(effectDataList, level) {
         this.unselectedEffectData = Array.from(effectDataList);
+
+        const randomCategory = RandomFromList(itemTypes);
+        const levelProperties = levelPrice[Math.min(level,5)]
+        this.description = RandomFromList(randomCategory.options);
+        this.size = randomCategory.size;
+        this.rarity = levelProperties.rarity;
+        this.price = levelProperties.cost+ randomCategory.price[0] + (Math.ceil(Math.random()* (randomCategory.price[1]-randomCategory.price[0]) / 10) * 10) ;
 
         this.AddEffect()
 

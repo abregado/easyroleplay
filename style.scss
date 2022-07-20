@@ -48,6 +48,29 @@ $horizontalRule: #9c2b1b;
     strong.randomelement {
         color: darkslateblue;
     }
+    div.item {
+        border-color: #222222;
+        border-width: 2px;
+        border-style: solid;
+        padding: 15px;
+        margin: 5px;
+
+        ul {
+            padding: 0;
+            margin: 0;
+        }
+
+        li.effect {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 5px;
+        }
+
+        div.desc {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+    }
 }
 div.container {
     width: 600px;
@@ -129,3 +152,5 @@ figure.twincard {
     display: grid;
     grid-template-columns: 50% 50%;
 }
+
+

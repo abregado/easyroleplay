@@ -12,14 +12,16 @@ function buildOneOfEachItemEffect(itemEffects){
 function createList(inputData,strongLevelables) {
     var html = '';
 
-    html += '<ul>';
+    html += '<div class="item"><ul>';
 
-    inputData.forEach(entry=>{
+    html += `<div class="desc">${inputData.rarity} ${inputData.description} (${inputData.size}). ${inputData.price}gp</div>`;
+
+    inputData.effects.forEach(entry=>{
         const filledText = entry.GenerateText(strongLevelables);
-        html += `<li>${filledText}</li>`
+        html += `<li class="effect">${filledText}</li>`
     });
 
-    html += '</ul>';
+    html += '</ul></div>';
 
     return html;
 }
@@ -31,14 +33,20 @@ function insertHTML(id, html) {
         alert(`Element with id ${id} not found`);
     }
 
-    el.innerHTML = html;
+    el.innerHTML = el.innerHTML + html;
 }
 
 function run() {
-    const item1 = new Artifact(itemEffects,0);
-    const item2 = new Artifact(itemEffects,0);
-    insertHTML('item1',createList(item1.effects))
-    insertHTML('item2',createList(item2.effects))
+    const itemCount = 5;
+
+    for (let i=0;i<itemCount;i++){
+        insertHTML('lowitems',createList(new Artifact(itemEffects,0)));
+    }
+
+    for (let i=0;i<itemCount;i++){
+        insertHTML('highitems',createList(new Artifact(itemEffects,3)));
+    }
+
     var allItems = buildOneOfEachItemEffect(itemEffects)
     const html = createList(allItems,true);
     insertHTML('allEffects',html);

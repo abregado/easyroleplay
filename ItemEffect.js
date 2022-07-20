@@ -61,7 +61,6 @@ class ItemEffect {
 
     constructor(itemData) {
         this.text = itemData.text
-        console.log(this.text);
         if (itemData.components != null) {
             itemData.components.forEach(componentData => {
                 const componentClass = componentClasses[componentData.formula];
