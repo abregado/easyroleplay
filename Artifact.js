@@ -15,6 +15,17 @@ const levelPrice = [
     {rarity:"Very Rare",cost:20000},
 ]
 
+const magicSchool = [
+    "Abjuration ",
+    "Conjuration ",
+    "Divination ",
+    "Enchantment ",
+    "Evocation ",
+    "Illusion ",
+    "Necromancy ",
+    "Transmutation ",
+]
+
 
 function RandomFromList(list) {
     return list[Math.floor(Math.random() * list.length)];
@@ -26,6 +37,7 @@ class Artifact {
     description = "";
     size = "";
     rarity = "";
+    magic = "";
     price = 0;
 
     constructor(effectDataList, level) {
@@ -33,6 +45,7 @@ class Artifact {
 
         const randomCategory = RandomFromList(itemTypes);
         const levelProperties = levelPrice[Math.min(level,5)]
+        this.magic = RandomFromList(magicSchool);
         this.description = RandomFromList(randomCategory.options);
         this.size = randomCategory.size;
         this.rarity = levelProperties.rarity;

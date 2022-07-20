@@ -14,7 +14,7 @@ function createList(inputData,strongLevelables) {
 
     html += '<div class="item"><ul>';
 
-    html += `<div class="desc">${inputData.rarity} ${inputData.description} (${inputData.size}). ${inputData.price}gp</div>`;
+    html += `<div class="desc">${inputData.rarity} ${inputData.description} (${inputData.size}/${inputData.magic}). ${inputData.price}gp</div>`;
 
     inputData.effects.forEach(entry=>{
         const filledText = entry.GenerateText(strongLevelables);
