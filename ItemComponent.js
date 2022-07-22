@@ -432,6 +432,7 @@ export class UsesPerDay extends ItemComponent {
         this.componentLevel = startingValues;
         this.maxLevel = 3;
         this.formulaName = "UsesPerDay";
+        this.isProperty = true;
     }
 
     GenerateText() {
@@ -526,6 +527,7 @@ export class RandomCantrip extends ItemComponent {
         this.componentLevel = 0;
         this.maxLevel = 0;
         this.isProperty = true;
+        this.isRandom = true;
         this.formulaName = "RandomCantrip";
     }
 
@@ -543,6 +545,7 @@ export class CantripOption extends ItemComponent {
         this.maxLevel = 3;
         this.cantripsList = RandomListFromList(cantripOptions, startingValues)
         this.isProperty = true;
+        this.isRandom = true;
         this.formulaName = "CantripOption";
     }
 
@@ -560,6 +563,7 @@ export class RandomClassResource extends ItemComponent {
         this.componentLevel = 0;
         this.maxLevel = 0;
         this.isProperty = true;
+        this.isRandom = true;
         this.formulaName = "RandomClassResource";
     }
 
@@ -577,6 +581,7 @@ export class RandomLanguage extends ItemComponent {
         this.componentLevel = 0;
         this.maxLevel = 0;
         this.isProperty = true;
+        this.isRandom = true;
         this.formulaName = "RandomLanguage";
     }
 
@@ -594,6 +599,7 @@ export class RandomAttackRollType extends ItemComponent {
         this.componentLevel = 0;
         this.maxLevel = 0;
         this.isProperty = true;
+        this.isRandom = true;
         this.formulaName = "RandomAttackRollType";
     }
 
@@ -644,6 +650,7 @@ export class ListOfDamageTypes extends ItemComponent {
         super(propertyName, startingValues);
         this.componentLevel = startingValues;
         this.maxLevel = 4;
+        this.isRandom = true;
         this.damageTypes = RandomListFromList(damageTypeOptions[0], startingValues)
         this.isProperty = true;
         this.formulaName = "ListOfDamageTypes";

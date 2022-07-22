@@ -82,19 +82,19 @@ let itemEffects = [
         ]
     },
     {
-        text: "Action: ${this.UsesPerDay}, upgrade your lowest spell slot by three levels. ",
-        components: [
-            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 0},
-        ]
-    },
-    {
-        text: "Action: ${this.UsesPerDay}, upgrade your lowest spell slot by two levels. ",
+        text: "Ritual: ${this.UsesPerDay}, upgrade your lowest spell slot by three levels. You may not store more spell slots than your maximum.",
         components: [
             {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
         ]
     },
     {
-        text: "Action: ${this.UsesPerDay}, upgrade a spell slot one level.",
+        text: "Action: ${this.UsesPerDay}, upgrade your lowest spell slot by two levels. You may not store more spell slots than your maximum.",
+        components: [
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
+        ]
+    },
+    {
+        text: "Action: ${this.UsesPerDay}, upgrade a spell slot one level. You may not store more spell slots than your maximum.",
         components: [
             {name: "UsesPerDay", formula: "UsesPerDay", startValue: 2},
         ]
@@ -129,25 +129,18 @@ let itemEffects = [
         ]
     },
     {
-        text: "Reaction: You ${this.SkillBonus} any saving throws against effects caused by a ${this.RandomCreatureType} type creature until the start of your next turn.",
+        text: "Passive: You ${this.SkillBonus} any saving throws against effects caused by a ${this.RandomCreatureType} type creature.",
         components: [
             {name: "SkillBonus", formula: "SkillBonus", startValue: 1},
             {name: "RandomCreatureType", formula: "RandomCreatureType", startValue: 0},
         ]
     },
     {
-        text: "Reaction: ${this.UsesPerDay}, You ${this.SkillBonus} a single saving throw made against effects caused by a ${this.RandomCreatureType} type creature",
+        text: "Free action: ${this.UsesPerDay}, You ${this.SkillBonus} a single saving throw made against effects caused by a ${this.RandomCreatureType} type creature",
         components: [
             {name: "SkillBonus", formula: "SkillBonus", startValue: 2},
             {name: "RandomCreatureType", formula: "RandomCreatureType", startValue: 0},
-            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 0},
-        ]
-    },
-    {
-        text: "Passive: You ${this.SkillBonus} any saving throws against effects caused by ${this.RandomCreatureType} type creatures.",
-        components: [
-            {name: "SkillBonus", formula: "SkillBonus", startValue: 0},
-            {name: "RandomCreatureType", formula: "RandomCreatureType", startValue: 0},
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
         ]
     },
     {
@@ -163,16 +156,18 @@ let itemEffects = [
         ]
     },
     {
-        text: "Your party is immune to being surprised by a group including at least one ${this.RandomCreatureType} type, once per long rest.",
+        text: "${this.UsesPerDay}, your party is immune to being surprised by a group including at least one ${this.RandomCreatureType} type.",
         components: [
             {name: "RandomCreatureType", formula: "RandomCreatureType", startValue: 0},
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 0},
         ]
     },
     {
-        text: "Your party ${this.PartySkillBonus} initiative tests against a group including at least one ${this.RandomCreatureType} type, once per long rest.",
+        text: "${this.UsesPerDay}, your party ${this.PartySkillBonus} initiative tests against a group including at least one ${this.RandomCreatureType} type.",
         components: [
             {name: "PartySkillBonus", formula: "PartySkillBonus", startValue: 1},
             {name: "RandomCreatureType", formula: "RandomCreatureType", startValue: 0},
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 2},
         ]
     },
     {
@@ -621,9 +616,10 @@ let itemEffects = [
         text: "Passive: Reroll any spent hit dice once. You must accept the second result.",
     },
     {
-        text: "Free action, before rolling Initiative: Once per day, your initiative score is ${this.NumberPlus} for this encounter.",
+        text: "Free action, before rolling Initiative: ${this.UsesPerDay}, your initiative score is ${this.NumberPlus} for this encounter.",
         components: [
-            {name: "NumberPlus", formula: "NumberPlus", startValue: [1, 15]}
+            {name: "NumberPlus", formula: "NumberPlus", startValue: [1, 15]},
+            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 0},
         ]
     },
     {

@@ -109,9 +109,9 @@ class ItemEffect {
         this.components.forEach(component => {
             properties[component.propertyName] = component.GenerateText();
             if (strongLevelables) {
-                if (component.isProperty) {
+                if (component.isRandom) {
                     properties[component.propertyName] = '<strong class="randomelement">[' + properties[component.propertyName] + ']</strong>';
-                } else {
+                } else if (component.CanLevelUp()) {
                     properties[component.propertyName] = '<strong class="levelable">[' + properties[component.propertyName] + ']</strong>';
                 }
             }
