@@ -2,14 +2,14 @@ import {ItemEffect} from "./ItemEffect.js";
 import {Artifact} from "./Artifact.js";
 
 function buildOneOfEachItemEffect(itemEffects){
-    let allEffectObjects = [];
+    let allEffectObject = {effects:[]};
     itemEffects.forEach(effectData=>{
-        allEffectObjects.push(new ItemEffect(effectData))
+        allEffectObject.effects.push(new ItemEffect(effectData))
     })
-    return allEffectObjects;
+    return allEffectObject;
 }
 
-function createList(inputData,strongLevelables) {
+function createItemCard(inputData,strongLevelables) {
     console.log(inputData);
     var html = '';
 
@@ -27,6 +27,23 @@ function createList(inputData,strongLevelables) {
     return html;
 }
 
+function createList(inputData,strongLevelables) {
+    console.log(inputData);
+    var html = '';
+
+    html += '<div class="effectList"><ul>';
+
+    inputData.effects.forEach(entry=>{
+        const filledText = entry.GenerateText(strongLevelables);
+        html += `<li class="effect">${filledText}</li>`
+    });
+
+    html += '</ul></div>';
+
+    return html;
+}
+
+
 function insertHTML(id, html) {
     var el = document.getElementById(id);
 
@@ -41,16 +58,16 @@ function run() {
     const itemCount = 50;
 
     for (let i=0;i<itemCount;i++){
-        insertHTML('lowitems',createList(new Artifact(itemEffects,0)));
+        insertHTML('lowitems',createItemCard(new Artifact(itemEffects,0)));
     }
 
     for (let i=0;i<itemCount;i++){
-        insertHTML('highitems',createList(new Artifact(itemEffects,2)));
+        insertHTML('highitems',createItemCard(new Artifact(itemEffects,2)));
     }
 
-    //var allItems = buildOneOfEachItemEffect(itemEffects)
-    //const html = createList(allItems,true);
-    //insertHTML('allEffects',html);
+    var allItems = buildOneOfEachItemEffect(itemEffects)
+    const html = createList(allItems,true);
+    insertHTML('allEffects',html);
 }
 
 window.onload = run;
