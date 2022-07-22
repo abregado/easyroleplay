@@ -608,7 +608,7 @@ let itemEffects = [
     {
         text: "Passive: Creatures already under the effect of one of your spells suffer -${this.AttackBonus} AC against spell attack rolls you make against them.",
         components: [
-            {name: "AttackBonus", formula: "AttackBonus", startValue: 0}
+            {name: "AttackBonus", formula: "AttackBonus", startValue: 1}
         ]
     },
     {
