@@ -10,6 +10,7 @@ function buildOneOfEachItemEffect(itemEffects){
 }
 
 function createList(inputData,strongLevelables) {
+    console.log(inputData);
     var html = '';
 
     html += '<div class="item"><ul>';
@@ -37,19 +38,19 @@ function insertHTML(id, html) {
 }
 
 function run() {
-    const itemCount = 5;
+    const itemCount = 50;
 
     for (let i=0;i<itemCount;i++){
         insertHTML('lowitems',createList(new Artifact(itemEffects,0)));
     }
 
     for (let i=0;i<itemCount;i++){
-        insertHTML('highitems',createList(new Artifact(itemEffects,3)));
+        insertHTML('highitems',createList(new Artifact(itemEffects,2)));
     }
 
-    var allItems = buildOneOfEachItemEffect(itemEffects)
-    const html = createList(allItems,true);
-    insertHTML('allEffects',html);
+    //var allItems = buildOneOfEachItemEffect(itemEffects)
+    //const html = createList(allItems,true);
+    //insertHTML('allEffects',html);
 }
 
 window.onload = run;

@@ -20,7 +20,13 @@ import {
     RandomDamageType,
     CantripOption,
     RandomCantrip,
-    NumberIncrement, RandomClassResource, RandomLanguage, RandomAttackRollType, SkillPenalty, NumberPlus
+    NumberIncrement,
+    RandomClassResource,
+    RandomLanguage,
+    RandomAttackRollType,
+    SkillPenalty,
+    NumberPlus,
+    ListOfDamageTypes, SpendCharges
 } from "./ItemComponent.js";
 
 const componentClasses = {
@@ -51,6 +57,8 @@ const componentClasses = {
     "RandomAttackRollType": RandomAttackRollType,
     "SkillPenalty": SkillPenalty,
     "NumberPlus": NumberPlus,
+    "ListOfDamageTypes": ListOfDamageTypes,
+    "SpendCharges": SpendCharges,
 
 }
 
@@ -70,6 +78,29 @@ class ItemEffect {
                 this.components.push(new componentClass(componentData.name, componentData.startValue))
             })
         }
+    }
+
+    GetComponentByFormula(formulaName){
+        let result = null;
+        this.components.forEach(component=>{
+            if (component.formulaName == formulaName){
+                console.log("found formula component")
+                result = component;
+            }
+        });
+        return result;
+    }
+
+    RemoveComponentByFormula(formulaName){
+        let result = -1;
+        for (var i=0;i<this.components.length;i++){
+            const component = this.components[i];
+            if (component.formulaName == formulaName) {
+                result = i;
+                return;
+            }
+        }
+        this.components.splice(result,1);
     }
 
     GenerateText(strongLevelables = false) {

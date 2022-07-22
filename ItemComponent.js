@@ -89,6 +89,7 @@ function RandomListFromList(list, entries) {
 }
 
 export class ItemComponent {
+    formulaName = "ItemComponent";
     isProperty = false;
     componentLevel = 0;
     maxLevel = 10;
@@ -126,6 +127,7 @@ export class ActionSpeedIncrease extends ItemComponent {
     constructor(propertyName, startingValues) {
         super(propertyName, startingValues);
         this.componentLevel = startingValues;
+        this.formulaName = "ActionSpeedIncrease";
         this.maxLevel = 3;
     }
 
@@ -143,6 +145,7 @@ export class TextUnits extends ItemComponent {
         super(propertyName, startingValues);
         this.componentLevel = startingValues[0];
         this.unitName = startingValues[1]
+        this.formulaName = "TextUnits";
         this.maxLevel = 3;
     }
 
@@ -159,6 +162,7 @@ export class AttackBonus extends ItemComponent {
         super(propertyName, startingValues);
         this.componentLevel = startingValues
         this.maxLevel = 3;
+        this.formulaName = "AttackBonus";
     }
 
     GenerateText() {
@@ -174,6 +178,7 @@ export class SpellCountOfLevel extends ItemComponent {
         this.componentLevel = startingValues[0];
         this.spellLevelItem = new SpellLevel("SpellCountLevel", startingValues[1]);
         this.maxLevel = 4;
+        this.formulaName = "SpellCountOfLevel";
     }
 
     LevelUp() {
@@ -210,6 +215,7 @@ export class SpellLevel extends ItemComponent {
         super(propertyName, startingValues);
         this.componentLevel = startingValues;
         this.maxLevel = 4;
+        this.formulaName = "SpellLevel";
     }
 
     GenerateText() {
@@ -236,6 +242,7 @@ export class TextNumber extends ItemComponent {
         super(propertyName, startingValues);
         this.componentLevel = startingValues;
         this.maxLevel = 10;
+        this.formulaName = "TextNumber";
     }
 
     GenerateText() {
@@ -255,6 +262,7 @@ export class DamageTypes extends ItemComponent {
         super(propertyName, startingValues);
         this.componentLevel = startingValues;
         this.maxLevel = 2;
+        this.formulaName = "DamageTypes";
     }
 
     GenerateText() {
@@ -282,6 +290,7 @@ export class SkillBonus extends ItemComponent {
         super(propertyName, startingValues);
         this.componentLevel = startingValues;
         this.maxLevel = 2;
+        this.formulaName = "SkillBonus";
     }
 
     GenerateText() {
@@ -300,6 +309,7 @@ export class PartySkillBonus extends ItemComponent {
         super(propertyName, startingValues);
         this.componentLevel = startingValues;
         this.maxLevel = 2;
+        this.formulaName = "PartySkillBonus";
     }
 
     GenerateText() {
@@ -316,6 +326,7 @@ export class RandomSkillCheckType extends ItemComponent {
         this.componentLevel = 0;
         this.maxLevel = 0;
         this.isProperty = true;
+        this.formulaName = "RandomSkillCheckType";
     }
 
     GenerateText() {
@@ -332,6 +343,7 @@ export class RandomAbilityScoreType extends ItemComponent {
         this.componentLevel = 0;
         this.maxLevel = 0;
         this.isProperty = true;
+        this.formulaName = "RandomAbilityScoreType";
     }
 
     GenerateText() {
@@ -348,6 +360,7 @@ export class RandomCreatureType extends ItemComponent {
         this.componentLevel = 0;
         this.maxLevel = 0;
         this.isProperty = true;
+        this.formulaName = "RandomCreatureType";
     }
 
     GenerateText() {
@@ -364,6 +377,7 @@ export class RandomCondition extends ItemComponent {
         this.componentLevel = 0;
         this.maxLevel = 0;
         this.isProperty = true;
+        this.formulaName = "RandomCondition";
     }
 
     GenerateText() {
@@ -380,6 +394,7 @@ export class RandomEnvironment extends ItemComponent {
         this.componentLevel = 0;
         this.maxLevel = 0;
         this.isProperty = true;
+        this.formulaName = "RandomEnvironment";
     }
 
     GenerateText() {
@@ -396,6 +411,7 @@ export class RandomDamageType extends ItemComponent {
         this.componentLevel = 0;
         this.maxLevel = 0;
         this.isProperty = true;
+        this.formulaName = "RandomDamageType";
     }
 
     GenerateText() {
@@ -409,13 +425,13 @@ export class UsesPerDay extends ItemComponent {
         "Twice per day",
         "Three times per day",
         "Four times per day",
-        "Five times per day",
     ]
 
     constructor(propertyName, startingValues) {
         super(propertyName, startingValues);
         this.componentLevel = startingValues;
-        this.maxLevel = 4;
+        this.maxLevel = 3;
+        this.formulaName = "UsesPerDay";
     }
 
     GenerateText() {
@@ -431,6 +447,7 @@ export class FeetIncrement extends ItemComponent {
         this.componentLevel = startingValues[0];
         this.incrementSize = startingValues[1];
         this.maxLevel = 10;
+        this.formulaName = "FeetIncrement";
     }
 
     GenerateText() {
@@ -446,6 +463,7 @@ export class NumberIncrement extends ItemComponent {
         this.componentLevel = startingValues[0];
         this.incrementSize = startingValues[1];
         this.maxLevel = 10;
+        this.formulaName = "NumberIncrement";
     }
 
     GenerateText() {
@@ -471,6 +489,7 @@ export class DamageDice extends ItemComponent {
         super(propertyName, startingValues);
         this.componentLevel = startingValues;
         this.maxLevel = 4;
+        this.formulaName = "DamageDice";
     }
 
     GenerateText() {
@@ -490,6 +509,7 @@ export class DiceMinimum extends ItemComponent {
         super(propertyName, startingValues);
         this.componentLevel = startingValues;
         this.maxLevel = 3;
+        this.formulaName = "DiceMinimum";
     }
 
     GenerateText() {
@@ -506,6 +526,7 @@ export class RandomCantrip extends ItemComponent {
         this.componentLevel = 0;
         this.maxLevel = 0;
         this.isProperty = true;
+        this.formulaName = "RandomCantrip";
     }
 
     GenerateText() {
@@ -522,6 +543,7 @@ export class CantripOption extends ItemComponent {
         this.maxLevel = 3;
         this.cantripsList = RandomListFromList(cantripOptions, startingValues)
         this.isProperty = true;
+        this.formulaName = "CantripOption";
     }
 
     GenerateText() {
@@ -538,6 +560,7 @@ export class RandomClassResource extends ItemComponent {
         this.componentLevel = 0;
         this.maxLevel = 0;
         this.isProperty = true;
+        this.formulaName = "RandomClassResource";
     }
 
     GenerateText() {
@@ -554,6 +577,7 @@ export class RandomLanguage extends ItemComponent {
         this.componentLevel = 0;
         this.maxLevel = 0;
         this.isProperty = true;
+        this.formulaName = "RandomLanguage";
     }
 
     GenerateText() {
@@ -570,6 +594,7 @@ export class RandomAttackRollType extends ItemComponent {
         this.componentLevel = 0;
         this.maxLevel = 0;
         this.isProperty = true;
+        this.formulaName = "RandomAttackRollType";
     }
 
     GenerateText() {
@@ -588,6 +613,7 @@ export class SkillPenalty extends ItemComponent {
         super(propertyName, startingValues);
         this.componentLevel = startingValues;
         this.maxLevel = 2;
+        this.formulaName = "SkillPenalty";
     }
 
     GenerateText() {
@@ -603,9 +629,40 @@ export class NumberPlus extends ItemComponent {
         this.componentLevel = startingValues[0];
         this.extraNumber = startingValues[1];
         this.maxLevel = 10;
+        this.formulaName = "NumberPlus";
     }
 
     GenerateText() {
         return (this.componentLevel + this.extraNumber).toString();
+    }
+}
+
+export class ListOfDamageTypes extends ItemComponent {
+    damageTypes = [];
+
+    constructor(propertyName, startingValues) {
+        super(propertyName, startingValues);
+        this.componentLevel = startingValues;
+        this.maxLevel = 4;
+        this.damageTypes = RandomListFromList(damageTypeOptions[0], startingValues)
+        this.isProperty = true;
+        this.formulaName = "ListOfDamageTypes";
+    }
+
+    GenerateText() {
+        return this.damageTypes.join(', ').replace(/, ([^,]*)$/, ' or $1');
+    }
+}
+
+export class SpendCharges extends ItemComponent {
+    constructor(propertyName, startingValues) {
+        super(propertyName, startingValues);
+        this.componentLevel = startingValues;
+        this.maxLevel = 10;
+        this.formulaName = "SpendCharges";
+    }
+
+    GenerateText() {
+        return `Spend ${this.componentLevel} charges`
     }
 }
