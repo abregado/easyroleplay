@@ -169,7 +169,7 @@ let itemEffects = [
         ]
     },
     {
-        text: "Your party ${this.PartySkillBonus} on initiative tests against a group including at least one ${this.RandomCreatureType} type, once per long rest.",
+        text: "Your party ${this.PartySkillBonus} initiative tests against a group including at least one ${this.RandomCreatureType} type, once per long rest.",
         components: [
             {name: "PartySkillBonus", formula: "PartySkillBonus", startValue: 1},
             {name: "RandomCreatureType", formula: "RandomCreatureType", startValue: 0},
@@ -439,14 +439,14 @@ let itemEffects = [
         ]
     },
     {
-        text: "Free action: ${this.UsesPerDay}, You ${this.SkillBonus} on Concentration checks for the duration of the next spell you cast.",
+        text: "Free action: ${this.UsesPerDay}, You ${this.SkillBonus} Concentration checks for the duration of the next spell you cast.",
         components: [
             {name: "UsesPerDay", formula: "UsesPerDay", startValue: 2},
             {name: "SkillBonus", formula: "SkillBonus", startValue: 0},
         ]
     },
     {
-        text: "Free action: ${this.UsesPerDay}, You ${this.SkillBonus} on Concentration checks for the duration of the next spell you cast.",
+        text: "Free action: ${this.UsesPerDay}, You ${this.SkillBonus} Concentration checks for the duration of the next spell you cast.",
         components: [
             {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
             {name: "SkillBonus", formula: "SkillBonus", startValue: 1},
@@ -568,7 +568,7 @@ let itemEffects = [
         text: "Passive: Creatures under the effect of one of your spells trigger AoO when moving into melee range of you.",
     },
     {
-        text: "Passive: You ${this.SkillBonus} on saving throws against creatures under the effect of one of your spells.",
+        text: "Passive: You ${this.SkillBonus} saving throws against creatures under the effect of one of your spells.",
         components: [
             {name: "SkillBonus", formula: "SkillBonus", startValue: 0}
         ]
@@ -621,10 +621,9 @@ let itemEffects = [
         text: "Passive: Reroll any spent hit dice once. You must accept the second result.",
     },
     {
-        text: "Free action, before rolling Initiative: ${this.UsesPerDay}, your initiative score is ${this.NumberPlus} for this encounter.",
+        text: "Free action, before rolling Initiative: Once per day, your initiative score is ${this.NumberPlus} for this encounter.",
         components: [
-            {name: "UsesPerDay", formula: "UsesPerDay", startValue: 1},
-            {name: "NumberPlus", formula: "NumberPlus", startValue: [1, 18]}
+            {name: "NumberPlus", formula: "NumberPlus", startValue: [1, 15]}
         ]
     },
     {
