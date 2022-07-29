@@ -84,7 +84,7 @@ class ItemEffect {
         let result = null;
         this.components.forEach(component=>{
             if (component.formulaName == formulaName){
-                console.log("found formula component")
+                // console.log("found formula component")
                 result = component;
             }
         });

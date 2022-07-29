@@ -48,6 +48,17 @@ $horizontalRule: #9c2b1b;
     strong.randomelement {
         color: darkslateblue;
     }
+    div.generate-item-box {
+        border-color: #222222;
+        border-width: 2px;
+        border-style: solid;
+        padding: 15px;
+        margin: 5px;
+    }
+    div.side-by-side {
+        display: flex;
+        justify-content: space-around;
+    }
     div.item {
         border-color: #222222;
         border-width: 2px;
