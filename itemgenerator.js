@@ -29,7 +29,6 @@ class ItemGenerator {
     }
 
     createList(inputData, strongLevelables) {
-        console.log(inputData);
         var html = '';
 
         html += '<div class="effectList"><ul>';
@@ -91,13 +90,18 @@ class ItemGenerator {
 
         if (itemId != undefined) {
             // save seed of randomness
-            initialSeed = Math.random();
+            initialSeed = Math.floor(Math.random() * 10000000000);
             // set current seed determined by item id
-            Math.seedrandom(itemId);
-            seed = itemId;
+            if (typeof itemId === "string") {
+                seed = parseInt(itemId)
+            } else {
+                seed = itemId;
+            }
         } else {
             seed = Math.floor(Math.random() * 10000000000);
         }
+
+        Math.seedrandom(seed);
 
         var el = document.getElementById('generated-item');
         el.innerHTML = "";
