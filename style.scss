@@ -59,6 +59,9 @@ $horizontalRule: #9c2b1b;
         display: flex;
         justify-content: space-around;
     }
+    div.rarity-select {
+        text-align: center;
+    }
     div.item {
         border-color: #222222;
         border-width: 2px;

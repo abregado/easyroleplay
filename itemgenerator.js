@@ -29,7 +29,6 @@ class ItemGenerator {
     }
 
     createList(inputData, strongLevelables) {
-        console.log(inputData);
         var html = '';
 
         html += '<div class="effectList"><ul>';
@@ -60,11 +59,18 @@ class ItemGenerator {
         html += '<div class="generate-item-box">';
         html += '  <div class="side-by-side">';
         html += '    <div><input type="button" id="random-item-btn" value="Generate new item"></div>';
-        html += '    <div><label for="item-id-text-box">Recreate item by its ID</label>';
+        html += '    <div>';
+        html += '        <label for="item-id-text-box">Recreate item by its ID</label>';
         html += '         <input type="text" id="recreate-item-tb" name="item-id-text-box">';
-        html += '    </div>'
-        html += '  </div>'
-        html += '<figure id="generated-item"></figure>'
+        html += '    </div>';
+        html += '  </div>';
+        html += '  <div class="rarity-select">';
+        html += '    <select id="raritySelectionSelect">';
+        html += '      <option value="0">Uncommon</option>';
+        html += '      <option value="2">Rare</option>';
+        html += '    </select>';
+        html += '  </div>';
+        html += '<figure id="generated-item"></figure>';
         html += '</div>';
 
         return html;
@@ -91,17 +97,25 @@ class ItemGenerator {
 
         if (itemId != undefined) {
             // save seed of randomness
-            initialSeed = Math.random();
+            initialSeed = Math.floor(Math.random() * 10000000000);
             // set current seed determined by item id
-            Math.seedrandom(itemId);
-            seed = itemId;
+            if (typeof itemId === "string") {
+                seed = parseInt(itemId)
+            } else {
+                seed = itemId;
+            }
         } else {
             seed = Math.floor(Math.random() * 10000000000);
         }
 
+        Math.seedrandom(seed);
+
+        var raritySelection = document.getElementById("raritySelectionSelect");
+        var selectedLevel = parseInt(raritySelection.value);
+
         var el = document.getElementById('generated-item');
         el.innerHTML = "";
-        this.insertHTML('generated-item', this.createItemCard(new Artifact(itemEffects, 0), false, seed));
+        this.insertHTML('generated-item', this.createItemCard(new Artifact(itemEffects, selectedLevel), false, seed));
 
         if (itemId != undefined) {
             // reset seed back to randomized to end determination
