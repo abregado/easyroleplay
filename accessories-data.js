@@ -1,4 +1,4 @@
-let itemEffects = [
+let accessoryEffects = [
     {
         text: "Passive: You ${this.SkillBonus} your ${this.RandomSkillCheckType} checks.",
         components: [
