@@ -5,7 +5,7 @@ import {ItemTypes} from "./Artifact.js";
 /**
  * Handles generation of items
  */
-class ItemGenerator {
+export class ItemGenerator {
 
     /**
      * Generate a new item in the generate item box
