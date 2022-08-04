@@ -1,11 +1,27 @@
 import {ItemEffect} from "./ItemEffect.js";
 import {SpendCharges} from "./ItemComponent.js";
 
-const itemTypes = [
+const accessorySubtypes = [
     {size: "Tiny", price: [100,250], options: ["Ring", "Earring", "Brooch", "Amulet", "Bracelet", "Clasp", "Necklace", "Chain", "Pendant",  "Choker", "Torc", "Armlet", "Anklet", "Pin", "Locket", "Emblem", "Medallion"] },
     {size: "Tiny", price: [80,200], options: ["Quill", "Die", "Chalice", "Parchment", "Mechanical Object", "Horn", "Shell", "Lode", "Orb", "Crystal", "Form", "Band"] },
     {size: "Small", price: [50,150], options: ["Gloves", "Cap", "Bracer", "Helm", "Gauntlet", "Greaves", "Boots", "Belt", "Pauldron", "Cape", "Cloak", "Sash"] }
 ]
+
+const weaponSubtypes = [
+    {size: "Small", price: [80,200], options: ["Dagger", "Handaxe", "Shortsword", "Mace", "Shortbow"]},
+    {size: "Medium", price: [120,300], options: ["Longsword", "Warhammer", "Rapier", "Hammer", "Spear", "Quarterstaff"]},
+    {size: "Large", price: [160,400], options: ["Halberd", "Greataxe", "Greatsword", "Maul", "Longbow", "Heavy Crossbow", "Hand Crossbow"]}
+    // TODO redesign categorisation of weapons
+]
+
+/**
+ * Enumeration of item types
+ */
+const ItemTypes = {
+    Accessories: {data: accessoryEffects, subTypes: accessorySubtypes, abbr: "ACC"},
+    Weapons: {data: weaponEffects, subTypes: weaponSubtypes, abbr: "WEP"}
+    // TODO add armors
+}
 
 const levelPrice = [
     {rarity:"Uncommon",cost:200},
@@ -45,16 +61,25 @@ class Artifact {
     magic = "";
     price = 0;
 
-    constructor(effectDataList, level) {
+    constructor(itemTypes, level) {
+        if (itemTypes === undefined || level === undefined) {
+            // todo add message for the user
+            console.log("Insufficient parameters passed to the artifact constructor");
+            return;
+        }
+
+        var effectDataList = itemTypes.data;
+        var categoryList = itemTypes.subTypes;
         this.unselectedEffectData = Array.from(effectDataList);
 
-        const randomCategory = RandomFromList(itemTypes);
+        const randomCategory = RandomFromList(categoryList);
         const levelProperties = levelPrice[Math.min(level,5)]
         this.magic = RandomFromList(magicSchool);
         this.description = RandomFromList(randomCategory.options);
         this.size = randomCategory.size;
         this.rarity = levelProperties.rarity;
-        this.price = levelProperties.cost+ randomCategory.price[0] + (Math.ceil(Math.random()* (randomCategory.price[1]-randomCategory.price[0]) / 10) * 10) ;
+        this.price = levelProperties.cost + randomCategory.price[0]
+            + (Math.ceil(Math.random()* (randomCategory.price[1] - randomCategory.price[0]) / 10) * 10) ;
 
         this.AddEffect()
 
@@ -123,3 +148,4 @@ class Artifact {
 }
 
 export {Artifact}
+export {ItemTypes}
