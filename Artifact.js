@@ -8,10 +8,11 @@ const accessorySubtypes = [
 ]
 
 const weaponSubtypes = [
-    {size: "Small", price: [80,200], options: ["Dagger", "Handaxe", "Shortsword", "Mace", "Shortbow"]},
+    {size: "Small", price: [80,200], options: ["Dagger", "Handaxe", "Shortsword", "Mace"]},
     {size: "Medium", price: [120,300], options: ["Longsword", "Warhammer", "Rapier", "Hammer", "Spear", "Quarterstaff"]},
-    {size: "Large", price: [160,400], options: ["Halberd", "Greataxe", "Greatsword", "Maul", "Longbow", "Heavy Crossbow", "Hand Crossbow"]}
+    {size: "Large", price: [160,400], options: ["Halberd", "Greataxe", "Greatsword", "Maul"]}
     // TODO redesign categorisation of weapons
+    // TODO add ranged weapons back in with their own effects
 ]
 
 /**
