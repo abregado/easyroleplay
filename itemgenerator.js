@@ -119,6 +119,7 @@ export class ItemGenerator {
         html += '      <option value="Any">Any Category</option>';
         html += '      <option value="Accessories">Accessories</option>';
         html += '      <option value="Weapons">Weapons</option>';
+        html += '      <option value="Armors">Armors</option>';
         html += '    </select>';
         html += '  </div>';
         html += '<figure id="generated-item"></figure>';
