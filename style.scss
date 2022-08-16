@@ -7,13 +7,13 @@ $noteGreen: #e0e5c1;
 $horizontalRule: #9c2b1b;
 
 * {
-    font-family: "Titillium Web";
+    font-family: "Luminari-Regular";
     color: #222222;
     p {
         margin-top: 0em;
     }
     li {
-        font-family: "Titillium Web";
+        font-family: "Luminari-Regular";
         color: #222222;
         margin-top: 0em;
     }
@@ -116,7 +116,7 @@ a.back {
 }
 
 .action {
-    font-family: "Titillium Web";
+    font-family: "Luminari-Regular";
     .title {
         font-style: italic;
     }
@@ -125,7 +125,7 @@ a.back {
     }
 }
 .passive {
-    font-family: "Titillium Web";
+    font-family: "Luminari-Regular";
     .title {
         font-style: italic;
     }
@@ -135,7 +135,7 @@ table.ability {
     width: 100%;
     margin-bottom: 1em;
     font-size: 10pt;
-    font-family: "Titillium Web";
+    font-family: "Luminari-Regular";
 
     thead {
         display: table-row-group;
@@ -170,6 +170,21 @@ table.ability {
 figure.twincard {
     display: grid;
     grid-template-columns: 50% 50%;
+}
+
+@font-face {
+    font-family: Luminari-Regular;
+    src: url("font/Luminari-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Parisienne-Regular;
+    src: url("font/Parisienne-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Playtime;
+    src: url("font/Playtime.otf") format("opentype");
 }
 
 
