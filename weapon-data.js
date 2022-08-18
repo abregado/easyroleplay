@@ -54,7 +54,7 @@ let weaponEffects = [
         text: "Passive: Weapon size reduced to Tiny when sheathed.",
     },
     {
-        text: "Passive: Item weighs 0.5lb when sheathed.",
+        text: "Passive: Item weighs almost nothing when sheathed.",
     },
     {
         text: "Action: Item is sheathed to an extradimensional space or unsheathed from that space.",
