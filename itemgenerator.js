@@ -34,6 +34,7 @@ export class ItemGenerator {
 
         this.#insertHTML('generate-item', this.#createItemGenerationBox());
         this.#insertHTML('item-stock-section', this.#createItemStockSection());
+        this.#insertHTML('item-basket-section', this.#createItemBasket());
 
         // for (let i=0;i<itemCount;i++){
         //     let seed = Math.floor(Math.random() * 10000000000);
@@ -53,9 +54,9 @@ export class ItemGenerator {
         //     this.#insertHTML('highitems', this.#createItemCard(new Artifact(itemType,2), false, itemId));
         // }
 
-        var allItems = this.#buildOneOfEachItemEffect(accessoryEffects)
-        const html = this.#createList(allItems, true);
-        this.#insertHTML('allEffects', html);
+        // var allItems = this.#buildOneOfEachItemEffect(accessoryEffects)
+        // const html = this.#createList(allItems, true);
+        // this.#insertHTML('allEffects', html);
 
         this.#createEventListeners();
         this.#refreshStock();
@@ -69,7 +70,7 @@ export class ItemGenerator {
         return allEffectObject;
     }
 
-    #createItemCard(inputData, strongLevelables, itemId) {
+    #createItemCard(inputData, strongLevelables, itemId, basketAddable = false) {
         var html = '';
 
         html += '<div class="item"><ul>';
@@ -81,6 +82,7 @@ export class ItemGenerator {
             html += `<li class="effect">${filledText}</li>`
         });
 
+        html += '<input class="add-to-basket-btn" type="button" onclick="addItemToBasket(this)" value="Add to basket"></input>'
         html += '</ul></div>';
 
         return html;
@@ -129,6 +131,17 @@ export class ItemGenerator {
                 ItemGenerator.generateItem(event.target.value);
             }
         });
+
+        // var elements = document.getElementsByClassName("add-to-basket-btn");
+        // console.log(elements);
+        // var addItemToBasket = function(event) {
+        //     console.log(event.target);
+        //     var attribute = this.getAttribute("data-myattribute");
+        //     alert(attribute);
+        // };
+        // for (var i = 0; i < elements.length; i++) {
+        //     elements[i].addEventListener('click', addItemToBasket, false);
+        // }
     }
 
     #determineItemType(category, typeSelectorId) {
@@ -193,7 +206,6 @@ export class ItemGenerator {
             if (-1 == selectedLevel) {
                 // for the moment, generate only 0 or 2
                 let roll = Math.floor(Math.random() * 10);
-                console.log(roll);
                 selectedLevel = roll % 2 * 2;
             }
 
@@ -314,6 +326,14 @@ export class ItemGenerator {
         html += '  </div>';
         html += '</div>';
         html += '<figure id="item-stock"></figure>';
+        return html;
+    }
+
+    #createItemBasket() {
+        var html = '';
+        html += '<div class="basket">';
+        html += '   <figure id="items-in-basket"></figure>';
+        html += '</div>';
         return html;
     }
 }
