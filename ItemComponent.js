@@ -170,6 +170,19 @@ export class AttackBonus extends ItemComponent {
     }
 }
 
+export class ArmorClassBonus extends ItemComponent {
+    constructor(propertyName, startingValues) {
+        super(propertyName, startingValues);
+        this.componentLevel = startingValues;
+        this.maxLevel = 3;
+        this.formulaName = "ArmorClassBonus";
+    }
+
+    GenerateText() {
+        return this.componentLevel.toString();
+    }
+}
+
 export class SpellCountOfLevel extends ItemComponent {
     spellLevelItem;
 

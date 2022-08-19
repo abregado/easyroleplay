@@ -1,6 +1,7 @@
 import {
     ActionSpeedIncrease,
     AttackBonus,
+    ArmorClassBonus,
     DamageTypes,
     SkillBonus,
     RandomSkillCheckType,
@@ -31,6 +32,7 @@ import {
 
 const componentClasses = {
     "AttackBonus": AttackBonus,
+    "ArmorClassBonus": ArmorClassBonus,
     "SpellCountOfLevel": SpellCountOfLevel,
     "DamageTypes": DamageTypes,
     "TextUnits": TextUnits,
@@ -68,7 +70,7 @@ class ItemEffect {
     effectLevel = 0
 
     constructor(itemData) {
-        this.text = itemData.text
+        this.text = itemData.text;
         if (itemData.components != null) {
             itemData.components.forEach(componentData => {
                 const componentClass = componentClasses[componentData.formula];
