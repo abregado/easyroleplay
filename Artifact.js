@@ -25,23 +25,23 @@ const ItemTypes = {
 }
 
 const levelPrice = [
-    {rarity:"Uncommon",cost:200},
-    {rarity:"Rare",cost:1000},
-    {rarity:"Rare",cost:2000},
-    {rarity:"Rare",cost:3000},
-    {rarity:"Very Rare",cost:10000},
-    {rarity:"Very Rare",cost:20000},
+    {rarity:"Weak",cost:200},
+    {rarity:"Strong",cost:1000},
+    {rarity:"Strong",cost:2000},
+    {rarity:"Strong",cost:3000},
+    {rarity:"Incredible",cost:10000},
+    {rarity:"Spectacular",cost:20000},
 ]
 
 const magicSchool = [
-    "Abjuration ",
-    "Conjuration ",
-    "Divination ",
-    "Enchantment ",
-    "Evocation ",
-    "Illusion ",
-    "Necromancy ",
-    "Transmutation ",
+    "Abjuration",
+    "Conjuration",
+    "Divination",
+    "Enchantment",
+    "Evocation",
+    "Illusion",
+    "Necromancy",
+    "Transmutation",
 ]
 
 const chargeItemData = {

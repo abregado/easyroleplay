@@ -64,9 +64,9 @@ export class ItemGenerator {
         html += '<div class="tag-outer">';
         html += '<div class="inner">';
         html += `<div class="item-id">${inputData.price}gp</div>`;
-        html += `<div class="item-name">${inputData.rarity} ${inputData.description}</div>`;
+        html += `<div class="item-name">${inputData.description}</div>`;
         html += '<hr>';
-        html += `<div class="item-desc">(${inputData.size}/${inputData.magic})</div>`;
+        html += `<div class="item-desc">${inputData.rarity} ${inputData.magic}</div>`;
         html += `<div class="item-id">id: ${itemId}</div></div></div>`;
         html += '</div>'
         html += '</div>'
