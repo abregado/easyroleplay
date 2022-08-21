@@ -60,18 +60,27 @@ export class ItemGenerator {
     #createItemCard(inputData, strongLevelables, itemId) {
         var html = '';
 
-        html += '<div class="item"><div class="item-inner">';
+        html += '<div class="item">';
+        html += '<div class="tag-outer">';
+        html += '<div class="inner">';
         html += `<div class="item-id">${inputData.price}gp</div>`;
         html += `<div class="item-name">${inputData.rarity} ${inputData.description}</div>`;
         html += '<hr>';
         html += `<div class="item-desc">(${inputData.size}/${inputData.magic})</div>`;
-        html += '<ul>';
+        html += `<div class="item-id">id: ${itemId}</div></div></div>`;
+        html += '</div>'
+        html += '</div>'
+        html += '<div class="paper-outer">';
+        html += '<div class="inner">';
+        html += '<ul class="effects">';
         inputData.effects.forEach(entry => {
             const filledText = entry.GenerateText(strongLevelables);
             html += `<li class="effect">${filledText}</li>`
         });
         html += '</ul>';
-        html += `<div class="item-id">id: ${itemId}</div></div></div>`;
+        html += '</div>'
+        html += '</div>'
+        html += '</div>'
 
         return html;
     }
@@ -100,34 +109,6 @@ export class ItemGenerator {
 
         el.innerHTML = el.innerHTML + html;
     }
-
-    // #createItemGenerationBox() {
-    //     var html = '';
-    //
-    //     html += '<div class="generate-item-box">';
-    //     html += '  <div class="side-by-side">';
-    //     html += '    <div><input type="button" id="random-item-btn" value="Generate new item"></div>';
-    //     html += '    <div>';
-    //     html += '        <label for="item-id-text-box">Recreate item by its ID</label>';
-    //     html += '         <input type="text" id="recreate-item-tb" name="item-id-text-box">';
-    //     html += '    </div>';
-    //     html += '  </div>';
-    //     html += '  <div class="rarity-select">';
-    //     html += '    <select id="raritySelectionSelect">';
-    //     html += '      <option value="0">Uncommon</option>';
-    //     html += '      <option value="2">Rare</option>';
-    //     html += '    </select>';
-    //     html += '    <select id="itemTypeSelect">';
-    //     html += '      <option value="Any">Any Category</option>';
-    //     html += '      <option value="Accessories">Accessories</option>';
-    //     html += '      <option value="Weapons">Weapons</option>';
-    //     html += '    </select>';
-    //     html += '  </div>';
-    //     html += '<figure id="generated-item"></figure>';
-    //     html += '</div>';
-    //
-    //     return html;
-    // }
 
     #createEventListeners() {
         var randomItemBtn = document.getElementById('random-item-btn');

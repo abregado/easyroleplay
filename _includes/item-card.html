@@ -1,0 +1,12 @@
+<div class="item"><div class="item-inner">';
+<div class="item-id">${inputData.price}gp</div>`;
+<div class="item-name">${inputData.rarity} ${inputData.description}</div>`;
+<hr>';
+<div class="item-desc">(${inputData.size}/${inputData.magic})</div>`;
+<ul>';
+    inputData.effects.forEach(entry => {
+    const filledText = entry.GenerateText(strongLevelables);
+    html += `<li class="effect">${filledText}</li>`
+    });
+</ul>';
+<div class="item-id">id: ${itemId}</div></div></div>`;
