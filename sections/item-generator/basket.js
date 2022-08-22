@@ -3,35 +3,77 @@ const SIZE_BUFFER = 20;
 const SEVEN_DAYS = 7;
 const BASKET_COOKIE = 'basket-cookie';
 
-addItemToBasket = function (caller) {
-    var itemHtml = caller.parentElement;
-    let effects = itemHtml.querySelectorAll('.effect');
-    let basketWrapper;
+/** Basket item prototype */
+function BasketItem(name, price, description, effects, id) {
+    this.name = name;
+    this.price = price;
+    this.description = description;
+    this.effects = effects;
+    this.id = id;
+}
 
-    let itemObject = {};
-    itemObject.desc = itemHtml.querySelector('.desc').innerText;
-    itemObject.effects = [];
-    effects.forEach( effect => {
-        itemObject.effects.push(effect.innerText);
+addItemToBasket = function (caller) {
+    let itemElement = caller.parentElement;
+    let parentItemNode = itemElement.parentNode.parentNode.parentNode;
+    let effectsBlock = itemElement.querySelectorAll('.effect');
+    let basketObj;
+
+    let name = parentItemNode.querySelector('.item-name').innerText;
+    let price = parentItemNode.querySelector('.item-price').innerText;
+    let description = parentItemNode.querySelector('.item-desc').innerText;
+    let id = parentItemNode.querySelector('.item-id').innerText;
+    let effects = [];
+    effectsBlock.forEach( effect => {
+        effects.push(effect.innerText);
     });
 
     // check for existing cookie
     let bCookie = getCookie(BASKET_COOKIE);
     if (bCookie == '') {
-        basketWrapper = [];
+        basketObj = [];
     } else {
-        basketWrapper = JSON.parse(bCookie);
+        basketObj = JSON.parse(bCookie);
     }
-    basketWrapper.push(itemObject);
 
-    if (JSON.stringify(basketWrapper).length + SIZE_BUFFER > MAX_COOKIE_SIZE) {
-        alert('Max basket size reached');
+    let itemObject = new BasketItem(name, price, description, effects, id);
+    basketObj.push(itemObject);
+
+    // Every cookie has a maximum size of 4096 bytes
+    if (JSON.stringify(basketObj).length + SIZE_BUFFER > MAX_COOKIE_SIZE) {
+        // TODO change into normal error message
+        alert('Maximum basket size reached');
         return;
     }
 
     // create a basket cookie
-    setCookie(BASKET_COOKIE, JSON.stringify(basketWrapper), SEVEN_DAYS);
+    setCookie(BASKET_COOKIE, JSON.stringify(basketObj), SEVEN_DAYS);
 }
+
+function removeItemFromBasket(caller) {
+    let itemNode = caller.parentNode.parentNode.parentNode;
+    let parent = itemNode.parentNode;
+    let index = Array.prototype.indexOf.call(parent.children, itemNode);
+    let bCookie = getCookie(BASKET_COOKIE);
+    let basketObj = JSON.parse(bCookie);;
+
+    basketObj.splice(index, 1);
+    setCookie(BASKET_COOKIE, JSON.stringify(basketObj), SEVEN_DAYS);
+    loadBasket();
+}
+
+// function editItem(caller) {
+//     let block = caller.parentNode;
+//     let parent = itemHtml.parentNode;
+//     let itemNode = caller.parentNode.parentNode.parentNode;
+//     let index = Array.prototype.indexOf.call(parent.children, itemNode);
+//     let bCookie = getCookie(BASKET_COOKIE);
+//
+//     let basketObj = JSON.parse(bCookie);;
+//
+//     basketObj.splice(index, 1);
+//     setCookie(BASKET_COOKIE, JSON.stringify(basketObj), SEVEN_DAYS);
+//     loadBasket();
+// }
 
 function setCookie(cname, cvalue, exdays) {
     const d = new Date();
@@ -56,8 +98,7 @@ function getCookie(cname) {
     return "";
 }
 
-insertItemsToBasket = function() {
-    console.log("inserting items...");
+loadBasket = function() {
     // reset basket content
     document.getElementById('item-basket-section').innerHTML = "";
 
@@ -76,7 +117,7 @@ insertItemsToBasket = function() {
 }
 
 insertHTML = function (id, html) {
-    var el = document.getElementById(id);
+    let el = document.getElementById(id);
 
     if (!el) {
         alert(`Element with id ${id} not found`);
@@ -86,17 +127,23 @@ insertHTML = function (id, html) {
 }
 
 createBasketItemCard = function (inputData) {
-    var html = '';
-    html += '<div class="item"><ul>';
-    html += `<div class="desc">${inputData.desc}</div>`;
+    let html = '';
+    html += '<div class="basket-item fantasy"><ul>';
+    html += `  <div class="basket-item-price">${inputData.price}</div>`;
+    html += `  <div class="basket-item-name">${inputData.description}</div>`;
+    html += `  <div class="basket-item-id">${inputData.id}</div>`;
+    html += `  <div class="basket-item-desc">${inputData.description}</div>`;
     inputData.effects.forEach(entry => {
-        html += `<li class="effect">${entry}</li>`;
+        html += `<li class="basket-item-effect">${entry}</li>`;
     });
+    html += '  <div class="side-by-side">';
+    html += '    <input class="remove-item-btn" type="button" onclick="removeItemFromBasket(this)" value="Remove" />';
+    html += '  </div>';
     html += '</ul></div>';
     return html;
 }
 
-// wait for document to be fully laoded
+// wait for document to be fully loaded
 document.addEventListener("DOMContentLoaded", function(event) {
     // Get the modal
     var modal = document.getElementById("myModal");
@@ -110,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     // When the user clicks the button, open the modal and populate items
     btn.onclick = function() {
         modal.style.display = "block";
-        insertItemsToBasket();
+        loadBasket();
     }
 
     // When the user clicks on <span> (x), close the modal

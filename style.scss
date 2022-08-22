@@ -7,7 +7,7 @@ $noteGreen: #e0e5c1;
 $horizontalRule: #9c2b1b;
 
 * {
-    font-family: "Titillium Web";
+    //font-family: "Titillium Web";
     color: #222222;
     p {
         margin-top: 0;
@@ -308,7 +308,8 @@ figure.twincard {
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
-    animation-duration: 0.4s
+    animation-duration: 0.4s;
+    overflow-y: initial !important;
 }
 
 /* Add Animation */
@@ -343,10 +344,31 @@ figure.twincard {
     color: white;
 }
 
-.modal-body {padding: 2px 16px;}
+.modal-body {
+    padding: 2px 16px;
+    height: 80vh;
+    overflow-y: auto;
+}
 
 .modal-footer {
     padding: 2px 16px;
     background-color: #5cb85c;
     color: white;
+    height: 25vh;
+    overflow-y: auto;
+}
+
+.basket-item {
+    border: #58180D 1px solid;
+    border-radius: 16px;
+    margin-bottom: 3px;
+}
+
+.fantasy {
+    font-family: "Luminari-Regular";
+}
+
+@font-face {
+    font-family: Luminari-Regular;
+    src: url("fonts/Luminari-Regular.ttf") format("truetype");
 }
