@@ -83,7 +83,10 @@ const magicSchool = [
 ]
 
 const chargeItemData = {
-    text: "The item has 4 charges. All charges recharge during a long rest."
+    text: "The item has ${this.TextUnits}. All charges recharge during a long rest.",
+    components: [
+        {name: "TextUnits", formula: "TextUnits", startLevel: 4, increasePerLevel: 1, unitName: "charge"}
+    ]
 }
 
 
@@ -156,7 +159,9 @@ class Artifact {
                 effect.RemoveComponentByFormula("UsesPerDay");
             })
 
-            this.effects.push(new ItemEffect(chargeItemData));
+            let ChargeItemEffect = new ItemEffect(chargeItemData);
+            ChargeItemEffect.components[0].componentLevel = 4 + chargeBasedEffects.length;
+            this.effects.push(ChargeItemEffect);
         }
     }
 

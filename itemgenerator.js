@@ -20,7 +20,7 @@ export class ItemGenerator {
      * Method called to build the initial page content
      */
     run() {
-        const itemCount = 50;
+        const itemCount = 5;
 
         //this.#insertHTML('generate-item', this.#createItemGenerationBox());
 
@@ -30,7 +30,7 @@ export class ItemGenerator {
             Math.seedrandom(seed);
             var itemType = this.#determineItemType(null);
             var itemId = itemType.abbr + "-0-" + seed;
-            this.#insertHTML('lowitems', this.#createItemCard(new Artifact(itemType,0), false, itemId));
+            this.#insertHTML('weakitems', this.#createItemCard(new Artifact(itemType,0), false, itemId));
         }
 
         for (let i=0;i<itemCount;i++){
@@ -39,7 +39,16 @@ export class ItemGenerator {
             Math.seedrandom(seed);
             var itemType = this.#determineItemType(null);
             var itemId = itemType.abbr + "-2-" + seed;
-            this.#insertHTML('highitems', this.#createItemCard(new Artifact(itemType,2), false, itemId));
+            this.#insertHTML('strongitems', this.#createItemCard(new Artifact(itemType,1), false, itemId));
+        }
+
+        for (let i=0;i<itemCount;i++){
+            let seed = Math.floor(Math.random() * 10000000000);
+            // make item property generation based on this seed
+            Math.seedrandom(seed);
+            var itemType = this.#determineItemType(null);
+            var itemId = itemType.abbr + "-2-" + seed;
+            this.#insertHTML('incredibleitems', this.#createItemCard(new Artifact(itemType,2), false, itemId));
         }
 
         var allItems = this.#buildOneOfEachItemEffect(accessoryEffects)

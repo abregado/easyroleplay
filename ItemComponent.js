@@ -149,7 +149,7 @@ export class TextUnits extends ItemComponent {
         this.componentLevel = prototypeData.startLevel;
         this.unitName = prototypeData.unitName;
         this.formulaName = "TextUnits";
-        this.maxLevel = 3;
+        this.maxLevel = 10;
     }
 
     GenerateText() {
