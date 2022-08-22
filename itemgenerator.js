@@ -112,8 +112,10 @@ export class ItemGenerator {
         html += '  </div>';
         html += '  <div class="rarity-select">';
         html += '    <select id="raritySelectionSelect">';
-        html += '      <option value="0">Uncommon</option>';
-        html += '      <option value="2">Rare</option>';
+        html += '      <option value="0">Weak</option>';
+        html += '      <option value="1">Strong</option>';
+        html += '      <option value="2">Incredible</option>';
+        html += '      <option value="3">Spectacular</option>';
         html += '    </select>';
         html += '    <select id="itemTypeSelect">';
         html += '      <option value="Any">Any Category</option>';

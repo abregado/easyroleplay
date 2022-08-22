@@ -24,24 +24,62 @@ const ItemTypes = {
     // TODO add armors
 }
 
-const levelPrice = [
-    {rarity:"Uncommon",cost:200},
-    {rarity:"Rare",cost:1000},
-    {rarity:"Rare",cost:2000},
-    {rarity:"Rare",cost:3000},
-    {rarity:"Very Rare",cost:10000},
-    {rarity:"Very Rare",cost:20000},
+const levelOptions = [
+    {
+        name: "Weak",
+        cost: 200,
+        options: [
+            {
+                effects: 1,
+                extralevels: 0
+            }
+        ]
+    },
+    {
+        name: "Strong",
+        cost: 1000,
+        options: [
+            {
+                effects: 1,
+                extralevels: 1
+            },
+        ]
+    },
+    {
+        name: "Incredible",
+        cost: 10000,
+        options: [
+            {
+                effects: 1,
+                extralevels: 2
+            },
+        ]
+    },
+    {
+        name: "Spectacular",
+        cost: 50000,
+        options: [
+            {
+                effects: 2,
+                extralevels: 3
+            },
+            {
+                effects: 2,
+                extralevels: 3
+            },
+        ]
+    },
 ]
 
 const magicSchool = [
-    "Abjuration ",
-    "Conjuration ",
-    "Divination ",
-    "Enchantment ",
-    "Evocation ",
-    "Illusion ",
-    "Necromancy ",
-    "Transmutation ",
+    "Abjuration",
+    "Conjuration",
+    "Divination",
+    "Enchantment",
+    "Evocation",
+    "Illusion",
+    "Necromancy",
+    "Transmutation",
 ]
 
 const chargeItemData = {
@@ -69,30 +107,33 @@ class Artifact {
             return;
         }
 
+        const levelData = levelOptions[Math.min(level,3)];
+        const randomSubOption = RandomFromList(levelData.options);
+
         var effectDataList = itemTypes.data;
         var categoryList = itemTypes.subTypes;
         this.unselectedEffectData = Array.from(effectDataList);
 
         const randomCategory = RandomFromList(categoryList);
-        const levelProperties = levelPrice[Math.min(level,5)]
+
         this.magic = RandomFromList(magicSchool);
         this.description = RandomFromList(randomCategory.options);
-        this.size = randomCategory.size;
-        this.rarity = levelProperties.rarity;
-        this.price = levelProperties.cost + randomCategory.price[0]
+        this.rarity = levelData.name;
+        this.price = levelData.cost + randomCategory.price[0]
             + (Math.ceil(Math.random()* (randomCategory.price[1] - randomCategory.price[0]) / 10) * 10) ;
 
-        this.AddEffect()
-
-        for (let i = 1; i < level; i++) {
-            this.AddLevel()
+        for (let i = 0; i < randomSubOption.effects; i++){
+            this.AddEffect();
         }
 
-        this.ChangeToCharges()
+        for (let i = 0; i < randomSubOption.extralevels; i++){
+            this.LevelUpOneEffect();
+        }
+
+        this.ChangeToCharges();
     }
 
     ChangeToCharges() {
-
         let chargeBasedEffects = [];
         this.effects.forEach(effect=>{
             let component = effect.GetComponentByFormula("UsesPerDay");
@@ -105,7 +146,13 @@ class Artifact {
             console.log("changing to charges");
             chargeBasedEffects.forEach(effect=>{
                 let component = effect.GetComponentByFormula("UsesPerDay");
-                effect.components.push(new SpendCharges(component.propertyName,5-component.componentLevel));
+
+                let spendChargesProto = {
+                    text: "",
+                    startLevel: 5-component.componentLevel,
+                };
+
+                effect.components.push(new SpendCharges(component.propertyName,spendChargesProto));
                 effect.RemoveComponentByFormula("UsesPerDay");
             })
 
@@ -119,32 +166,15 @@ class Artifact {
         this.unselectedEffectData.splice(randomIndex, 1);
     }
 
-    AddLevel() {
-        const randRoll = Math.random() * 2;
-        if (randRoll > this.effects.length) {
-            this.AddEffect()
+    LevelUpOneEffect(){
+        const levellables = this.effects.filter(effect => effect.CanLevelUp())
+
+        if (levellables.length > 0) {
+            levellables[Math.floor(Math.random() * levellables.length)].LevelUp();
         } else {
-            this.LevelUpAllEffects()
+            this.AddEffect()
         }
-    }
 
-    LevelUpAllEffects() {
-        let extraLevels = 0
-
-        this.effects.forEach(effect => {
-            if (effect.CanLevelUp()) {
-                effect.LevelUp()
-            } else {
-                extraLevels++;
-            }
-        })
-
-        for (let i = 0; i < extraLevels; i++) {
-            const levellables = this.effects.filter(effect => effect.CanLevelUp())
-            if (levellables.length > 0) {
-                levellables[Math.floor(Math.random() * levellables.length)].LevelUp();
-            }
-        }
     }
 }
 
