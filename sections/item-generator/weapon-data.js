@@ -99,7 +99,7 @@ let weaponEffects = [
     {
         text: "Reaction when you cause damage using this weapon: Heal ${this.DamageDice}.",
         components: [
-            {name: "DamageDice", formula: "DamageDice", startLevel: 1, increasePerLevel: 1},
+            {name: "DamageDice", formula: "DamageDice", startLevel: 0, increasePerLevel: 1},
         ],
         maxLevel: 2
     },
