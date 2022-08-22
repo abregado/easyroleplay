@@ -3,36 +3,53 @@ permalink: "/"
 layout: default
 ---
 
-<script type="text/javascript" src="accessories-data.js"></script>
+<script type="text/javascript" src="accessory-data.js"></script>
 <script type="text/javascript" src="weapon-data.js"></script>
+<script type="text/javascript" src="armor-data.js"></script>
+<script type="text/javascript" src="basket.js"></script>
 <script type="text/javascript" src="lib/seedrandom.min.js"></script>
 <script type="module" src="ItemComponent.js"></script>
 <script type="module" src="itemgenerator.js"></script>
 <noscript>The items are generated via Javascript. No Javascript, No items.</noscript>
+
+<!-- Trigger/Open The Modal -->
+<button id="basketBtn">Open Basket</button>
 
 <h3>Generate an item</h3>
 <figure id="generate-item">
     {% include item-generator-options.html %}
 </figure>
 
-<h3>Items worth 200-500gp</h3>
-<figure id="weakitems">
+<h3>Item stock</h3>
+<figure id="item-stock-section">
 </figure>
 
-<h3>Items worth 1000-3000gp</h3>
-<figure id="strongitems">
-</figure>
+<!-- The Modal -->
+<div id="myModal" class="modal">
 
-<h3>Items worth 10000-20000gp</h3>
-<figure id="incredibleitems">
-</figure>
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>Basket</h2>
+        </div>
+        <div class="modal-body">
+            <figure id="item-basket-section">
+            </figure>
+        </div>
+        <div class="modal-footer">
+            <h3>Number of items in the basket: <span id="basket-item-count">0</span></h3>
+        </div>
+    </div>
 
-<figure>
-    <h3>All possible effects at lowest level</h3>
-    <p>Sections which level up are marked <strong class="levelable">like this</strong> and sections which contain
-        randomized options are displayed <strong class="randomelement">like this</strong>.
-        Press f5 to refresh random components.
-    </p>
-    <div id="allEffects"></div>
-</figure>
+</div>
+
+<!--<figure>-->
+<!--    <h3>All possible effects at lowest level</h3>-->
+<!--    <p>Sections which level up are marked <strong class="levelable">like this</strong> and sections which contain-->
+<!--        randomized options are displayed <strong class="randomelement">like this</strong>.-->
+<!--        Press f5 to refresh random components.-->
+<!--    </p>-->
+<!--    <div id="allEffects"></div>-->
+<!--</figure>-->
 

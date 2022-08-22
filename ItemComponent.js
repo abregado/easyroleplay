@@ -173,37 +173,20 @@ export class AttackBonus extends ItemComponent {
     }
 }
 
-// export class SpellCountOfLevel extends ItemComponent {
-//     spellLevelItem;
-//
-//     constructor(propertyName, prototypeData) {
-//         super(propertyName, prototypeData);
-//         this.componentLevel = prototypeData.startLevel;
-//         this.spellLevelItem = new SpellLevel("SpellCountLevel", prototypeData.spellLevel[1]);
-//         this.maxLevel = 4;
-//         this.formulaName = "SpellCountOfLevel";
-//     }
-//
-//     LevelUp() {
-//         if ((Math.random() > 0.5 && this.spellLevelItem.CanLevelUp()) || super.CanLevelUp() === false) {
-//             this.spellLevelItem.LevelUp();
-//         }
-//         this.componentLevel++;
-//     }
-//
-//     CanLevelUp() {
-//         return super.CanLevelUp() || this.spellLevelItem.CanLevelUp();
-//     }
-//
-//     GenerateText() {
-//         const levelText = this.spellLevelItem.GenerateText();
-//
-//         if (Math.abs(this.componentLevel) > 1 || this.componentLevel === 0) {
-//             return `${this.componentLevel} ${levelText}s`
-//         }
-//         return `a ${levelText}`
-//     }
-// }
+export class ArmorClassBonus extends ItemComponent {
+    constructor(propertyName, prototypeData) {
+        super(propertyName, prototypeData);
+        this.componentLevel = prototypeData.startLevel;
+        this.maxLevel = 3;
+        this.formulaName = "ArmorClassBonus";
+    }
+
+    GenerateText() {
+        return this.componentLevel.toString();
+    }
+}
+
+
 
 export class SpellLevel extends ItemComponent {
     levels = [

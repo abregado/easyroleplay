@@ -15,13 +15,20 @@ const weaponSubtypes = [
     // TODO add ranged weapons back in with their own effects
 ]
 
+const armorSubtypes = [
+    {size: "Light", price: [80,200], options: ["Padded", "Leather", "Studded leather"]},
+    {size: "Medium", price: [120,300], options: ["Hide", "Chain shirt", "Scale mail", "Breastplate", "Half plate"]},
+    {size: "Heavy", price: [160,400], options: ["Ring mail", "Chain mail", "Splint", "Plate"]}
+    // TODO redesign categorisation of armors
+]
+
 /**
  * Enumeration of item types
  */
 const ItemTypes = {
     Accessories: {data: accessoryEffects, subTypes: accessorySubtypes, abbr: "ACC"},
-    Weapons: {data: weaponEffects, subTypes: weaponSubtypes, abbr: "WEP"}
-    // TODO add armors
+    Weapons: {data: weaponEffects, subTypes: weaponSubtypes, abbr: "WEP"},
+    Armors: {data: armorEffects, subTypes: armorSubtypes, abbr: "ARM"}
 }
 
 const levelOptions = [

@@ -1,6 +1,7 @@
 import {
     ActionSpeedIncrease,
     AttackBonus,
+    ArmorClassBonus,
     DamageTypes,
     SkillBonus,
     RandomSkillCheckType,
@@ -30,6 +31,8 @@ import {
 
 const componentClasses = {
     "AttackBonus": AttackBonus,
+    "ArmorClassBonus": ArmorClassBonus,
+    "SpellCountOfLevel": SpellCountOfLevel,
     "DamageTypes": DamageTypes,
     "TextUnits": TextUnits,
     "TextNumber": TextNumber,

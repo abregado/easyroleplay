@@ -7,6 +7,8 @@ import {ItemTypes} from "./Artifact.js";
  */
 export class ItemGenerator {
 
+    #stockSize = 5;
+
     /**
      * Generate a new item in the generate item box
      * @param itemId Id of an existing item in case we want to recreate an item
@@ -17,45 +19,22 @@ export class ItemGenerator {
     }
 
     /**
+     * Refresh items in stock
+     */
+    static refreshItemStock() {
+        let generator = new ItemGenerator();
+        generator.#refreshStock();
+    }
+
+    /**
      * Method called to build the initial page content
      */
     run() {
-        const itemCount = 5;
-
-        //this.#insertHTML('generate-item', this.#createItemGenerationBox());
-
-        for (let i=0;i<itemCount;i++){
-            let seed = Math.floor(Math.random() * 10000000000);
-            // make item property generation based on this seed
-            Math.seedrandom(seed);
-            var itemType = this.#determineItemType(null);
-            var itemId = itemType.abbr + "-0-" + seed;
-            this.#insertHTML('weakitems', this.#createItemCard(new Artifact(itemType,0), false, itemId));
-        }
-
-        for (let i=0;i<itemCount;i++){
-            let seed = Math.floor(Math.random() * 10000000000);
-            // make item property generation based on this seed
-            Math.seedrandom(seed);
-            var itemType = this.#determineItemType(null);
-            var itemId = itemType.abbr + "-2-" + seed;
-            this.#insertHTML('strongitems', this.#createItemCard(new Artifact(itemType,1), false, itemId));
-        }
-
-        for (let i=0;i<itemCount;i++){
-            let seed = Math.floor(Math.random() * 10000000000);
-            // make item property generation based on this seed
-            Math.seedrandom(seed);
-            var itemType = this.#determineItemType(null);
-            var itemId = itemType.abbr + "-2-" + seed;
-            this.#insertHTML('incredibleitems', this.#createItemCard(new Artifact(itemType,2), false, itemId));
-        }
-
-        var allItems = this.#buildOneOfEachItemEffect(accessoryEffects)
-        const html = this.#createList(allItems, true);
-        this.#insertHTML('allEffects', html);
+        this.#insertHTML('item-stock-section', this.#createItemStockSection());
+        this.#insertHTML('item-basket-section', this.#createItemBasket());
 
         this.#createEventListeners();
+        this.#refreshStock();
     }
 
     #buildOneOfEachItemEffect(itemEffects) {
@@ -66,7 +45,7 @@ export class ItemGenerator {
         return allEffectObject;
     }
 
-    #createItemCard(inputData, strongLevelables, itemId) {
+    #createItemCard(inputData, strongLevelables, itemId, basketAddable = false) {
         var html = '';
 
         html += '<div class="item">';
@@ -86,6 +65,9 @@ export class ItemGenerator {
             const filledText = entry.GenerateText(strongLevelables);
             html += `<li class="effect">${filledText}</li>`
         });
+
+        html += '<input class="add-to-basket-btn" type="button" onclick="addItemToBasket(this)" value="Add to basket"></input>'
+        html += '</ul></div>';
         html += '</ul>';
         html += '</div>'
         html += '</div>'
@@ -125,6 +107,11 @@ export class ItemGenerator {
             ItemGenerator.generateItem();
         });
 
+        var randomItemBtn = document.getElementById('refresh-stock-btn');
+        randomItemBtn.addEventListener("click", () => {
+            ItemGenerator.refreshItemStock();
+        });
+
         var recreateItemTb = document.getElementById('recreate-item-tb');
         recreateItemTb.addEventListener("keypress", function(event) {
             if (event.key === "Enter") {
@@ -134,7 +121,7 @@ export class ItemGenerator {
         });
     }
 
-    #determineItemType(category) {
+    #determineItemType(category, typeSelectorId) {
         var itemType;
 
         if (category != undefined) {
@@ -144,7 +131,7 @@ export class ItemGenerator {
                 }
             });
         } else {
-            var itemTypeSelection = document.getElementById("itemTypeSelect");
+            var itemTypeSelection = document.getElementById(typeSelectorId);
             var selectedItemType = itemTypeSelection.value;
 
             if ("Any" != selectedItemType) {
@@ -164,6 +151,48 @@ export class ItemGenerator {
             Math.random();
         }
         return itemType;
+    }
+
+    /**
+     * Refresh stock of currently showed items
+     */
+    #refreshStock() {
+        let seed = Math.floor(Math.random() * 10000000000);
+        let initialSeed = seed;
+        let newItemId;
+        var initialSelectedLevel;
+        var selectedLevel;
+        var itemType;
+
+        Math.seedrandom(seed);
+
+        var raritySelection = document.getElementById("stockRaritySelectionSelect");
+        initialSelectedLevel = parseInt(raritySelection.value);
+
+        // clear previously generated stock
+        var el = document.getElementById('item-stock');
+        el.innerHTML = "";
+
+        for (var i = 0; i < this.#stockSize; i++) {
+            seed = Math.floor(Math.random() * 10000000000);
+            Math.seedrandom(seed);
+
+            itemType = this.#determineItemType(null, 'stockItemTypeSelect');
+            selectedLevel = initialSelectedLevel;
+
+            if (-1 == selectedLevel) {
+                // for the moment, generate only 0 or 2
+                let roll = Math.floor(Math.random() * 10);
+                selectedLevel = roll % 2 * 2;
+            }
+
+            newItemId = itemType.abbr + "-" + selectedLevel + "-" + seed;
+
+            var result = this.#createItemCard(new Artifact(itemType, selectedLevel), false, newItemId);
+            this.#insertHTML('item-stock', result);
+        }
+
+        Math.seedrandom(initialSeed);
     }
 
     /**
@@ -209,7 +238,7 @@ export class ItemGenerator {
 
         Math.seedrandom(seed);
 
-        var itemType = this.#determineItemType(category);
+        var itemType = this.#determineItemType(category, 'itemTypeSelect');
 
         // clear previously generated item
         var el = document.getElementById('generated-item');
@@ -226,6 +255,63 @@ export class ItemGenerator {
             // reset seed back to randomized to end determination
             Math.seedrandom(initialSeed);
         }
+    }
+
+    #createItemGenerationBox() {
+        var html = '';
+        html += '<div class="generate-item-box">';
+        html += '  <div class="side-by-side">';
+        html += '    <div><input type="button" id="random-item-btn" value="Generate new item"></div>';
+        html += '    <div>';
+        html += '        <label for="item-id-text-box">Recreate item by its ID</label>';
+        html += '         <input type="text" id="recreate-item-tb" name="item-id-text-box">';
+        html += '    </div>';
+        html += '  </div>';
+        html += '  <div class="category-select">';
+        html += '    <select id="raritySelectionSelect">';
+        html += '      <option value="0">Uncommon</option>';
+        html += '      <option value="2">Rare</option>';
+        html += '    </select>';
+        html += '    <select id="itemTypeSelect">';
+        html += '      <option value="Any">Any Category</option>';
+        html += '      <option value="Accessories">Accessories</option>';
+        html += '      <option value="Weapons">Weapons</option>';
+        html += '      <option value="Armors">Armors</option>';
+        html += '    </select>';
+        html += '  </div>';
+        html += '<figure id="generated-item"></figure>';
+        html += '</div>';
+        return html;
+    }
+
+    #createItemStockSection() {
+        var html = '';
+        html += '<div class="side-by-side">';
+        html += '  <div><input type="button" id="refresh-stock-btn" value="Refresh stock"></div>';
+        html += '  <div class="category-select">';
+        html += '    <select id="stockRaritySelectionSelect">';
+        html += '      <option value="-1">Any Rarity</option>';
+        html += '      <option value="0">Uncommon</option>';
+        html += '      <option value="2">Rare</option>';
+        html += '    </select>';
+        html += '    <select id="stockItemTypeSelect">';
+        html += '      <option value="Any">Any Category</option>';
+        html += '      <option value="Accessories">Accessories</option>';
+        html += '      <option value="Weapons">Weapons</option>';
+        html += '      <option value="Armors">Armors</option>';
+        html += '    </select>';
+        html += '  </div>';
+        html += '</div>';
+        html += '<figure id="item-stock"></figure>';
+        return html;
+    }
+
+    #createItemBasket() {
+        var html = '';
+        html += '<div class="basket">';
+        html += '   <figure id="items-in-basket"></figure>';
+        html += '</div>';
+        return html;
     }
 }
 
