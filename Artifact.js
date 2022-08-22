@@ -16,10 +16,12 @@ const weaponSubtypes = [
 ]
 
 const armorSubtypes = [
-    {size: "Light", price: [80,200], options: ["Padded", "Leather", "Studded leather"]},
-    {size: "Medium", price: [120,300], options: ["Hide", "Chain shirt", "Scale mail", "Breastplate", "Half plate"]},
-    {size: "Heavy", price: [160,400], options: ["Ring mail", "Chain mail", "Splint", "Plate"]}
-    // TODO redesign categorisation of armors
+    {size: "Light", price: [50,100], options: ["Studded leather"]},
+    {size: "Medium", price: [400,500], options: ["Breastplate"]},
+    {size: "Medium", price: [600,800], options: ["Half plate"]},
+    {size: "Heavy", price: [60,120], options: ["Chain mail"]},
+    {size: "Heavy", price: [190,300], options: ["Splint mail"]},
+    {size: "Heavy", price: [1400,1700], options: ["Plate armor"]}
 ]
 
 /**
