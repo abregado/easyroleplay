@@ -3,16 +3,28 @@ const SIZE_BUFFER = 20;
 const SEVEN_DAYS = 7;
 const BASKET_COOKIE = 'basket-cookie';
 
+/** Basket item prototype */
+function BasketItem(name, price, description, effects, id) {
+    this.name = name;
+    this.price = price;
+    this.description = description;
+    this.effects = effects;
+    this.id = id;
+}
+
 addItemToBasket = function (caller) {
-    let itemHtml = caller.parentElement;
-    let effects = itemHtml.querySelectorAll('.effect');
+    let itemElement = caller.parentElement;
+    let parentItemNode = itemElement.parentNode.parentNode.parentNode;
+    let effectsBlock = itemElement.querySelectorAll('.effect');
     let basketObj;
 
-    let itemObject = {};
-    itemObject.desc = itemHtml.querySelector('.desc').innerText;
-    itemObject.effects = [];
-    effects.forEach( effect => {
-        itemObject.effects.push(effect.innerText);
+    let name = parentItemNode.querySelector('.item-name').innerText;
+    let price = parentItemNode.querySelector('.item-price').innerText;
+    let description = parentItemNode.querySelector('.item-desc').innerText;
+    let id = parentItemNode.querySelector('.item-id').innerText;
+    let effects = [];
+    effectsBlock.forEach( effect => {
+        effects.push(effect.innerText);
     });
 
     // check for existing cookie
@@ -22,8 +34,11 @@ addItemToBasket = function (caller) {
     } else {
         basketObj = JSON.parse(bCookie);
     }
+
+    let itemObject = new BasketItem(name, price, description, effects, id);
     basketObj.push(itemObject);
 
+    // Every cookie has a maximum size of 4096 bytes
     if (JSON.stringify(basketObj).length + SIZE_BUFFER > MAX_COOKIE_SIZE) {
         // TODO change into normal error message
         alert('Maximum basket size reached');
@@ -102,7 +117,7 @@ loadBasket = function() {
 }
 
 insertHTML = function (id, html) {
-    var el = document.getElementById(id);
+    let el = document.getElementById(id);
 
     if (!el) {
         alert(`Element with id ${id} not found`);
@@ -112,11 +127,14 @@ insertHTML = function (id, html) {
 }
 
 createBasketItemCard = function (inputData) {
-    var html = '';
-    html += '<div class="item"><ul>';
-    html += `<div class="desc">${inputData.desc}</div>`;
+    let html = '';
+    html += '<div class="basket-item fantasy"><ul>';
+    html += `  <div class="basket-item-price">${inputData.price}</div>`;
+    html += `  <div class="basket-item-name">${inputData.description}</div>`;
+    html += `  <div class="basket-item-id">${inputData.id}</div>`;
+    html += `  <div class="basket-item-desc">${inputData.description}</div>`;
     inputData.effects.forEach(entry => {
-        html += `<li class="effect">${entry}</li>`;
+        html += `<li class="basket-item-effect">${entry}</li>`;
     });
     html += '  <div class="side-by-side">';
     html += '    <input class="remove-item-btn" type="button" onclick="removeItemFromBasket(this)" value="Remove" />';

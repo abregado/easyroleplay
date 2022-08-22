@@ -37,27 +37,23 @@ export class ItemGenerator {
         this.#refreshStock();
     }
 
-    #buildOneOfEachItemEffect(itemEffects) {
-        let allEffectObject = {effects: []};
-        itemEffects.forEach(effectData => {
-            allEffectObject.effects.push(new ItemEffect(effectData))
-        })
-        return allEffectObject;
-    }
-
-    #createItemCard(inputData, strongLevelables, itemId, basketAddable = false) {
+    #createItemCard(inputData, strongLevelables, itemId) {
         var html = '';
+
+        html += '<div class="item-outer">';
 
         html += '<div class="item">';
         html += '<div class="tag-outer">';
-        html += '<div class="inner">';
-        html += `<div class="item-id">${inputData.price}gp</div>`;
+        html += '<div class="inner fantasy">';
+        html += `<div class="item-price">${inputData.price}gp</div>`;
         html += `<div class="item-name">${inputData.description}</div>`;
         html += '<hr>';
         html += `<div class="item-desc">${inputData.rarity} ${inputData.magic}</div>`;
-        html += `<div class="item-id">id: ${itemId}</div></div></div>`;
-        html += '</div>'
-        html += '</div>'
+        html += `<div class="item-id">id: ${itemId}</div>`;
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+
         html += '<div class="paper-outer">';
         html += '<div class="inner">';
         html += '<ul class="effects">';
@@ -65,12 +61,11 @@ export class ItemGenerator {
             const filledText = entry.GenerateText(strongLevelables);
             html += `<li class="effect">${filledText}</li>`
         });
-
         html += '<input class="add-to-basket-btn" type="button" onclick="addItemToBasket(this)" value="Add to basket"></input>'
-        html += '</ul></div>';
         html += '</ul>';
         html += '</div>'
         html += '</div>'
+
         html += '</div>'
 
         return html;
@@ -266,35 +261,6 @@ export class ItemGenerator {
             // reset seed back to randomized to end determination
             Math.seedrandom(initialSeed);
         }
-    }
-
-    #createItemGenerationBox() {
-        var html = '';
-        html += '<div class="generate-item-box">';
-        html += '  <div class="side-by-side">';
-        html += '    <div><input type="button" id="random-item-btn" value="Generate new item"></div>';
-        html += '    <div>';
-        html += '        <label for="item-id-text-box">Recreate item by its ID</label>';
-        html += '         <input type="text" id="recreate-item-tb" name="item-id-text-box">';
-        html += '    </div>';
-        html += '  </div>';
-        html += '  <div class="category-select">';
-        html += '    <select id="raritySelectionSelect">';
-        html += '      <option value="0">Weak</option>';
-        html += '      <option value="1">Strong</option>';
-        html += '      <option value="2">Incredible</option>';
-        html += '      <option value="3">Spectacular</option>';
-        html += '    </select>';
-        html += '    <select id="itemTypeSelect">';
-        html += '      <option value="Any">Any Category</option>';
-        html += '      <option value="Accessories">Accessories</option>';
-        html += '      <option value="Weapons">Weapons</option>';
-        html += '      <option value="Armors">Armors</option>';
-        html += '    </select>';
-        html += '  </div>';
-        html += '<figure id="generated-item"></figure>';
-        html += '</div>';
-        return html;
     }
 
     #createItemStockSection() {

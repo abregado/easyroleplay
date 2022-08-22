@@ -7,7 +7,7 @@ $noteGreen: #e0e5c1;
 $horizontalRule: #9c2b1b;
 
 * {
-    font-family: "Titillium Web";
+    //font-family: "Titillium Web";
     color: #222222;
     p {
         margin-top: 0;
@@ -356,4 +356,19 @@ figure.twincard {
     color: white;
     height: 25vh;
     overflow-y: auto;
+}
+
+.basket-item {
+    border: #58180D 1px solid;
+    border-radius: 16px;
+    margin-bottom: 3px;
+}
+
+.fantasy {
+    font-family: "Luminari-Regular";
+}
+
+@font-face {
+    font-family: Luminari-Regular;
+    src: url("fonts/Luminari-Regular.ttf") format("truetype");
 }
