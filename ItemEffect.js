@@ -32,7 +32,6 @@ import {
 const componentClasses = {
     "AttackBonus": AttackBonus,
     "ArmorClassBonus": ArmorClassBonus,
-    "SpellCountOfLevel": SpellCountOfLevel,
     "DamageTypes": DamageTypes,
     "TextUnits": TextUnits,
     "TextNumber": TextNumber,
@@ -131,8 +130,6 @@ class ItemEffect {
     }
 
     LevelUp() {
-        this.effectLevel++;
-
         const levelables = this.components.filter(component => component.CanLevelUp());
         if (levelables.length > 0) {
             const randomIndex = Math.floor(Math.random() * levelables.length);

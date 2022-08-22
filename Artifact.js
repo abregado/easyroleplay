@@ -138,6 +138,7 @@ class Artifact {
 
         for (let i = 0; i < randomSubOption.extralevels; i++){
             this.LevelUpOneEffect();
+            console.log(this.effects);
         }
 
         this.ChangeToCharges();

@@ -121,6 +121,17 @@ export class ItemGenerator {
         });
     }
 
+    // var elements = document.getElementsByClassName("add-to-basket-btn");
+    // console.log(elements);
+    // var addItemToBasket = function(event) {
+    //     console.log(event.target);
+    //     var attribute = this.getAttribute("data-myattribute");
+    //     alert(attribute);
+    // };
+    // for (var i = 0; i < elements.length; i++) {
+    //     elements[i].addEventListener('click', addItemToBasket, false);
+    // }
+
     #determineItemType(category, typeSelectorId) {
         var itemType;
 
@@ -269,8 +280,10 @@ export class ItemGenerator {
         html += '  </div>';
         html += '  <div class="category-select">';
         html += '    <select id="raritySelectionSelect">';
-        html += '      <option value="0">Uncommon</option>';
-        html += '      <option value="2">Rare</option>';
+        html += '      <option value="0">Weak</option>';
+        html += '      <option value="1">Strong</option>';
+        html += '      <option value="2">Incredible</option>';
+        html += '      <option value="3">Spectacular</option>';
         html += '    </select>';
         html += '    <select id="itemTypeSelect">';
         html += '      <option value="Any">Any Category</option>';
