@@ -193,8 +193,8 @@ export class ItemGenerator {
 
             if (-1 == selectedLevel) {
                 // for the moment, generate only 0 or 2
-                let roll = Math.floor(Math.random() * 10);
-                selectedLevel = roll % 2 * 2;
+                let roll = Math.floor(Math.random() * 3);
+                selectedLevel = roll;
             }
 
             newItemId = itemType.abbr + "-" + selectedLevel + "-" + seed;
@@ -303,9 +303,11 @@ export class ItemGenerator {
         html += '  <div><input type="button" id="refresh-stock-btn" value="Refresh stock"></div>';
         html += '  <div class="category-select">';
         html += '    <select id="stockRaritySelectionSelect">';
-        html += '      <option value="-1">Any Rarity</option>';
-        html += '      <option value="0">Uncommon</option>';
-        html += '      <option value="2">Rare</option>';
+        html += '      <option value="-1">Any Strength</option>';
+        html += '      <option value="0">Weak</option>';
+        html += '      <option value="1">Strong</option>';
+        html += '      <option value="2">Incredible</option>';
+        html += '      <option value="3">Spectacular</option>';
         html += '    </select>';
         html += '    <select id="stockItemTypeSelect">';
         html += '      <option value="Any">Any Category</option>';
