@@ -1,6 +1,6 @@
 ---
 title: Characters
-permalink: "characters"
+permalink: characters
 layout: default
 ---
 
@@ -8,7 +8,7 @@ layout: default
 <ul class="character-classes">
   {% for item in site.data.classes %}
   {% assign content = item[1] %}
-    {% capture link %}/character/{{ item[0] }}{% endcapture %}
+    {% capture link %}/character/{{ item[0] }}/index.html{% endcapture %}
   <li><a href={{ link }}>
       <h3>{{ content.name }}</h3>
       <p>{{  content.desc }}</p>
