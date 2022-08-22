@@ -174,7 +174,6 @@ class Artifact {
         } else {
             this.AddEffect()
         }
-
     }
 }
 

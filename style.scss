@@ -10,12 +10,12 @@ $horizontalRule: #9c2b1b;
     font-family: "Titillium Web";
     color: #222222;
     p {
-        margin-top: 0em;
+        margin-top: 0;
     }
     li {
         font-family: "Titillium Web";
         color: #222222;
-        margin-top: 0em;
+        margin-top: 0;
     }
     h1 {
         font-family: "Cormorant SC SemiBold";
@@ -37,7 +37,7 @@ $horizontalRule: #9c2b1b;
         font-weight: bold;
         letter-spacing : -0.02em;
         font-size: 1em;
-        margin-bottom: 0em;
+        margin-bottom: 0;
     }
     ul {
         margin-top: 0;
@@ -48,49 +48,159 @@ $horizontalRule: #9c2b1b;
     strong.randomelement {
         color: darkslateblue;
     }
-    div.generate-item-box {
-        border-color: #222222;
-        border-width: 2px;
-        border-style: solid;
-        padding: 15px;
-        margin: 5px;
-    }
-    div.side-by-side {
-        display: flex;
-        justify-content: space-around;
-    }
-    div.rarity-select {
-        text-align: center;
-    }
-    div.item {
-        border-color: #222222;
-        border-width: 2px;
-        border-style: solid;
-        padding: 15px;
-        margin: 5px;
 
-        ul {
-            padding: 0;
-            margin: 0;
-        }
-
-        li.effect {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 5px;
-        }
-
-        div.desc {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-    }
     div.effectList {
         li.effect {
             margin-bottom: 15px;
         }
     }
 }
+
+div.generate-item-box {
+    border-color: #222222;
+    border-width: 2px;
+    border-style: solid;
+    padding: 10px;
+    margin: 5px;
+
+    div.side-by-side {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    div.rarity-select {
+        text-align: center;
+        width:50%;
+    }
+
+    div.regenerate {
+        text-align: center;
+        width:50%;
+    }
+
+    #random-item-btn {
+        margin-top: 5px;
+    }
+
+    #generated-item {
+        margin: 0;
+        padding: 0;
+
+    }
+}
+
+.lowitems {
+    margin: 10px
+}
+
+.item {
+    display: inline-block;
+    justify-content: space-around;
+    text-align: center;
+    vertical-align: middle;
+
+    .item-name {
+        font-size: larger;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .item-desc {
+        font-size: large;
+        font-weight: bold;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    hr {
+        width: 0;
+    }
+}
+
+.paper-outer {
+    border: 60px solid transparent;
+    padding: 5px;
+    margin: -60px 0px 5px 5px;
+    border-image-source: url("paper-corner.png");
+    border-image-slice: 20% 33% 20% 33%;
+    border-image-repeat: stretch;
+    display: block;
+    vertical-align: middle;
+    text-align: center;
+
+    .inner {
+        margin: 0px;
+        display: inline-block;
+    }
+}
+
+.tag-outer {
+    padding: 100px 100px 100px 60px;
+    margin: 5px;
+    z-index: 1;
+    background-image: url("item-tag.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    display: block;
+    vertical-align: middle;
+    text-align: center;
+    width: 100%;
+
+    .inner {
+        margin: -75px -90px -90px 0;
+        display: inline-block;
+    }
+}
+
+.effects {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+
+    }
+}
+
+//.item {
+//    display: inline-block;
+//    justify-content: space-around;
+//
+//    div.item-inner{
+//        margin: -60px;
+//        display: inline-block;
+//
+//        ul {
+//            padding: 0;
+//            margin: 5px 0 0 0;
+//        }
+//
+//        li.effect {
+//            list-style: none;
+//            padding: 0;
+//            margin: 0 0 5px;
+//        }
+//
+//        .item-desc {
+//            font-size: large;
+//            font-weight: bold;
+//            margin-bottom: 5px;
+//        }
+//
+//        hr {
+//            width: 50%;
+//        }
+//
+//
+//        .item-name {
+//            font-size: large;
+//            font-weight: bold;
+//            margin-top: 10px;
+//        }
+//    }
+//}
+
 div.container {
     width: 600px;
     margin-left:auto;
