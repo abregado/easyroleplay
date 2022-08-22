@@ -79,7 +79,7 @@ let accessoryEffects = [
         text: "Reaction: ${this.UsesPerDay}, You gain advantage on the next saving throw made against effects caused by a ${this.RandomCreatureType} type creature",
         components: [
             {name: "RandomCreatureType", formula: "RandomCreatureType", startLevel: 0},
-            {name: "UsesPerDay", formula: "UsesPerDay", startLevel: 2, increasePerLevel: 2},
+            {name: "UsesPerDay", formula: "UsesPerDay", startLevel: 1, increasePerLevel: 1},
         ]
     },
     {
@@ -215,7 +215,8 @@ let accessoryEffects = [
         text: "Free Action: ${this.UsesPerDay}, Gain Darkvision (60ft) for 1 hour.",
         components: [
             {name: "UsesPerDay", formula: "UsesPerDay", startLevel: 2, increasePerLevel: 1},
-        ]
+        ],
+        maxLevel: 1
     },
     {
         text: "Passive: Gain Darkvision (${this.FeetIncrement})",

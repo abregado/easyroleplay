@@ -30,10 +30,10 @@ let weaponEffects = [
         maxLevel: 2
     },
     {
-        text: "Reaction when you hit with an attack using this weapon: deal an extra +${this.DamageDice} ${this.RandomDamageType} damage.",
+        text: "Reaction when you hit with an attack using this weapon: deal an extra +$2{this.DamageDice} ${this.RandomDamageType} damage.",
         components: [
             {name: "RandomDamageType", formula: "RandomDamageType", startLevel: 0},
-            {name: "DamageDice", formula: "DamageDice", startLevel: 3, increasePerLevel: 2},
+            {name: "DamageDice", formula: "DamageDice", startLevel: 1, increasePerLevel: 1},
         ],
         maxLevel: 2
     },
