@@ -5,7 +5,6 @@ import {
     DamageTypes,
     SkillBonus,
     RandomSkillCheckType,
-    SpellCountOfLevel,
     SpellLevel,
     TextNumber,
     TextUnits,
@@ -27,13 +26,12 @@ import {
     RandomAttackRollType,
     SkillPenalty,
     NumberPlus,
-    ListOfDamageTypes, SpendCharges
+    ListOfDamageTypes, SpendCharges, LevelledTextBlock
 } from "./ItemComponent.js";
 
 const componentClasses = {
     "AttackBonus": AttackBonus,
     "ArmorClassBonus": ArmorClassBonus,
-    "SpellCountOfLevel": SpellCountOfLevel,
     "DamageTypes": DamageTypes,
     "TextUnits": TextUnits,
     "TextNumber": TextNumber,
@@ -61,23 +59,32 @@ const componentClasses = {
     "NumberPlus": NumberPlus,
     "ListOfDamageTypes": ListOfDamageTypes,
     "SpendCharges": SpendCharges,
+    "LevelledTextBlock": LevelledTextBlock,
 
 }
 
 class ItemEffect {
-    text = ""
-    components = []
-    effectLevel = 0
+    text = "";
+    components = [];
+    maxLevel = 0;
+    effectLevel = 0;
+    itemData;
 
     constructor(itemData) {
-        this.text = itemData.text;
+        this.text = itemData.text
+        if (itemData.maxLevel == null){
+            this.maxLevel = 2;
+        } else {
+            this.maxLevel = itemData.maxLevel;
+        }
+        this.itemData = itemData;
         if (itemData.components != null) {
             itemData.components.forEach(componentData => {
                 const componentClass = componentClasses[componentData.formula];
                 if (componentClass == null) {
                     console.error("No ComponentClass found with name: " + componentData.formula);
                 }
-                this.components.push(new componentClass(componentData.name, componentData.startValue))
+                this.components.push(new componentClass(componentData.name, componentData))
             })
         }
     }
@@ -129,20 +136,12 @@ class ItemEffect {
             levelables[randomIndex].LevelUp();
             this.effectLevel++;
         } else {
-            console.log("No levelable effects!")
+            console.log(`No levelable effects at level ${this.effectLevel} on: ${this.itemData.text}`)
         }
     }
 
     CanLevelUp() {
-        let result = true;
-
-        this.components.forEach(component => {
-            if (component.CanLevelUp() === false) {
-                result = false;
-            }
-        })
-
-        return result;
+        return this.effectLevel < this.maxLevel;
     }
 }
 

@@ -30,33 +30,8 @@ export class ItemGenerator {
      * Method called to build the initial page content
      */
     run() {
-        const itemCount = 50;
-
-        this.#insertHTML('generate-item', this.#createItemGenerationBox());
         this.#insertHTML('item-stock-section', this.#createItemStockSection());
         this.#insertHTML('item-basket-section', this.#createItemBasket());
-
-        // for (let i=0;i<itemCount;i++){
-        //     let seed = Math.floor(Math.random() * 10000000000);
-        //     // make item property generation based on this seed
-        //     Math.seedrandom(seed);
-        //     var itemType = this.#determineItemType(null);
-        //     var itemId = itemType.abbr + "-0-" + seed;
-        //     this.#insertHTML('lowitems', this.#createItemCard(new Artifact(itemType,0), false, itemId));
-        // }
-        //
-        // for (let i=0;i<itemCount;i++){
-        //     let seed = Math.floor(Math.random() * 10000000000);
-        //     // make item property generation based on this seed
-        //     Math.seedrandom(seed);
-        //     var itemType = this.#determineItemType(null);
-        //     var itemId = itemType.abbr + "-2-" + seed;
-        //     this.#insertHTML('highitems', this.#createItemCard(new Artifact(itemType,2), false, itemId));
-        // }
-
-        // var allItems = this.#buildOneOfEachItemEffect(accessoryEffects)
-        // const html = this.#createList(allItems, true);
-        // this.#insertHTML('allEffects', html);
 
         this.#createEventListeners();
         this.#refreshStock();
@@ -73,10 +48,19 @@ export class ItemGenerator {
     #createItemCard(inputData, strongLevelables, itemId, basketAddable = false) {
         var html = '';
 
-        html += '<div class="item"><ul>';
-
-        html += `<div class="desc">${inputData.rarity} ${inputData.description} (${inputData.size}/${inputData.magic}). ${inputData.price}gp, id: ${itemId}</div>`;
-
+        html += '<div class="item">';
+        html += '<div class="tag-outer">';
+        html += '<div class="inner">';
+        html += `<div class="item-id">${inputData.price}gp</div>`;
+        html += `<div class="item-name">${inputData.description}</div>`;
+        html += '<hr>';
+        html += `<div class="item-desc">${inputData.rarity} ${inputData.magic}</div>`;
+        html += `<div class="item-id">id: ${itemId}</div></div></div>`;
+        html += '</div>'
+        html += '</div>'
+        html += '<div class="paper-outer">';
+        html += '<div class="inner">';
+        html += '<ul class="effects">';
         inputData.effects.forEach(entry => {
             const filledText = entry.GenerateText(strongLevelables);
             html += `<li class="effect">${filledText}</li>`
@@ -84,6 +68,10 @@ export class ItemGenerator {
 
         html += '<input class="add-to-basket-btn" type="button" onclick="addItemToBasket(this)" value="Add to basket"></input>'
         html += '</ul></div>';
+        html += '</ul>';
+        html += '</div>'
+        html += '</div>'
+        html += '</div>'
 
         return html;
     }
@@ -131,18 +119,18 @@ export class ItemGenerator {
                 ItemGenerator.generateItem(event.target.value);
             }
         });
-
-        // var elements = document.getElementsByClassName("add-to-basket-btn");
-        // console.log(elements);
-        // var addItemToBasket = function(event) {
-        //     console.log(event.target);
-        //     var attribute = this.getAttribute("data-myattribute");
-        //     alert(attribute);
-        // };
-        // for (var i = 0; i < elements.length; i++) {
-        //     elements[i].addEventListener('click', addItemToBasket, false);
-        // }
     }
+
+    // var elements = document.getElementsByClassName("add-to-basket-btn");
+    // console.log(elements);
+    // var addItemToBasket = function(event) {
+    //     console.log(event.target);
+    //     var attribute = this.getAttribute("data-myattribute");
+    //     alert(attribute);
+    // };
+    // for (var i = 0; i < elements.length; i++) {
+    //     elements[i].addEventListener('click', addItemToBasket, false);
+    // }
 
     #determineItemType(category, typeSelectorId) {
         var itemType;
@@ -205,8 +193,8 @@ export class ItemGenerator {
 
             if (-1 == selectedLevel) {
                 // for the moment, generate only 0 or 2
-                let roll = Math.floor(Math.random() * 10);
-                selectedLevel = roll % 2 * 2;
+                let roll = Math.floor(Math.random() * 3);
+                selectedLevel = roll;
             }
 
             newItemId = itemType.abbr + "-" + selectedLevel + "-" + seed;
@@ -292,8 +280,10 @@ export class ItemGenerator {
         html += '  </div>';
         html += '  <div class="category-select">';
         html += '    <select id="raritySelectionSelect">';
-        html += '      <option value="0">Uncommon</option>';
-        html += '      <option value="2">Rare</option>';
+        html += '      <option value="0">Weak</option>';
+        html += '      <option value="1">Strong</option>';
+        html += '      <option value="2">Incredible</option>';
+        html += '      <option value="3">Spectacular</option>';
         html += '    </select>';
         html += '    <select id="itemTypeSelect">';
         html += '      <option value="Any">Any Category</option>';
@@ -313,9 +303,11 @@ export class ItemGenerator {
         html += '  <div><input type="button" id="refresh-stock-btn" value="Refresh stock"></div>';
         html += '  <div class="category-select">';
         html += '    <select id="stockRaritySelectionSelect">';
-        html += '      <option value="-1">Any Rarity</option>';
-        html += '      <option value="0">Uncommon</option>';
-        html += '      <option value="2">Rare</option>';
+        html += '      <option value="-1">Any Strength</option>';
+        html += '      <option value="0">Weak</option>';
+        html += '      <option value="1">Strong</option>';
+        html += '      <option value="2">Incredible</option>';
+        html += '      <option value="3">Spectacular</option>';
         html += '    </select>';
         html += '    <select id="stockItemTypeSelect">';
         html += '      <option value="Any">Any Category</option>';
