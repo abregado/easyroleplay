@@ -119,10 +119,6 @@ export class ItemGenerator {
         el.innerHTML = "";
 
         for (let i = 0; i < this.#stockSize; i++) {
-            seed = Math.floor(Math.random() * 10000000000);
-            Math.seedrandom(seed);
-
-            itemType = this.#determineItemType(null, 'stockItemTypeSelect');
             selectedLevel = initialSelectedLevel;
 
             if (-1 == selectedLevel) {
@@ -131,6 +127,10 @@ export class ItemGenerator {
                 selectedLevel = roll;
             }
 
+            seed = Math.floor(Math.random() * 10000000000);
+            Math.seedrandom(seed);
+
+            itemType = this.#determineItemType(null, 'stockItemTypeSelect');
             newItemId = itemType.abbr + "-" + selectedLevel + "-" + seed;
 
             let result = this.#createItemCard(new Artifact(itemType, selectedLevel), false, newItemId);
@@ -182,6 +182,7 @@ export class ItemGenerator {
         }
 
         Math.seedrandom(seed);
+        console.log("used seed: " + seed);
 
         let itemType = this.#determineItemType(category, 'itemTypeSelect');
 
