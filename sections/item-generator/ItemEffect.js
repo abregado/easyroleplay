@@ -137,6 +137,7 @@ class ItemEffect {
             this.effectLevel++;
         } else {
             console.log(`No levelable effects at level ${this.effectLevel} on: ${this.itemData.text}`)
+            Math.random(); // burn one iteration
         }
     }
 

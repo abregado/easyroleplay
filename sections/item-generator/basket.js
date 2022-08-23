@@ -137,7 +137,7 @@ createBasketItemCard = function (inputData) {
         html += `<li class="basket-item-effect">${entry}</li>`;
     });
     html += '  <div class="side-by-side">';
-    html += '    <input class="remove-item-btn" type="button" onclick="removeItemFromBasket(this)" value="Remove" />';
+    html += '    <input class="remove-item-btn button-28" type="button" onclick="removeItemFromBasket(this)" value="Remove" />';
     html += '  </div>';
     html += '</ul></div>';
     return html;
@@ -146,13 +146,13 @@ createBasketItemCard = function (inputData) {
 // wait for document to be fully loaded
 document.addEventListener("DOMContentLoaded", function(event) {
     // Get the modal
-    var modal = document.getElementById("myModal");
+    let modal = document.getElementById("myModal");
 
     // Get the button that opens the modal
-    var btn = document.getElementById("basketBtn");
+    let btn = document.getElementById("basketBtn");
 
     // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
+    let span = document.getElementsByClassName("close")[0];
 
     // When the user clicks the button, open the modal and populate items
     btn.onclick = function() {

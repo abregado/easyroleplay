@@ -1,4 +1,3 @@
-import {ItemEffect} from "./ItemEffect.js";
 import {Artifact} from "./Artifact.js";
 import {ItemTypes} from "./Artifact.js";
 
@@ -37,8 +36,174 @@ export class ItemGenerator {
         this.#refreshStock();
     }
 
+    #insertHTML(id, html) {
+        let el = document.getElementById(id);
+
+        if (!el) {
+            alert(`Element with id ${id} not found`);
+        }
+
+        el.innerHTML = el.innerHTML + html;
+    }
+
+    #createEventListeners() {
+        let randomItemBtn = document.getElementById('random-item-btn');
+        randomItemBtn.addEventListener("click", () => {
+            ItemGenerator.generateItem();
+        });
+
+        randomItemBtn = document.getElementById('refresh-stock-btn');
+        randomItemBtn.addEventListener("click", () => {
+            ItemGenerator.refreshItemStock();
+        });
+
+        let recreateItemTb = document.getElementById('recreate-item-tb');
+        recreateItemTb.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                ItemGenerator.generateItem(event.target.value);
+            }
+        });
+    }
+
+    #determineItemType(category, typeSelectorId) {
+        let itemType;
+
+        if (category != undefined) {
+            Object.values(ItemTypes).forEach((val) => {
+                if (val.abbr == category) {
+                    itemType = val;
+                }
+            });
+        } else {
+            let itemTypeSelection = document.getElementById(typeSelectorId);
+            let selectedItemType = itemTypeSelection.value;
+
+            if ("Any" != selectedItemType) {
+                let index = Object.keys(ItemTypes).lastIndexOf(selectedItemType);
+                if (index < Object.keys(ItemTypes).length) {
+                    itemType = Object.values(ItemTypes)[index];
+                }
+            }
+        }
+
+        // if no specific type was selected, choose one at random
+        if (itemType === undefined) {
+            let index = Math.floor(Math.random() * 10000) % Object.keys(ItemTypes).length;
+            itemType = Object.values(ItemTypes)[index];
+        } else {
+            // burn one roll to keep up with the seed state
+            Math.random();
+        }
+        return itemType;
+    }
+
+    /**
+     * Refresh stock of currently showed items
+     */
+    #refreshStock() {
+        let seed = Math.floor(Math.random() * 10000000000);
+        let initialSeed = seed;
+        let newItemId;
+        let initialSelectedLevel;
+        let selectedLevel;
+        let itemType;
+
+        Math.seedrandom(seed);
+
+        let raritySelection = document.getElementById("stockRaritySelectionSelect");
+        initialSelectedLevel = parseInt(raritySelection.value);
+
+        // clear previously generated stock
+        let el = document.getElementById('item-stock');
+        el.innerHTML = "";
+
+        for (let i = 0; i < this.#stockSize; i++) {
+            seed = Math.floor(Math.random() * 10000000000);
+            Math.seedrandom(seed);
+
+            itemType = this.#determineItemType(null, 'stockItemTypeSelect');
+            selectedLevel = initialSelectedLevel;
+
+            if (-1 == selectedLevel) {
+                // for the moment, generate only 0 or 2
+                let roll = Math.floor(Math.random() * 3);
+                selectedLevel = roll;
+            }
+
+            newItemId = itemType.abbr + "-" + selectedLevel + "-" + seed;
+
+            let result = this.#createItemCard(new Artifact(itemType, selectedLevel), false, newItemId);
+            this.#insertHTML('item-stock', result);
+        }
+
+        Math.seedrandom(initialSeed);
+    }
+
+    /**
+     * Generates a new item either or recreates one based on specified itemId
+     * ItemId has form of: [item category]-[item level]-[used seed]
+     * Generation Criteria may have following patterns:
+     *   * ANY - any category, no filtering
+     *   * WEP - any weapon
+     *   * ACC - any accessory`
+     * @param itemId Id of item to recreates
+     */
+    #doGenerateItem (inputItemId) {
+        if (typeof inputItemId === 'string' && inputItemId === '') {
+            // todo write message to the user
+            return;
+        }
+
+        let seed;
+        let initialSeed;
+        let category;
+        let itemId;
+        let newItemId = inputItemId;
+        let selectedLevel;
+
+        if (inputItemId != undefined) {
+            category = inputItemId.split("-")[0];
+            selectedLevel = parseInt(inputItemId.split("-")[1]);
+            itemId = inputItemId.split("-")[2];
+
+            // save seed of randomness
+            initialSeed = Math.floor(Math.random() * 10000000000);
+            // set current seed determined by item id
+            if (typeof itemId === "string") {
+                seed = parseInt(itemId)
+            } else {
+                seed = itemId;
+            }
+        } else {
+            let raritySelection = document.getElementById("raritySelectionSelect");
+            selectedLevel = parseInt(raritySelection.value);
+            seed = Math.floor(Math.random() * 10000000000);
+        }
+
+        Math.seedrandom(seed);
+
+        let itemType = this.#determineItemType(category, 'itemTypeSelect');
+
+        // clear previously generated item
+        let el = document.getElementById('generated-item');
+        el.innerHTML = "";
+
+        if (inputItemId === undefined) {
+            newItemId = itemType.abbr + "-" + selectedLevel + "-" + seed;
+        }
+
+        let result = this.#createItemCard(new Artifact(itemType, selectedLevel), false, newItemId);
+        this.#insertHTML('generated-item', result);
+
+        if (itemId != undefined) {
+            // reset seed back to randomized to end determination
+            Math.seedrandom(initialSeed);
+        }
+    }
+
     #createItemCard(inputData, strongLevelables, itemId) {
-        var html = '';
+        let html = '';
 
         html += '<div class="item-outer">';
 
@@ -61,7 +226,7 @@ export class ItemGenerator {
             const filledText = entry.GenerateText(strongLevelables);
             html += `<li class="effect">${filledText}</li>`
         });
-        html += '<input class="add-to-basket-btn" type="button" onclick="addItemToBasket(this)" value="Add to basket"></input>'
+        html += '<input class="add-to-basket-btn button-28" type="button" onclick="addItemToBasket(this)" value="Add to basket"></input>'
         html += '</ul>';
         html += '</div>'
         html += '</div>'
@@ -71,202 +236,10 @@ export class ItemGenerator {
         return html;
     }
 
-    #createList(inputData, strongLevelables) {
-        var html = '';
-
-        html += '<div class="effectList"><ul>';
-
-        inputData.effects.forEach(entry => {
-            const filledText = entry.GenerateText(strongLevelables);
-            html += `<li class="effect">${filledText}</li>`
-        });
-
-        html += '</ul></div>';
-
-        return html;
-    }
-
-    #insertHTML(id, html) {
-        var el = document.getElementById(id);
-
-        if (!el) {
-            alert(`Element with id ${id} not found`);
-        }
-
-        el.innerHTML = el.innerHTML + html;
-    }
-
-    #createEventListeners() {
-        var randomItemBtn = document.getElementById('random-item-btn');
-        randomItemBtn.addEventListener("click", () => {
-            ItemGenerator.generateItem();
-        });
-
-        var randomItemBtn = document.getElementById('refresh-stock-btn');
-        randomItemBtn.addEventListener("click", () => {
-            ItemGenerator.refreshItemStock();
-        });
-
-        var recreateItemTb = document.getElementById('recreate-item-tb');
-        recreateItemTb.addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                event.preventDefault();
-                ItemGenerator.generateItem(event.target.value);
-            }
-        });
-    }
-
-    // var elements = document.getElementsByClassName("add-to-basket-btn");
-    // console.log(elements);
-    // var addItemToBasket = function(event) {
-    //     console.log(event.target);
-    //     var attribute = this.getAttribute("data-myattribute");
-    //     alert(attribute);
-    // };
-    // for (var i = 0; i < elements.length; i++) {
-    //     elements[i].addEventListener('click', addItemToBasket, false);
-    // }
-
-    #determineItemType(category, typeSelectorId) {
-        var itemType;
-
-        if (category != undefined) {
-            Object.values(ItemTypes).forEach((val) => {
-                if (val.abbr == category) {
-                    itemType = val;
-                }
-            });
-        } else {
-            var itemTypeSelection = document.getElementById(typeSelectorId);
-            var selectedItemType = itemTypeSelection.value;
-
-            if ("Any" != selectedItemType) {
-                var index = Object.keys(ItemTypes).lastIndexOf(selectedItemType);
-                if (index < Object.keys(ItemTypes).length) {
-                    itemType = Object.values(ItemTypes)[index];
-                }
-            }
-        }
-
-        // if no specific type was selected, choose one at random
-        if (itemType === undefined) {
-            var index = Math.floor(Math.random() * 10000) % Object.keys(ItemTypes).length;
-            itemType = Object.values(ItemTypes)[index];
-        } else {
-            // burn one roll to keep up with the seed state
-            Math.random();
-        }
-        return itemType;
-    }
-
-    /**
-     * Refresh stock of currently showed items
-     */
-    #refreshStock() {
-        let seed = Math.floor(Math.random() * 10000000000);
-        let initialSeed = seed;
-        let newItemId;
-        var initialSelectedLevel;
-        var selectedLevel;
-        var itemType;
-
-        Math.seedrandom(seed);
-
-        var raritySelection = document.getElementById("stockRaritySelectionSelect");
-        initialSelectedLevel = parseInt(raritySelection.value);
-
-        // clear previously generated stock
-        var el = document.getElementById('item-stock');
-        el.innerHTML = "";
-
-        for (var i = 0; i < this.#stockSize; i++) {
-            seed = Math.floor(Math.random() * 10000000000);
-            Math.seedrandom(seed);
-
-            itemType = this.#determineItemType(null, 'stockItemTypeSelect');
-            selectedLevel = initialSelectedLevel;
-
-            if (-1 == selectedLevel) {
-                // for the moment, generate only 0 or 2
-                let roll = Math.floor(Math.random() * 3);
-                selectedLevel = roll;
-            }
-
-            newItemId = itemType.abbr + "-" + selectedLevel + "-" + seed;
-
-            var result = this.#createItemCard(new Artifact(itemType, selectedLevel), false, newItemId);
-            this.#insertHTML('item-stock', result);
-        }
-
-        Math.seedrandom(initialSeed);
-    }
-
-    /**
-     * Generates a new item either or recreates one based on specified itemId
-     * ItemId has form of: [item category]-[item level]-[used seed]
-     * Generation Criteria may have following patterns:
-     *   * ANY - any category, no filtering
-     *   * WEP - any weapon
-     *   * ACC - any accessory`
-     * @param itemId Id of item to recreates
-     */
-    #doGenerateItem (inputItemId) {
-        if (typeof inputItemId === 'string' && inputItemId === '') {
-            // todo write messgae to the user
-            return;
-        }
-
-        let seed;
-        let initialSeed;
-        let category;
-        let itemId;
-        let newItemId = inputItemId;
-        var selectedLevel;
-
-        if (inputItemId != undefined) {
-            category = inputItemId.split("-")[0];
-            selectedLevel = parseInt(inputItemId.split("-")[1]);
-            itemId = inputItemId.split("-")[2];
-
-            // save seed of randomness
-            initialSeed = Math.floor(Math.random() * 10000000000);
-            // set current seed determined by item id
-            if (typeof itemId === "string") {
-                seed = parseInt(itemId)
-            } else {
-                seed = itemId;
-            }
-        } else {
-            var raritySelection = document.getElementById("raritySelectionSelect");
-            selectedLevel = parseInt(raritySelection.value);
-            seed = Math.floor(Math.random() * 10000000000);
-        }
-
-        Math.seedrandom(seed);
-
-        var itemType = this.#determineItemType(category, 'itemTypeSelect');
-
-        // clear previously generated item
-        var el = document.getElementById('generated-item');
-        el.innerHTML = "";
-
-        if (inputItemId === undefined) {
-            newItemId = itemType.abbr + "-" + selectedLevel + "-" + seed;
-        }
-
-        var result = this.#createItemCard(new Artifact(itemType, selectedLevel), false, newItemId);
-        this.#insertHTML('generated-item', result);
-
-        if (itemId != undefined) {
-            // reset seed back to randomized to end determination
-            Math.seedrandom(initialSeed);
-        }
-    }
-
     #createItemStockSection() {
-        var html = '';
+        let html = '';
         html += '<div class="side-by-side">';
-        html += '  <div><input type="button" id="refresh-stock-btn" value="Refresh stock"></div>';
+        html += '  <div><input type="button" class="button-28" id="refresh-stock-btn" value="Refresh stock"></div>';
         html += '  <div class="category-select">';
         html += '    <select id="stockRaritySelectionSelect">';
         html += '      <option value="-1">Any Strength</option>';
@@ -288,7 +261,7 @@ export class ItemGenerator {
     }
 
     #createItemBasket() {
-        var html = '';
+        let html = '';
         html += '<div class="basket">';
         html += '   <figure id="items-in-basket"></figure>';
         html += '</div>';

@@ -32,7 +32,7 @@ $horizontalRule: #9c2b1b;
         text-decoration-color: $heading-underline;
     }
     h3 {
-        font-family: "Cormorant SC";
+        font-family: "Apple-Chancery-Italic";
         color: $heading-red;
         font-weight: bold;
         letter-spacing : -0.02em;
@@ -57,11 +57,26 @@ $horizontalRule: #9c2b1b;
 }
 
 div.generate-item-box {
-    border-color: #222222;
-    border-width: 2px;
-    border-style: solid;
+    // scatchy border: https://codepen.io/piccalilli/pen/MPLzay
+    border: 3px solid #333333;
+    border-radius: 2% 6% 5% 4% / 1% 1% 2% 4%;
+    position: relative;
     padding: 10px;
     margin: 5px;
+
+
+    &::before {
+        content: '';
+        border: 2px solid #353535;
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0) scale(1.015) rotate(0.5deg);
+        border-radius: 1% 1% 2% 4% / 2% 6% 5% 4%;
+    }
 
     div.side-by-side {
         display: flex;
@@ -368,7 +383,56 @@ figure.twincard {
     font-family: "Luminari-Regular";
 }
 
+.button-28 {
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid #1A1A1A;
+    border-radius: 15px;
+    box-sizing: border-box;
+    color: #3B3B3B;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    //font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    margin: 5px;
+    //min-height: 60px;
+    min-width: 0;
+    outline: none;
+    padding: 16px 24px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    //width: 100%;
+    will-change: transform;
+}
+
+.button-28:disabled {
+    pointer-events: none;
+}
+
+.button-28:hover {
+    color: #fff;
+    background-color: #1A1A1A;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+}
+
+.button-28:active {
+    box-shadow: none;
+    transform: translateY(0);
+}
+
 @font-face {
     font-family: Luminari-Regular;
     src: url("fonts/Luminari-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Apple-Chancery-Italic;
+    src: url("fonts/Apple-Chancery-Italic.ttf") format("truetype");
 }

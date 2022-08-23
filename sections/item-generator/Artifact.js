@@ -122,8 +122,8 @@ class Artifact {
         const levelData = levelOptions[Math.min(level,3)];
         const randomSubOption = RandomFromList(levelData.options);
 
-        var effectDataList = itemTypes.data;
-        var categoryList = itemTypes.subTypes;
+        let effectDataList = itemTypes.data;
+        let categoryList = itemTypes.subTypes;
         this.unselectedEffectData = Array.from(effectDataList);
 
         const randomCategory = RandomFromList(categoryList);
@@ -187,6 +187,7 @@ class Artifact {
             levellables[Math.floor(Math.random() * levellables.length)].LevelUp();
         } else {
             this.AddEffect()
+            Math.random(); // burn one iteration
         }
     }
 }

@@ -104,6 +104,8 @@ export class ItemComponent {
     LevelUp() {
         this.componentLevel += this.prototypeData.increasePerLevel;
         this.componentLevel = Math.min(this.componentLevel,this.maxLevel);
+
+        Math.random(); // burn one iteration
     }
 
     CanLevelUp() {
