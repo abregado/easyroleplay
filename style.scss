@@ -56,6 +56,23 @@ $horizontalRule: #9c2b1b;
     }
 }
 
+button {
+    font-family: Apple-Chancery-Italic;
+    font-weight: bold;
+}
+
+img {
+    width:100%;
+    height:100%;
+    object-fit: cover;
+}
+
+div.img-holder {
+    height: 300px;
+    margin-bottom: 1%;
+    border:solid 5px #640101;
+}
+
 div.generate-item-box {
     // scatchy border: https://codepen.io/piccalilli/pen/MPLzay
     border: 3px solid #333333;
@@ -441,7 +458,6 @@ figure.twincard {
    color: #41403e;
    cursor: pointer;
    display: inline-block;
-   font-family: Neucha, sans-serif;
    font-size: 1rem;
    line-height: 23px;
    outline: none;
@@ -511,6 +527,39 @@ figure.twincard {
     border-bottom: 1px solid black;
     border-left: 1px solid black;
     transform: translateX(25%) rotate(45deg);
+}
+
+div.hand-drawn-wrapper{
+    width:100%;
+    margin-top:2%;
+    text-align:center;
+}
+div.hand-drawn-tab{
+    display: flex;
+    border:solid 5px black;
+    padding:1em;
+    //line-height:1.5em;
+    background:hsla(67, 95%, 95%, 1);
+    margin-bottom: 1%;
+}
+
+div.hand-drawn-tab-left {
+    width: 75%;
+}
+
+div.hand-drawn-tab-right {
+    width: 25%;
+    align-content: center;
+    font-family: Apple-Chancery-Italic;
+}
+
+#one {
+    border:solid 5px #640101;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+}
+#two {
+    border:solid 5px #640101;
+    border-radius: 25px 150px 30px 220px/220px 30px 150px 25px;
 }
 
 @font-face {
