@@ -335,7 +335,7 @@ let accessoryEffects = [
         ]
     },
     {
-        text: "Passive: Targets you heal may reroll ${this.DiceMinimum} on dice for healing.",
+        text: "Passive: Targets you heal may reroll ${this.DiceMinimum}, once per dice, on dice for healing.",
         components: [
             {name: "DiceMinimum", formula: "DiceMinimum", startLevel: 0, increasePerLevel: 1}
         ]
@@ -363,13 +363,6 @@ let accessoryEffects = [
         components: [
             {name: "RandomAttackRollType", formula: "RandomAttackRollType", startLevel: 1},
             {name: "AttackBonus", formula: "AttackBonus", startLevel: 1, increasePerLevel: 1}
-        ]
-    },
-    {
-        text: "Passive: You ${this.SkillBonus} to ${this.RandomAttackRollType} attack rolls.",
-        components: [
-            {name: "RandomAttackRollType", formula: "RandomAttackRollType", startLevel: 1},
-            {name: "SkillBonus", formula: "SkillBonus", startLevel: 0, increasePerLevel: 1}
         ]
     },
     {
