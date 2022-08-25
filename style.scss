@@ -23,14 +23,6 @@ $horizontalRule: #9c2b1b;
         font-weight: bold;
         font-size: 1.5em;
     }
-    h2 {
-        font-family: "Cormorant SC SemiBold";
-        color: $heading-red;
-        font-size: 1.2em;
-        font-weight: bold;
-        text-decoration-line: underline;
-        text-decoration-color: $heading-underline;
-    }
     h3 {
         font-family: "Apple-Chancery-Italic";
         color: $heading-red;
@@ -54,6 +46,15 @@ $horizontalRule: #9c2b1b;
             margin-bottom: 15px;
         }
     }
+}
+
+h2 {
+    font-family: "Cormorant SC SemiBold";
+    color: $heading-red;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration-line: underline;
+    text-decoration-color: $heading-underline;
 }
 
 button {
@@ -531,8 +532,7 @@ figure.twincard {
 
 div.hand-drawn-wrapper{
     width:100%;
-    margin-top:2%;
-    text-align:center;
+    margin-top:2%
 }
 div.hand-drawn-tab{
     display: flex;
@@ -545,12 +545,14 @@ div.hand-drawn-tab{
 
 div.hand-drawn-tab-left {
     width: 75%;
+    text-align: center;
 }
 
 div.hand-drawn-tab-right {
     width: 25%;
-    align-content: center;
+    align-content: flex-start;
     font-family: Apple-Chancery-Italic;
+    padding: 2%;
 }
 
 #one {
@@ -560,6 +562,70 @@ div.hand-drawn-tab-right {
 #two {
     border:solid 5px #640101;
     border-radius: 25px 150px 30px 220px/220px 30px 150px 25px;
+}
+
+#three {
+    border:solid 5px #640101;
+    border-radius: 200px 82px 36px 31px/31px 36px 82px 200px;
+}
+
+body {
+    padding: 2rem;
+    font-family: 'Just Another Hand', cursive;
+    background: #f3f3f3;
+}
+
+.sketchy {
+    color: black !important;
+    padding: 2%;
+    display: inline-block;
+    border: 3px solid #333333;
+    //font-size: 2.5rem;
+    border-radius: 2% 6% 5% 4% / 1% 1% 2% 4%;
+    text-transform: uppercase;
+    letter-spacing: 0.3ch;
+    background: #ffffff;
+    position: relative;
+
+    &::before {
+        // warning content property breaks most element actions such as text boxes or selects
+        content: '';
+        border: 2px solid #353535;
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0) scale(1.015) rotate(0.5deg);
+        border-radius: 1% 1% 2% 4% / 2% 6% 5% 4%;
+    }
+}
+
+.brands{
+    flex-wrap: wrap;
+}
+.brand{
+    flex: 1 0 25%;
+    border-bottom: 1px dashed #ccc;
+    margin-left: 1%;
+    margin-bottom: 1%;
+}
+
+span.left {
+    //width: 80%;
+    text-align: left;
+    //display: inline;
+}
+span.right {
+    //width: 100%;
+    text-align: right;
+    //display: inline;
+}
+
+#npc-name {
+    color: #1A1A1A;
+    font-family: Luminari-Regular;
 }
 
 @font-face {
