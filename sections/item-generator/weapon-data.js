@@ -30,7 +30,7 @@ let weaponEffects = [
         maxLevel: 2
     },
     {
-        text: "Reaction when you hit with an attack using this weapon: deal an extra +$2{this.DamageDice} ${this.RandomDamageType} damage.",
+        text: "Reaction when you hit with an attack using this weapon: deal an extra +2${this.DamageDice} ${this.RandomDamageType} damage.",
         components: [
             {name: "RandomDamageType", formula: "RandomDamageType", startLevel: 0},
             {name: "DamageDice", formula: "DamageDice", startLevel: 1, increasePerLevel: 1},
@@ -142,7 +142,7 @@ let weaponEffects = [
         maxLevel: 2
     },
     {
-        text: "Passive: Reroll ${this.DiceMinimum} on damage dice against targets that cannot see you.",
+        text: "Passive: Reroll ${this.DiceMinimum} on damage dice against targets that have not detected you.",
         components: [
             {name: "DiceMinimum", formula: "DiceMinimum", startLevel: 0, increasePerLevel: 1}
         ],
