@@ -3,28 +3,77 @@ import {NpcProfessions} from "./npc-data.js";
 import {NpcEmotions} from "./npc-data.js";
 import {NpcBonds} from "./npc-data.js";
 
+/**
+ * Handles generation of items
+ */
 class NpcGenerator {
 
+    /**
+     * Method called to build the initial page content
+     */
     run = function () {
+        this.#insertRandomNpcName();
+        this.#insertRandomNpcProfession();
+        this.#insertRandomNpcQuirk();
+        this.#insertRandomNpcBond();
+
+        this.#addEventListeners();
+    }
+
+    #insertRandomNpcName() {
         let randomIndex = Math.floor(Math.random() * 100) % Object.keys(NpcNames).length;
         let nameCategory = Object.values(NpcNames)[randomIndex];
         randomIndex = Math.floor(Math.random() * 1000) % nameCategory.length;
         let name = nameCategory[randomIndex];
         this.#replaceText("npc-name", name);
+    }
 
-        randomIndex = Math.floor(Math.random() * 1000) % NpcProfessions.length;
+    #insertRandomNpcProfession() {
+        let randomIndex = Math.floor(Math.random() * 1000) % NpcProfessions.length;
         let profession = NpcProfessions[randomIndex];
         this.#replaceText("npc-profession", profession);
+    }
 
-        randomIndex = Math.floor(Math.random() * 100) % Object.keys(NpcEmotions).length;
+    #insertRandomNpcQuirk() {
+        let randomIndex = Math.floor(Math.random() * 100) % Object.keys(NpcEmotions).length;
         let emotionCategory = Object.values(NpcEmotions)[randomIndex];
         randomIndex = Math.floor(Math.random() * 1000) % emotionCategory.length;
         let emotion = emotionCategory[randomIndex];
         this.#replaceText("npc-quirk", emotion);
+    }
 
-        randomIndex = Math.floor(Math.random() * 1000) % NpcBonds.length;
+    #insertRandomNpcBond() {
+        let randomIndex = Math.floor(Math.random() * 1000) % NpcBonds.length;
         let bond = NpcBonds[randomIndex];
         this.#replaceText("npc-bond", bond);
+    }
+
+    #addEventListeners() {
+        const btns = document.querySelectorAll('.reRoll-btn');
+        btns.forEach(btn => {
+            btn.addEventListener('click', function handleClick(event) {
+                event.target.parentNode.childNodes.forEach(child => {
+                   if ((child.id != undefined && child.id != 'undefined')
+                       && child.id.includes('npc')) {
+                       let instance = new NpcGenerator();
+                       switch (child.id) {
+                           case "npc-name":
+                               instance.#insertRandomNpcName();
+                               break;
+                           case "npc-profession":
+                               instance.#insertRandomNpcProfession();
+                               break;
+                           case "npc-quirk":
+                               instance.#insertRandomNpcQuirk();
+                               break;
+                           case "npc-bond":
+                               instance.#insertRandomNpcBond();
+                               break;
+                       }
+                   }
+                });
+            });
+        });
     }
 
     #replaceText(id, text) {
