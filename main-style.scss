@@ -3,7 +3,7 @@ $heading-underline: #c9ad6a;
 $noteGreen: #e0e5c1;
 $horizontalRule: #9c2b1b;
 
-* {
+body {
     font-family: "Titillium Web";
     color: #222222;
 }
@@ -18,15 +18,18 @@ li {
     margin-top: 0;
 }
 
+//used for page headings
 h1 {
-    font-family: "Cormorant SC SemiBold";
+    //font-family: "Cormorant SC SemiBold";
+    font-family: WalterTurncoat;
     color: $heading-red;
     font-weight: bold;
     font-size: 1.5em;
 }
 
 h2 {
-    font-family: "Cormorant SC SemiBold";
+    //font-family: "Cormorant SC SemiBold";
+    font-family: WalterTurncoat;
     color: $heading-red;
     font-size: 1.2em;
     font-weight: bold;
@@ -35,7 +38,8 @@ h2 {
 }
 
 h3 {
-    font-family: "Cormorant SC SemiBold";
+    //font-family: "Cormorant SC SemiBold";
+    font-family: WalterTurncoat;
     font-weight: bolder;
     letter-spacing : -0.02em;
     font-size: 1.1em;
@@ -168,9 +172,7 @@ figure.twincard {
 
 
 
-.fantasy {
-    //font-family: "Luminari-Regular";
-}
+
 
 .button-28 {
     appearance: none;

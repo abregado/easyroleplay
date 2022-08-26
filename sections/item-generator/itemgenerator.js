@@ -207,7 +207,7 @@ export class ItemGenerator {
 
         html += '<div class="item">';
         html += '<div class="tag-outer">';
-        html += '<div class="inner fantasy">';
+        html += '<div class="inner">';
         html += `<div class="item-price">${inputData.price}gp</div>`;
         html += `<div class="item-name">${inputData.description}</div>`;
         html += '<hr>';
