@@ -1,0 +1,53 @@
+.brands{
+  display: block;
+
+  .brand {
+    vertical-align: center;
+    display: block;
+    border-bottom: 2px dashed #ccc;
+    text-align: left;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding-bottom: 5px;
+    width: 100%;
+
+    .left {
+      display: inline-block;
+      width: 30%;
+      font-weight: bolder;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .right {
+      width: 69%;
+      display: inline-block;
+      text-align: left;
+
+      h1 {
+        display: inline;
+        color: #3B3B3B;
+        margin: 25px 0;
+      }
+    }
+  }
+
+  .brand:first-of-type {
+    border: none;
+  }
+
+  .brand:last-of-type {
+    border: none;
+  }
+}
+
+.reRoll-btn {
+  background-image: url('src/assets/img/reroll.png');
+  background-size: 100% 100%;
+  position: absolute;
+  float: right;
+  width: 30px;
+  height: 30px;
+  z-index: 3;
+}
+

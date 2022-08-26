@@ -3,6 +3,14 @@ permalink: /item-generator/
 layout: default
 ---
 
+
+<noscript>The items are generated via Javascript. No Javascript, No items.</noscript>
+
+
+{% include item-generator-options.html %}
+{% include item-store-controls.html %}
+{% include item-store-modal.html %}
+
 <script type="text/javascript" src="../sections/item-generator/accessory-data.js"></script>
 <script type="text/javascript" src="../sections/item-generator/weapon-data.js"></script>
 <script type="text/javascript" src="../sections/item-generator/armor-data.js"></script>
@@ -10,44 +18,3 @@ layout: default
 <script type="text/javascript" src="../../lib/seedrandom.min.js"></script>
 <script type="module" src="../sections/item-generator/ItemComponent.js"></script>
 <script type="module" src="../sections/item-generator/itemgenerator.js"></script>
-<noscript>The items are generated via Javascript. No Javascript, No items.</noscript>
-
-<!--<a class="back button button__arrow button__arrow&#45;&#45;left" href="/">&#8592; Home</a>-->
-<div class="side-by-side">
-    <button class="button button-55" onclick="location.href='/';" >
-        <div class="button__arrow button__arrow--left" />
-    </button>
-    <!-- Trigger/Open The Modal -->
-    <button id="basketBtn" class="button-28">Open Basket</button>
-</div>
-
-<h3>Generate an item</h3>
-<figure id="generate-item">
-    {% include item-generator-options.html %}
-</figure>
-
-<h3>Item stock</h3>
-<figure id="item-stock-section">
-</figure>
-
-<!-- The Modal -->
-<div id="myModal" class="modal">
-
-    <!-- Modal content -->
-    <div class="modal-content">
-        <div class="modal-header">
-            <span class="close">&times;</span>
-            <h2>Basket</h2>
-        </div>
-        <div class="modal-body">
-            <figure id="item-basket-section">
-            </figure>
-        </div>
-        <div class="modal-footer">
-            <h3>Number of items in the basket: <span id="basket-item-count">0</span></h3>
-        </div>
-    </div>
-
-</div>
-
-

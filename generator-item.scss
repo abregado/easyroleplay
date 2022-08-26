@@ -1,0 +1,223 @@
+.generate-item-box {
+    .controls {
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+
+    .rarity-select {
+      display:inline;
+      width: 49%;
+    }
+
+    .regenerate {
+      display:inline;
+      width: 49%;
+    }
+  }
+
+  #random-item-btn {
+    margin-top: 5px;
+  }
+
+  #generated-item {
+    margin: 0;
+    padding: 0;
+
+  }
+}
+
+.stock-controls {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  vertical-align: center;
+
+  .shop-heading{
+    width: 30%;
+    display: inline;
+  }
+
+  .basket-div {
+   width: 20%;
+    display: inline;
+    vertical-align: center;
+  }
+}
+
+.item-list {
+  .item {
+    display: inline-block;
+    justify-content: space-around;
+    text-align: center;
+    vertical-align: top;
+
+    .item-name {
+      font-size: larger;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .item-desc {
+      font-size: large;
+      font-weight: bold;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    hr {
+      width: 0;
+    }
+
+    .paper-outer {
+      border: 60px solid transparent;
+      padding: 5px;
+      margin: -60px 0px 5px 5px;
+      border-image-source: url("sections/item-generator/paper-corner.png");
+      border-image-slice: 20% 33% 20% 33%;
+      border-image-repeat: stretch;
+      display: block;
+      vertical-align: middle;
+      text-align: center;
+
+      .inner {
+        margin: 0px;
+        display: inline-block;
+      }
+    }
+
+    .tag-outer {
+      padding: 100px 100px 100px 60px;
+      margin: 5px;
+      z-index: 1;
+      position: relative;
+      background-image: url("sections/item-generator/item-tag.png");
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      display: block;
+      vertical-align: middle;
+      text-align: center;
+
+      .inner {
+        margin: -75px -90px -90px 0;
+        display: inline-block;
+      }
+    }
+
+    .effects {
+      text-align: left;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      li {
+        strong.levelable {
+          color: #6a1c0f;
+        }
+        strong.randomelement {
+          color: darkslateblue;
+        }
+      }
+    }
+
+    .bottom-overlap {
+      margin-top: -35px;
+      text-align: right;
+    }
+  }
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+
+
+  /* Modal Content */
+  .modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    overflow-y: initial !important;
+  }
+
+  /* Add Animation */
+  @-webkit-keyframes animatetop {
+    from {
+      top: -300px;
+      opacity: 0
+    }
+    to {
+      top: 0;
+      opacity: 1
+    }
+  }
+
+  @keyframes animatetop {
+    from {
+      top: -300px;
+      opacity: 0
+    }
+    to {
+      top: 0;
+      opacity: 1
+    }
+  }
+
+  /* The Close Button */
+  .close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .modal-header {
+    padding: 2px 16px;
+    background-color: #eeeeee;
+    color: white;
+  }
+
+  .modal-body {
+    padding: 2px 16px;
+    height: 80vh;
+    overflow-y: auto;
+  }
+
+  .modal-footer {
+    padding: 2px 16px;
+    background-color: #eeeeee;
+    color: white;
+    height: 25vh;
+    overflow-y: auto;
+  }
+
+  .basket-item {
+    border: #58180D 1px solid;
+    border-radius: 16px;
+    margin-bottom: 3px;
+  }
+}

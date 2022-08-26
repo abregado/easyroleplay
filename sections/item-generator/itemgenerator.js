@@ -29,9 +29,6 @@ export class ItemGenerator {
      * Method called to build the initial page content
      */
     run() {
-        this.#insertHTML('item-stock-section', this.#createItemStockSection());
-        this.#insertHTML('item-basket-section', this.#createItemBasket());
-
         this.#createEventListeners();
         this.#refreshStock();
     }
@@ -218,8 +215,6 @@ export class ItemGenerator {
         html += `<div class="item-id">id: ${itemId}</div>`;
         html += '</div>';
         html += '</div>';
-        html += '</div>';
-
         html += '<div class="paper-outer">';
         html += '<div class="inner">';
         html += '<ul class="effects">';
@@ -227,45 +222,15 @@ export class ItemGenerator {
             const filledText = entry.GenerateText(strongLevelables);
             html += `<li class="effect">${filledText}</li>`
         });
-        html += '<input class="add-to-basket-btn button-28" type="button" onclick="addItemToBasket(this)" value="Add to basket"></input>'
         html += '</ul>';
-        html += '</div>'
-        html += '</div>'
 
-        html += '</div>'
-
-        return html;
-    }
-
-    #createItemStockSection() {
-        let html = '';
-        html += '<div class="side-by-side">';
-        html += '  <div><input type="button" class="button-28" id="refresh-stock-btn" value="Refresh stock"></div>';
-        html += '  <div class="category-select">';
-        html += '    <select id="stockRaritySelectionSelect">';
-        html += '      <option value="-1">Any Strength</option>';
-        html += '      <option value="0">Weak</option>';
-        html += '      <option value="1">Strong</option>';
-        html += '      <option value="2">Incredible</option>';
-        html += '      <option value="3">Spectacular</option>';
-        html += '    </select>';
-        html += '    <select id="stockItemTypeSelect">';
-        html += '      <option value="Any">Any Category</option>';
-        html += '      <option value="Accessories">Accessories</option>';
-        html += '      <option value="Weapons">Weapons</option>';
-        html += '      <option value="Armors">Armors</option>';
-        html += '    </select>';
-        html += '  </div>';
         html += '</div>';
-        html += '<figure id="item-stock"></figure>';
-        return html;
-    }
+        html += '</div>'
+        html += '<div class="bottom-overlap"><input class="add-to-basket-btn button-28" type="button" onclick="addItemToBasket(this)" value="Add to basket"></input>'
+        html += '</div>'
 
-    #createItemBasket() {
-        let html = '';
-        html += '<div class="basket">';
-        html += '   <figure id="items-in-basket"></figure>';
-        html += '</div>';
+        html += '</div>'
+
         return html;
     }
 }

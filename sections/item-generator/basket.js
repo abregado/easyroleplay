@@ -146,7 +146,7 @@ createBasketItemCard = function (inputData) {
 // wait for document to be fully loaded
 document.addEventListener("DOMContentLoaded", function(event) {
     // Get the modal
-    let modal = document.getElementById("myModal");
+    let modal = document.getElementById("basket-modal");
 
     // Get the button that opens the modal
     let btn = document.getElementById("basketBtn");
