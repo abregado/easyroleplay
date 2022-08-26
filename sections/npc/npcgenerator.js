@@ -25,7 +25,6 @@ class NpcGenerator {
         randomIndex = Math.floor(Math.random() * 1000) % NpcBonds.length;
         let bond = NpcBonds[randomIndex];
         this.#replaceText("npc-bond", bond);
-
     }
 
     #replaceText(id, text) {
