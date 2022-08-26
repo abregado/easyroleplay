@@ -88,4 +88,3 @@ class NpcGenerator {
 }
 
 window.onload = new NpcGenerator().run();
-export {NpcGenerator};
