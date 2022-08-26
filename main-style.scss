@@ -24,25 +24,28 @@ h1 {
     font-family: WalterTurncoat;
     color: $heading-red;
     font-weight: bold;
-    font-size: 1.5em;
+    font-size: 1.6em;
+    letter-spacing: 1px;
 }
 
 h2 {
     //font-family: "Cormorant SC SemiBold";
     font-family: WalterTurncoat;
     color: $heading-red;
-    font-size: 1.2em;
+    font-size: 1.3em;
     font-weight: bold;
     text-decoration-line: underline;
     text-decoration-color: $heading-underline;
+    letter-spacing: 1px;
 }
 
 h3 {
     //font-family: "Cormorant SC SemiBold";
     font-family: WalterTurncoat;
-    font-weight: bolder;
+    font-weight: bold;
     letter-spacing : -0.02em;
-    font-size: 1.1em;
+    font-size: 1.2em;
+    letter-spacing: 1px;
 }
 
 button {
