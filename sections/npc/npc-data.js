@@ -583,7 +583,7 @@ const NpcEmotions = {
 }
 const NpcBonds = [
     "I would die to recover an ancient artifact of my faith that was lost long ago.",
-    "2. I will someday get revenge on the corrupt temple hierarchy who branded me a heretic.",
+    "I will someday get revenge on the corrupt temple hierarchy who branded me a heretic.",
     "I owe me life to the priest who took me in when my parents died",
     "Everything I do is for the common people.",
     "I will do anything to protect the temple where I served.",
