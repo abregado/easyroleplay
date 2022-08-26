@@ -62,26 +62,24 @@ class NpcGenerator {
         const btns = document.querySelectorAll('.reRoll-btn');
         btns.forEach(btn => {
             btn.addEventListener('click', function handleClick(event) {
-                event.target.parentNode.childNodes.forEach(child => {
-                   if ((child.id != undefined && child.id != 'undefined')
-                       && child.id.includes('npc')) {
-                       let instance = new NpcGenerator();
-                       switch (child.id) {
-                           case "npc-name":
-                               instance.#insertRandomNpcName();
-                               break;
-                           case "npc-profession":
-                               instance.#insertRandomNpcProfession();
-                               break;
-                           case "npc-quirk":
-                               instance.#insertRandomNpcQuirk();
-                               break;
-                           case "npc-bond":
-                               instance.#insertRandomNpcBond();
-                               break;
-                       }
+               if ((event.target.id != undefined && event.target.id != 'undefined')
+                   && event.target.id.includes('reroll')) {
+                   let instance = new NpcGenerator();
+                   switch (event.target.id) {
+                       case "npc-name-reroll":
+                           instance.#insertRandomNpcName();
+                           break;
+                       case "npc-profession-reroll":
+                           instance.#insertRandomNpcProfession();
+                           break;
+                       case "npc-quirk-reroll":
+                           instance.#insertRandomNpcQuirk();
+                           break;
+                       case "npc-bond-reroll":
+                           instance.#insertRandomNpcBond();
+                           break;
                    }
-                });
+               }
             });
         });
     }
