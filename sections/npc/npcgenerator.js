@@ -50,9 +50,6 @@ class NpcGenerator {
 
         this.#replaceText("npc-quirk-speaking", speaking);
         this.#replaceText("npc-quirk-listening", listening);
-        randomIndex = Math.floor(Math.random() * 1000) % emotionCategory.length;
-        let emotion = emotionCategory[randomIndex];
-        this.#replaceText("npc-quirk", emotion);
     }
 
     #insertRandomNpcBond() {
