@@ -3,6 +3,14 @@ import {NpcProfessions} from "./npc-data.js";
 import {NpcEmotions} from "./npc-data.js";
 import {NpcBonds} from "./npc-data.js";
 
+function RandomFromList(list) {
+    return list[Math.floor(Math.random() * list.length)];
+}
+function RandomFromObject(list) {
+    const keys = Object.keys(list);
+    return list[keys[Math.floor(Math.random() * keys.length)]];
+}
+
 /**
  * Handles generation of items
  */
@@ -37,6 +45,11 @@ class NpcGenerator {
     #insertRandomNpcQuirk() {
         let randomIndex = Math.floor(Math.random() * 100) % Object.keys(NpcEmotions).length;
         let emotionCategory = Object.values(NpcEmotions)[randomIndex];
+        let speaking = RandomFromList(emotionCategory.speaking);
+        let listening = RandomFromList(emotionCategory.listening);
+
+        this.#replaceText("npc-quirk-speaking", speaking);
+        this.#replaceText("npc-quirk-listening", listening);
         randomIndex = Math.floor(Math.random() * 1000) % emotionCategory.length;
         let emotion = emotionCategory[randomIndex];
         this.#replaceText("npc-quirk", emotion);
@@ -88,3 +101,4 @@ class NpcGenerator {
 }
 
 window.onload = new NpcGenerator().run();
+
