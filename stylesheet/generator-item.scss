@@ -1,3 +1,6 @@
+---
+---
+
 .generate-item-box {
     .controls {
     text-align: center;
@@ -56,7 +59,7 @@
       border: 60px solid transparent;
       padding: 5px;
       margin: -60px 0px 5px 5px;
-      border-image-source: url("sections/item-generator/paper-corner.png");
+      border-image-source: url("../sections/item-generator/paper-corner.png");
       border-image-slice: 20% 33% 20% 33%;
       border-image-repeat: stretch;
       display: block;
@@ -74,7 +77,7 @@
       margin: 5px;
       z-index: 1;
       position: relative;
-      background-image: url("sections/item-generator/item-tag.png");
+      background-image: url("../sections/item-generator/item-tag.png");
       background-repeat: no-repeat;
       background-size: contain;
       background-position: center;

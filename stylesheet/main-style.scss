@@ -1,7 +1,16 @@
+---
+---
+
 $heading-red: #6a1c0f;
 $heading-underline: #c9ad6a;
 $noteGreen: #e0e5c1;
 $horizontalRule: #9c2b1b;
+
+@font-face {
+    font-family: WalterTurncoat;
+    src: url("../fonts/WalterTurncoat.ttf") format("truetype");
+}
+
 
 body {
     font-family: "Titillium Web";
